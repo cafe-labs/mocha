@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loader {
+    width: 100vw;
+    height: calc(100vh - 4rem);
+    position: absolute;
+    bottom: 0;
+    z-index: 99999;
+
+}
+
+.frame {
+    height: calc(100vh - 4rem);
+    width: 100vw;
+}
