@@ -10,7 +10,7 @@ import * as fab from '@fortawesome/free-brands-svg-icons'
 function Frame({ src }) {
     const [bareLoaded, setBareLoaded] = useState(false)
 
-    var proxiedSrc = src ? `/service/` + btoa(src) : null
+    var proxiedSrc = src ? `/dynamic/` + btoa(src) : null
     const [loading, setLoading] = useState(true)
 
     function handleLoad() {

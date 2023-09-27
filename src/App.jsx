@@ -11,12 +11,15 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Proxy from "./pages/Proxy";
 import Settings from "./pages/Settings";
+import store from "store2";
 
 function App() {
   useEffect(() => {
     themeChange(false); // Handle light and dark mode
     async function checkBare() {
-      var bareData = await fetch(__uv$config.bare);
+      var bareData = await fetch(__uv$config.bare).catch(e => {
+        
+      });
       bareData = await bareData.json()
 
       if (bareData.versions) {
@@ -26,10 +29,11 @@ function App() {
       }
     };
 
-    // call the function
-    checkBare()
-      // make sure to catch any error
-      .catch(console.error);
+    checkBare().catch(console.error);
+
+    // Tab cloaking
+    if (store("tabTitle")) document.title = store("tabTitle")
+    if (store("tabIcon")) document.querySelector("link[rel~='icon']").href = store("tabIcon")
   }, []);
 
   return (
