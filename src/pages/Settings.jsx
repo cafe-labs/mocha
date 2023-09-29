@@ -4,8 +4,8 @@ import store from "store2";
 import toast from "react-hot-toast";
 
 function Settings() {
-  const [tabName, setTabName] = useState();
-  const [tabIcon, setTabIcon] = useState();
+  const [tabTitle, setTabTitle] = useState(store("tabName") || '');
+  const [tabIcon, setTabIcon] = useState(store("tabIcon") || '');
 
   function changeProxy(proxy) {
     store("proxy", proxy);
@@ -20,11 +20,20 @@ function Settings() {
         <input
           type="text"
           placeholder="Tab name"
-          value={tabName}
-          onChange={(e) => setTabName(e.target.value)}
+          onChange={(e) => setTabTitle(e.target.value)}
+          defaultValue={tabTitle}
           className="input bg-base-200 join-item w-64 focus:outline-none placeholder:opacity-70 outline-none"
         />
-        <button className="btn join-item">Save</button>
+        <button
+          className="btn join-item"
+          onClick={() => {
+            store("tabName", tabTitle);
+            document.title = tabTitle;
+            toast.success("Set tab title");
+          }}
+        >
+          Save
+        </button>
       </div>
 
       <div className="join mt-1">
@@ -64,73 +73,8 @@ function Settings() {
           />
         </label>
       </div>
-
-      <div className="divider w-315 text-center">Bookmarks</div>
-      <button className="btn" onClick={store("bookmarks", [])}>Initialize bookmarks</button>
     </div>
   );
 }
 
 export default Settings;
-
-/*
-<div className="center">
-            <div className="inline-grid grid-cols-3 gap-4 w-[75vw] pl-4">
-                <div className="card w-96 bg-base-200 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title">Tab cloak</h2>
-                        <p>Set a tab name and icon to be displayed instead of Mocha</p>
-                        <input type="text" className="input" />
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-96 bg-base-200 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-96 bg-base-200 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-96 bg-base-200 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-96 bg-base-200 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-96 bg-base-200 shadow-xl">
-                    <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        */

@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 import "./App.css";
-import "./scripts/tabCloak";
 
 import Navbar from "./components/Navbar";
 
@@ -32,7 +31,7 @@ function App() {
     checkBare().catch(console.error);
 
     // Tab cloaking
-    if (store("tabTitle")) document.title = store("tabTitle")
+    if (store("tabName")) document.title = store("tabName")
     if (store("tabIcon")) document.querySelector("link[rel~='icon']").href = store("tabIcon")
   }, []);
 
