@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import store from "store2";
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import store from 'store2'
 
-import "../App.css";
+import '../App.css'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import * as fas from "@fortawesome/free-solid-svg-icons";
-import * as fab from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as fas from '@fortawesome/free-solid-svg-icons'
+import * as fab from '@fortawesome/free-brands-svg-icons'
+
+import config from '../config'
 
 function Navbar() {
   function handleThemeChange() {
-    const [theme, setTheme] = useState(true);
+    const [theme, setTheme] = useState(true)
   }
 
   useEffect(() => {
-    if (localStorage.getItem("theme") == "autumn") {
-      document.querySelector("input").checked = true;
+    if (localStorage.getItem('theme') == 'autumn') {
+      document.querySelector('input').checked = true
     }
-  });
+  })
   return (
     <div className="navbar bg-base-200">
       {/* Dropdown */}
@@ -70,7 +72,17 @@ function Navbar() {
 
         <button className="btn btn-ghost btn-circle">
           <label className="swap swap-rotate">
-            <input type="checkbox" data-toggle-theme="coffee,autumn" />
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                store("lightmode", e.target.checked)
+                console.log(e.target.checked)
+                
+                document.querySelector("html").dataset.theme = `${e.target.checked ? config.lightTheme : config.darkTheme}`
+              }}
+
+              defaultChecked={store("lightmode")}
+            />
 
             <svg
               className="swap-on fill-current w-6 h-6"
@@ -90,7 +102,7 @@ function Navbar() {
         </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

@@ -1,7 +1,7 @@
 /*global Ultraviolet*/
 self.__uv$config = {
-    prefix: '/uv/',
-    bare: 'https://bear.hop.sh/',
+    prefix: '/~/uv/',
+    bare: 'https://tomp.app/',
     encodeUrl: Ultraviolet.codec.base64.encode,
     decodeUrl: Ultraviolet.codec.base64.decode,
     handler: '/uv/uv.handler.js',
@@ -10,3 +10,4 @@ self.__uv$config = {
     config: '/uv/uv.config.js',
     sw: '/uv/uv.sw.js',
 };
+

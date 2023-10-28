@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react";
-import Card from "../components/Card";
-import store from "store2";
-import toast from "react-hot-toast";
+import { useEffect, useState } from 'react'
+import Card from '../components/Card'
+import store from 'store2'
+import toast from 'react-hot-toast'
 
 function Settings() {
-  const [tabTitle, setTabTitle] = useState(store("tabName") || '');
-  const [tabIcon, setTabIcon] = useState(store("tabIcon") || '');
-
-  function changeProxy(proxy) {
-    store("proxy", proxy);
-    toast.success("Set proxy to " + proxy);
-  }
+  const [tabTitle, setTabTitle] = useState(store('tabName') || '')
+  const [tabIcon, setTabIcon] = useState(store('tabIcon') || '')
+  const [bareServer, setBareServer] = useState(store('bareServer') || '')
 
   return (
     <div className="center">
       <h1 className="font-bold text-4xl">Settings</h1>
-      <div className="divider w-315 text-center">Tab Cloaking</div>
+      <div className="divider text-center">Tab Cloaking</div>
       <div className="join">
         <input
           type="text"
@@ -27,9 +23,9 @@ function Settings() {
         <button
           className="btn join-item"
           onClick={() => {
-            store("tabName", tabTitle);
-            document.title = tabTitle;
-            toast.success("Set tab title");
+            store('tabName', tabTitle)
+            document.title = tabTitle || 'Mocha'
+            toast.success('Saved tab title')
           }}
         >
           Save
@@ -40,13 +36,24 @@ function Settings() {
         <input
           type="text"
           placeholder="Tab icon"
+          defaultValue={tabIcon}
           onChange={(e) => setTabIcon(e.target.value)}
           className="input bg-base-200 join-item w-64 focus:outline-none placeholder:opacity-70 outline-none"
         />
-        <button className="btn join-item">Save</button>
+        <button
+          className="btn join-item"
+          onClick={() => {
+            store('tabIcon', tabIcon)
+            document.querySelector('link[rel~=icon]').href =
+              tabIcon || '/icon-white.png'
+            toast.success('Saved tab icon')
+          }}
+        >
+          Save
+        </button>
       </div>
 
-      <div className="divider w-315 text-center">Proxy</div>
+      <div className="divider text-center">Proxy</div>
 
       <div className="form-control">
         <label className="label cursor-pointer w-64">
@@ -55,8 +62,11 @@ function Settings() {
             type="radio"
             name="radio-10"
             className="radio"
-            defaultChecked={store("proxy") === "ultraviolet" || !store("proxy")}
-            onClick={(e) => changeProxy("ultraviolet")}
+            defaultChecked={store('proxy') === 'uv' || !store('proxy')}
+            onClick={(e) => {
+              store('proxy', 'uv')
+              toast.success('Set proxy to Ultraviolet')
+            }}
           />
         </label>
       </div>
@@ -68,13 +78,16 @@ function Settings() {
             type="radio"
             name="radio-10"
             className="radio"
-            defaultChecked={store("proxy") === "dynamic"}
-            onClick={(e) => changeProxy("dynamic")}
+            defaultChecked={store('proxy') === 'dynamic'}
+            onClick={(e) => {
+              store('proxy', 'dynamic')
+              toast.success('Set proxy to Dynamic')
+            }}
           />
         </label>
       </div>
     </div>
-  );
+  )
 }
 
-export default Settings;
+export default Settings

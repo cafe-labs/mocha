@@ -30,3 +30,8 @@
     height: calc(100vh - 4rem);
     width: 100vw;
 }
+
+.horizCenter {
+    left: 50%;
+transform: translateX(-50%);
+}
