@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { themeChange } from 'theme-change'
-import { Routes, Route } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast'
+import React, { useEffect } from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 
 import './App.css'
 
@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Proxy from './pages/Proxy'
 import Settings from './pages/Settings'
+
 import store from 'store2'
 import config from './config'
 
@@ -42,7 +43,6 @@ function App() {
       console.error('Service workers are not supported.')
     }
     // Theme switcher
-    console.log(store("lightmode"))
     if (store('lightmode'))
       document.querySelector('html').dataset.theme = config.lightTheme
 
@@ -83,3 +83,9 @@ function App() {
 }
 
 export default App
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)

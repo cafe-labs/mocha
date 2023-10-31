@@ -48,7 +48,7 @@ function Proxy() {
                 <FontAwesomeIcon
                   icon={fas.faArrowLeft}
                   onClick={() => {
-                    if (frameRef) console.log(frameRef)
+                    console.log(frameRef.current.src)
                   }}
                 />
               </button>
