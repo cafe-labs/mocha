@@ -20,6 +20,9 @@ function Proxy() {
   const [urlInput, setUrlInput] = useState('')
   const params = useQuery()
   const navigate = useNavigate()
+  const [hidden, setHidden] = useState(false)
+  const frameRef = useRef()
+  const proxy = store('proxy')
 
   const [src, setSrc] = useState(params.get('src'))
 
@@ -27,10 +30,9 @@ function Proxy() {
     if (!src) navigate('/')
   })
 
+  var modifiedSrc = atob(src)
+  modifiedSrc = search(modifiedSrc, 'https://google.com/search?q=%s')
 
-  const [hidden, setHidden] = useState(false)
-  const frameRef = useRef()
-  const proxy = store('proxy') || "uv"
   function handleLoad() {
     if (frameRef.current.contentWindow == undefined) return
     setUrlInput(frameRef.current.contentWindow[`__${proxy}$location`].href)
@@ -38,7 +40,7 @@ function Proxy() {
 
   return (
     <>
-      <Frame src={search(atob(src), 'https://google.com/search?q=%s')} handleChange={handleLoad} frameRef={frameRef} />
+      <Frame src={modifiedSrc} handleChange={handleLoad} frameRef={frameRef} />
 
       <div className={`fixed bottom-0 p-2`}>
         {hidden || (

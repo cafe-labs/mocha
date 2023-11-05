@@ -48,9 +48,9 @@ function App() {
     //   bareData = await bareData.json()
 
     //   if (bareData.versions) {
-    //     toast.success("Connected to Bare server")
+    //     toast.success('Connected to Bare server')
     //   } else {
-    //     toast.error("Unable to connect to Bare server")
+    //     toast.error('Unable to connect to Bare server')
     //   }
     // };
 
@@ -58,19 +58,22 @@ function App() {
 
     // Tab cloaking
     if (store('tabName')) document.title = store('tabName')
-    if (store('tabIcon')) document.querySelector("link[rel~='icon']").href = store('tabIcon')
+    if (store('tabIcon')) document.querySelector('link[rel~="icon"]').href = store('tabIcon')
+
+    // Set default proxy
+    if (!store('proxy')) store('proxy', 'uv')
   }, [])
 
   return (
     <>
-      <Toaster position="bottom-right" reverseOrder={false} />
+      <Toaster position='bottom-right' reverseOrder={false} />
 
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="view" element={<Proxy />}></Route>
-        <Route path="settings" element={<Settings />}></Route>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='view' element={<Proxy />}></Route>
+        <Route path='settings' element={<Settings />}></Route>
       </Routes>
     </>
   )
