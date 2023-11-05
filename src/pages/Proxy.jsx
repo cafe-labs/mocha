@@ -27,10 +27,7 @@ function Proxy() {
     if (!src) navigate('/')
   })
 
-  var modifiedSrc = atob(src)
-  modifiedSrc = search(modifiedSrc, 'https://google.com/search?q=%s')
 
-  if (atob(src).includes('lol')) modifiedSrc = 'weoutfdx'
   const [hidden, setHidden] = useState(false)
   const frameRef = useRef()
   const proxy = store('proxy') || "uv"
@@ -41,7 +38,7 @@ function Proxy() {
 
   return (
     <>
-      <Frame src={modifiedSrc} handleChange={handleLoad} frameRef={frameRef} />
+      <Frame src={search(atob(src), 'https://google.com/search?q=%s')} handleChange={handleLoad} frameRef={frameRef} />
 
       <div className={`fixed bottom-0 p-2`}>
         {hidden || (
