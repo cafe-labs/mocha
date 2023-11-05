@@ -12,9 +12,6 @@ dist
 dist-ssr
 *.local
 
-aero
-dynamic
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
