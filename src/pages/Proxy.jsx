@@ -48,24 +48,24 @@ function Proxy() {
           <>
             <div className="join ml-[50vw] horizCenter">
               <span className="tooltip" data-tip="Back">
-                <button className="btn join-item">
-                  <FontAwesomeIcon
-                    icon={fas.faArrowLeft}
-                    onClick={() => {
-                      frameRef.current.contentWindow.history.back()
-                    }}
-                  />
+                <button
+                  className="btn join-item"
+                  onClick={() => {
+                    frameRef.current.contentWindow.history.back()
+                  }}
+                >
+                  <FontAwesomeIcon icon={fas.faArrowLeft} />
                 </button>
               </span>
 
               <span className="tooltip" data-tip="Reload">
-                <button className="btn join-item">
-                  <FontAwesomeIcon
-                    icon={fas.faRotateRight}
-                    onClick={() => {
-                      frameRef.current.contentWindow.location.reload()
-                    }}
-                  />
+                <button
+                  className="btn join-item"
+                  onClick={() => {
+                    frameRef.current.contentWindow.location.reload()
+                  }}
+                >
+                  <FontAwesomeIcon icon={fas.faRotateRight} />
                 </button>
               </span>
 
@@ -78,13 +78,13 @@ function Proxy() {
               </span>
 
               <span className="tooltip" data-tip="Open in new tab">
-                <button className="btn join-item">
-                  <FontAwesomeIcon
-                    icon={fas.faArrowUpRightFromSquare}
-                    onClick={() => {
-                      aboutblank(`/~/${proxy}/${btoa(frameRef.current.contentWindow[`__${proxy}$location`].href)}`)
-                    }}
-                  />
+                <button
+                  className="btn join-item"
+                  onClick={() => {
+                    aboutblank(`/~/${proxy}/${btoa(frameRef.current.contentWindow[`__${proxy}$location`].href)}`)
+                  }}
+                >
+                  <FontAwesomeIcon icon={fas.faArrowUpRightFromSquare} />
                 </button>
               </span>
 
