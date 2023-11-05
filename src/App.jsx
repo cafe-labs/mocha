@@ -27,24 +27,19 @@ function App() {
         }
       )
 
-      navigator.serviceWorker
-        .register(`/dynamic-sw.js`, { scope: '/~/dynamic/' })
-        .then(
-          () => {
-            console.log('Dynamic Service worker registration succeeded')
-          },
-          (error) => {
-            console.error(
-              `Dynamic Service worker registration failed: ${error}`
-            )
-          }
-        )
+      navigator.serviceWorker.register(`/dynamic-sw.js`, { scope: '/~/dynamic/' }).then(
+        () => {
+          console.log('Dynamic Service worker registration succeeded')
+        },
+        (error) => {
+          console.error(`Dynamic Service worker registration failed: ${error}`)
+        }
+      )
     } else {
       console.error('Service workers are not supported.')
     }
     // Theme switcher
-    if (store('lightmode'))
-      document.querySelector('html').dataset.theme = config.lightTheme
+    if (store('lightmode')) document.querySelector('html').dataset.theme = config.lightTheme
 
     // async function checkBare() {
     //   var bareData = await fetch(__uv$config.bare).catch(e => {
@@ -63,8 +58,7 @@ function App() {
 
     // Tab cloaking
     if (store('tabName')) document.title = store('tabName')
-    if (store('tabIcon'))
-      document.querySelector("link[rel~='icon']").href = store('tabIcon')
+    if (store('tabIcon')) document.querySelector("link[rel~='icon']").href = store('tabIcon')
   }, [])
 
   return (

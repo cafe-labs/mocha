@@ -33,7 +33,7 @@ function Proxy() {
   if (atob(src).includes('lol')) modifiedSrc = 'weoutfdx'
   const [hidden, setHidden] = useState(false)
   const frameRef = useRef()
-  const proxy = store('proxy')
+  const proxy = store('proxy') || "uv"
   function handleLoad() {
     if (frameRef.current.contentWindow == undefined) return
     setUrlInput(frameRef.current.contentWindow[`__${proxy}$location`].href)
