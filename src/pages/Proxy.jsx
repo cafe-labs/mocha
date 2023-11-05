@@ -2,11 +2,14 @@ import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom/dist'
 import search from '../scripts/search'
+import aboutblank from '../scripts/aboutblank'
 
 import Frame from '../components/Frame'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as fas from '@fortawesome/free-solid-svg-icons'
 import * as far from '@fortawesome/free-regular-svg-icons'
+import store from 'store2'
+import toast from 'react-hot-toast'
 
 function useQuery() {
   return new URLSearchParams(useLocation().search)
@@ -29,11 +32,11 @@ function Proxy() {
 
   if (atob(src).includes('lol')) modifiedSrc = 'weoutfdx'
   const [hidden, setHidden] = useState(false)
-  const frameRef = useRef();
-
+  const frameRef = useRef()
+  const proxy = store('proxy')
   function handleLoad() {
-    console.log('loaded')
-    console.log(frameRef)
+    if (frameRef.current.contentWindow == undefined) return
+    setUrlInput(frameRef.current.contentWindow[`__${proxy}$location`].href)
   }
 
   return (
@@ -44,40 +47,57 @@ function Proxy() {
         {hidden || (
           <>
             <div className="join ml-[50vw] horizCenter">
-              <button className="btn join-item ">
-                <FontAwesomeIcon
-                  icon={fas.faArrowLeft}
+              <span className="tooltip" data-tip="Back">
+                <button className="btn join-item">
+                  <FontAwesomeIcon
+                    icon={fas.faArrowLeft}
+                    onClick={() => {
+                      frameRef.current.contentWindow.history.back()
+                    }}
+                  />
+                </button>
+              </span>
+
+              <span className="tooltip" data-tip="Reload">
+                <button className="btn join-item">
+                  <FontAwesomeIcon
+                    icon={fas.faRotateRight}
+                    onClick={() => {
+                      frameRef.current.contentWindow.location.reload()
+                    }}
+                  />
+                </button>
+              </span>
+
+              <input type="text" className="input bg-base-200 join-item w-80 focus:outline-none placeholder:opacity-70 outline-none" value={urlInput} onChange={(e) => setUrlInput(e.target.value)} />
+
+              <span className="tooltip" data-tip="Add to Favorites">
+                <button className="btn join-item">
+                  <FontAwesomeIcon icon={far.faStar} />
+                </button>
+              </span>
+
+              <span className="tooltip" data-tip="Open in new tab">
+                <button className="btn join-item">
+                  <FontAwesomeIcon
+                    icon={fas.faArrowUpRightFromSquare}
+                    onClick={() => {
+                      aboutblank(`/~/${proxy}/${btoa(frameRef.current.contentWindow[`__${proxy}$location`].href)}`)
+                    }}
+                  />
+                </button>
+              </span>
+
+              <span className="tooltip" data-tip="Minimize menu">
+                <button
+                  className="btn join-item"
                   onClick={() => {
-                    console.log(frameRef.current.src)
+                    setHidden(true)
                   }}
-                />
-              </button>
-              <button className="btn join-item ">
-                <FontAwesomeIcon icon={fas.faRotateRight} />
-              </button>
-              <input
-                type="text"
-                className="input bg-base-200 join-item w-64 focus:outline-none placeholder:opacity-70 outline-none"
-                value={urlInput}
-                onChange={(e) => setUrlInput(e.target.value)}
-              />
-              <button className="btn join-item ">
-                <FontAwesomeIcon icon={far.faStar} />
-              </button>
-              <button className="btn join-item ">
-                <FontAwesomeIcon icon={fas.faArrowUpRightFromSquare} />
-              </button>
-              <button
-                className="btn join-item "
-                onClick={() => {
-                  setHidden(true)
-                }}
-              >
-                <FontAwesomeIcon
-                  className="rotate-180"
-                  icon={fas.faArrowRightToBracket}
-                />
-              </button>
+                >
+                  <FontAwesomeIcon className="rotate-180" icon={fas.faArrowRightToBracket} />
+                </button>
+              </span>
             </div>
           </>
         )}
