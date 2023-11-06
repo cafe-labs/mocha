@@ -15,11 +15,6 @@ function Navbar() {
     const [theme, setTheme] = useState(true)
   }
 
-  useEffect(() => {
-    if (localStorage.getItem('theme') == 'autumn') {
-      document.querySelector('input').checked = true
-    }
-  })
   return (
     <div className="navbar bg-base-200">
       {/* Dropdown */}

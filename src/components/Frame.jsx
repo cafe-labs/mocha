@@ -3,14 +3,14 @@ import toast from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import store from 'store2'
 
-function Frame({ src, handleChange, frameRef }) {
+function Frame({ src, handleLoad, frameRef }) {
   const [bareLoaded, setBareLoaded] = useState(false)
 
   var proxiedSrc = src ? `/~/${store('proxy') || 'uv'}/` + btoa(src) : null
   const [loading, setLoading] = useState(true)
 
-  function handleLoad() {
-    handleChange()
+  function load() {
+    handleLoad()
     setLoading(false)
   }
 
@@ -21,7 +21,7 @@ function Frame({ src, handleChange, frameRef }) {
           <span className="loading loading-spinner loading-lg"></span>
         </div>
       ) : null}
-      <iframe ref={frameRef} src={proxiedSrc} className="frame" onLoad={handleLoad} />
+      <iframe ref={frameRef} src={proxiedSrc} className="frame" onLoad={load} />
     </>
   )
 }
