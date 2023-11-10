@@ -60,7 +60,7 @@ function Settings() {
 
       <div className="form-control">
         <label className="label cursor-pointer w-64">
-          <span className="label-text mr-10">Dynamic</span>
+          <span className="label-text mr-10">Dynamic (Unstable)</span>
           <input
             type="radio"
             name="radio-10"
