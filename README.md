@@ -13,6 +13,8 @@ A web proxy that is simple, yet has many essential features for easy browsing.
 - [ ] Favorites
 - [ ] Games
 
+Mocha is intended to be **self-hosted**. We don't provide more than a few links.
+
 ## Run locally
 
 You need [NodeJS](https://nodejs.org) and [Git](https://git-scm.com/download) installed on your system.
@@ -28,3 +30,4 @@ npm run dev
 # To build:
 npm run build
 ````
+
