@@ -2,7 +2,7 @@
   <img src="public/icon.png" height=75 width=75 />
   <h1>Mocha</h1>
 </div>
-A web proxy that is simple, yet has many essential features for easy browsing.
+A simple web proxy that has many essential features for easy browsing.
 
 ## Features
 - [x] Tab cloaking
