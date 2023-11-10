@@ -44,7 +44,7 @@ function Settings() {
 
       <div className="form-control">
         <label className="label cursor-pointer w-64">
-          <span className="label-text left-0">Ultaviolet</span>
+          <span className="label-text left-0">Ultraviolet</span>
           <input
             type="radio"
             name="radio-10"
