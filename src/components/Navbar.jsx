@@ -61,9 +61,11 @@ function Navbar() {
       {/* Right buttons */}
 
       <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
-          <FontAwesomeIcon icon={fab.faGithub} className="h-5 w-5" />
-        </button>
+        <a href="https://github.com/cafe-labs/mocha" target="_blank">
+          <button className="btn btn-ghost btn-circle">
+            <FontAwesomeIcon icon={fab.faGithub} className="h-5 w-5" />
+          </button>
+        </a>
 
         <button className="btn btn-ghost btn-circle">
           <label className="swap swap-rotate">
