@@ -20,19 +20,19 @@ function App() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register(`/uv-sw.js`, { scope: '/~/uv/' }).then(
         () => {
-          console.log('UV Service worker registration succeeded')
+          console.log('Ultraviolet service worker registered')
         },
         (error) => {
-          console.error(`UV Service worker registration failed: ${error}`)
+          console.error(`Ultraviolet service worker failed: ${error}`)
         }
       )
 
       navigator.serviceWorker.register(`/dynamic-sw.js`, { scope: '/~/dynamic/' }).then(
         () => {
-          console.log('Dynamic Service worker registration succeeded')
+          console.log('Dynamic service worker registered')
         },
         (error) => {
-          console.error(`Dynamic Service worker registration failed: ${error}`)
+          console.error(`Dynamic service worker failed: ${error}`)
         }
       )
     } else {

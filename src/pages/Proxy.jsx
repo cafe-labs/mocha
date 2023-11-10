@@ -32,6 +32,7 @@ function Proxy() {
   })
 
   function handleLoad() {
+    // console.log(frameRef.current.contentWindow)
     const url = new URL(frameRef.current.contentWindow[`__${proxy}$location`].href)
     setUrlInput(url.toString())
 
@@ -82,7 +83,7 @@ function Proxy() {
                 <button
                   className="btn join-item"
                   onClick={() => {
-                    aboutblank(`/~/${proxy}/${btoa(frameRef.current.contentWindow[`__${proxy}$location`].href)}`)
+                    window.open(`/~/${proxy}/${btoa(frameRef.current.contentWindow[`__${proxy}$location`].href)}`)
                   }}
                 >
                   <FontAwesomeIcon icon={fas.faArrowUpRightFromSquare} />
