@@ -33,11 +33,13 @@ function Proxy() {
 
   function handleLoad() {
     // console.log(frameRef.current.contentWindow)
-    const url = new URL(frameRef.current.contentWindow[`__${proxy}$location`].href)
-    setUrlInput(url.toString())
+    if (`__${proxy}$location` in frameRef.current.contentWindow) {
+      const url = new URL(frameRef.current.contentWindow[`__${proxy}$location`].href)
+      setUrlInput(url.toString())
 
-    if (config.compatibility[proxy == 'uv' ? 'dynamic' : 'uv'].includes(url.host)) {
-      toast('This might work better on the other proccy')
+      if (config.compatibility[proxy == 'uv' ? 'dynamic' : 'uv'].includes(url.host)) {
+        toast('This might work better on the other proccy')
+      }
     }
   }
 
