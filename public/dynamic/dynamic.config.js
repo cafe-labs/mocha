@@ -7,7 +7,7 @@ self.__dynamic$config = {
   logLevel: 0, 
   bare: {
     version: 2, 
-    path: 'https://artclass.site/bare/',
+    path: 'https://bare.proudparrot2.tech/',
   },
   tab: {
     title: 'Service',
