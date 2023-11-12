@@ -73,7 +73,7 @@ function Settings() {
           />
         </label>
       </div>
-    </div>
+    </div> 
   )
 }
 
