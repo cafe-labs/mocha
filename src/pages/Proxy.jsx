@@ -81,6 +81,30 @@ function Proxy() {
                 </button>
               </span> */}
 
+              <span className="tooltip" data-tip="Toggle devtools">
+                <button
+                  className="btn join-item"
+                  onClick={() => {
+                    var contentWindow = frameRef.current.contentWindow
+                    if (!contentWindow) return
+                    if (contentWindow.eruda?._isInit) {
+                      contentWindow.eruda.destroy()
+                    } else {
+                      var erudaScript = contentWindow.document.createElement('script')
+                      erudaScript.src = 'https://cdn.jsdelivr.net/npm/eruda'
+                      erudaScript.onload = () => {
+                        if (!contentWindow) return
+                        contentWindow.eruda.init()
+                        contentWindow.eruda.show()
+                      }
+                      contentWindow.document.body.appendChild(erudaScript)
+                    }
+                  }}
+                >
+                  <FontAwesomeIcon icon={fas.faFileCode} />
+                </button>
+              </span>
+
               <span className="tooltip" data-tip="Open in new tab">
                 <button
                   className="btn join-item"
