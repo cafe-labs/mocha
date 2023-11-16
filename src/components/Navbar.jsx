@@ -20,7 +20,7 @@ function Navbar() {
       {/* Dropdown */}
       <div className="navbar-start">
         <div className="dropdown">
-          <label for="menu" tabIndex={0} className="btn btn-ghost btn-circle">
+          <label htmlFor="menu" tabIndex={0} className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -68,8 +68,8 @@ function Navbar() {
         </a>
 
         <button aria-label="Toggle dark mode" className="btn btn-ghost btn-circle">
-          <label for="themetoggle" className="swap swap-rotate">
-            <input for="darkmode" aria-label="Dark mode toggle"
+          <label htmlFor="themetoggle" className="swap swap-rotate">
+            <input htmlFor="darkmode" aria-label="Dark mode toggle"
               type="checkbox"
               onChange={(e) => {
                 store("lightmode", e.target.checked)
