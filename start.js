@@ -1,11 +1,7 @@
-import { build } from 'vite'
-
 import { createServer } from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { createBareServer } from '@tomphttp/bare-server-node';
 import serveStatic from 'serve-static';
-
-await build()
 
 const httpServer = createServer();
 
