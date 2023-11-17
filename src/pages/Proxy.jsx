@@ -73,7 +73,7 @@ function Proxy() {
                 </button>
               </span>
 
-              <input type="text" className="input bg-base-200 join-item w-80 focus:outline-none placeholder:opacity-70 outline-none" value={urlInput} onChange={(e) => setUrlInput(e.target.value)} />
+              <input type="text" className="input bg-base-200 join-item w-80 focus:outline-none placeholder:opacity-70 outline-none" onKeyDown={(e) => {if (e.key == "Enter") navigate(`/view?src=${btoa(e.target.value)}`)}} value={urlInput} onChange={(e) => setUrlInput(e.target.value)} />
 
               {/* <span className="tooltip" data-tip="Add to Favorites">
                 <button className="btn join-item">
