@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import Card from '../components/Card'
 import store from 'store2'
 import toast from 'react-hot-toast'
 
