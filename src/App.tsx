@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
@@ -39,7 +39,7 @@ function App() {
       console.error('Service workers are not supported.')
     }
     // Theme switcher
-    if (store('lightmode')) document.querySelector('html').dataset.theme = config.lightTheme
+    if (store('lightmode')) document.querySelector('html')!.dataset.theme = config.lightTheme
 
     // async function checkBare() {
     //   var bareData = await fetch(__uv$config.bare).catch(e => {
@@ -58,7 +58,7 @@ function App() {
 
     // Tab cloaking
     if (store('tabName')) document.title = store('tabName')
-    if (store('tabIcon')) document.querySelector('link[rel~="icon"]').href = store('tabIcon')
+    if (store('tabIcon')) (document.querySelector('link[rel~="icon"]') as HTMLLinkElement).href = store('tabIcon')
 
     // Set default proxy
     if (!store('proxy')) store('proxy', 'uv')
@@ -66,14 +66,14 @@ function App() {
 
   return (
     <>
-      <Toaster position='bottom-right' reverseOrder={false} />
+      <Toaster position="bottom-right" reverseOrder={false} />
 
       <Navbar />
 
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='view' element={<Proxy />}></Route>
-        <Route path='settings' element={<Settings />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="view" element={<Proxy />}></Route>
+        <Route path="settings" element={<Settings />}></Route>
       </Routes>
     </>
   )
@@ -81,7 +81,7 @@ function App() {
 
 export default App
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <App />
   </BrowserRouter>

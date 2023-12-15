@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import store from 'store2'
 import toast from 'react-hot-toast'
 
 function Settings() {
   const [tabTitle, setTabTitle] = useState(store('tabName') || '')
   const [tabIcon, setTabIcon] = useState(store('tabIcon') || '')
-  const [bareServer, setBareServer] = useState(store('bareServer') || '')
 
   return (
     <div className="center">
@@ -31,7 +30,7 @@ function Settings() {
           className="btn join-item"
           onClick={() => {
             store('tabIcon', tabIcon)
-            document.querySelector('link[rel~=icon]').href = tabIcon || '/icon-white.png'
+            (document.querySelector('link[rel~=icon]') as HTMLLinkElement).href = tabIcon || '/icon-white.png'
             toast.success('Saved tab icon')
           }}
         >
@@ -49,7 +48,7 @@ function Settings() {
             name="radio-10"
             className="radio"
             defaultChecked={store('proxy') === 'uv' || !store('proxy')}
-            onClick={(e) => {
+            onClick={() => {
               store('proxy', 'uv')
               toast.success('Set proxy to Ultraviolet')
             }}
@@ -65,7 +64,7 @@ function Settings() {
             name="radio-10"
             className="radio"
             defaultChecked={store('proxy') === 'dynamic'}
-            onClick={(e) => {
+            onClick={() => {
               store('proxy', 'dynamic')
               toast.success('Set proxy to Dynamic')
             }}

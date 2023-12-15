@@ -2,12 +2,12 @@
 
 self.__dynamic$config = {
   prefix: '/~/dynamic/',
-  encoding: 'base64',
+  encoding: 'xor',
   mode: 'production', 
   logLevel: 0, 
   bare: {
     version: 2, 
-    path: 'https://bare.proudparrot2.tech/',
+    path: '/bare/',
   },
   tab: {
     title: 'Service',

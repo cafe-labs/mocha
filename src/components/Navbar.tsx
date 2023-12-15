@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import store from 'store2'
 
@@ -11,10 +10,6 @@ import * as fab from '@fortawesome/free-brands-svg-icons'
 import config from '../config'
 
 function Navbar() {
-  function handleThemeChange() {
-    const [theme, setTheme] = useState(true)
-  }
-
   return (
     <div className="navbar bg-base-200">
       {/* Dropdown */}
@@ -56,14 +51,13 @@ function Navbar() {
         <button aria-label="Toggle dark mode" className="btn btn-ghost btn-circle">
           <label htmlFor="themetoggle" className="swap swap-rotate">
             <input
-              htmlFor="darkmode"
-              aria-label="Dark mode toggle"
+              aria-label="darkmode"
               type="checkbox"
               onChange={(e) => {
                 store('lightmode', e.target.checked)
                 console.log(e.target.checked)
 
-                document.querySelector('html').dataset.theme = `${e.target.checked ? config.lightTheme : config.darkTheme}`
+                document.querySelector('html')!.dataset.theme = `${e.target.checked ? config.lightTheme : config.darkTheme}`
               }}
               defaultChecked={store('lightmode')}
             />

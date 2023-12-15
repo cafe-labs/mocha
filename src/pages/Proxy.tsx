@@ -5,13 +5,12 @@ import { useNavigate } from 'react-router-dom/dist'
 import Frame from '../components/Frame'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as fas from '@fortawesome/free-solid-svg-icons'
-import * as far from '@fortawesome/free-regular-svg-icons'
 
 import config from '../config'
 import store from 'store2'
 import toast from 'react-hot-toast'
-import search from '../scripts/search'
-import aboutblank from '../scripts/aboutblank'
+import { decodeXor, encodeXor, formatSearch } from '../utils'
+import { ProxyWindow } from '../types'
 
 function useQuery() {
   return new URLSearchParams(useLocation().search)
@@ -22,10 +21,10 @@ function Proxy() {
   const params = useQuery()
   const navigate = useNavigate()
   const [hidden, setHidden] = useState(false)
-  const frameRef = useRef()
+  const frameRef = useRef<HTMLIFrameElement>(null)
   const proxy = store('proxy') || 'uv'
 
-  const src = params.get('src')
+  const src = params.get('src') || ''
 
   useEffect(() => {
     if (!src) navigate('/')
@@ -33,7 +32,8 @@ function Proxy() {
 
   function handleLoad() {
     // console.log(frameRef.current.contentWindow)
-    if (`__${proxy}$location` in frameRef.current.contentWindow) {
+    if (`__${proxy}$location` in frameRef.current!.contentWindow!) {
+      //@ts-ignore
       const url = new URL(frameRef.current.contentWindow[`__${proxy}$location`].href)
       setUrlInput(url.toString())
 
@@ -45,8 +45,7 @@ function Proxy() {
 
   return (
     <>
-      <Frame src={search(atob(src), 'https://google.com/search?q=%s')} handleLoad={handleLoad} frameRef={frameRef} />
-
+      <Frame src={formatSearch(decodeXor(src))} handleLoad={handleLoad} frameRef={frameRef} />
       <div className={`fixed bottom-0 p-2`}>
         {hidden || (
           <>
@@ -55,7 +54,8 @@ function Proxy() {
                 <button
                   className="btn join-item"
                   onClick={() => {
-                    frameRef.current.contentWindow.history.back()
+                    if (!frameRef.current) return
+                    frameRef.current.contentWindow?.history.back()
                   }}
                 >
                   <FontAwesomeIcon icon={fas.faArrowLeft} />
@@ -66,7 +66,8 @@ function Proxy() {
                 <button
                   className="btn join-item"
                   onClick={() => {
-                    frameRef.current.contentWindow.location.reload()
+                    if (!frameRef.current) return
+                    frameRef.current.contentWindow?.location.reload()
                   }}
                 >
                   <FontAwesomeIcon icon={fas.faRotateRight} />
@@ -76,8 +77,8 @@ function Proxy() {
               <input
                 type="text"
                 className="input bg-base-200 join-item w-80 focus:outline-none placeholder:opacity-70 outline-none"
-                onKeyDown={(e) => {
-                  if (e.key == 'Enter') navigate(`/view?src=${btoa(e.target.value)}`)
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                  if (e.key == 'Enter') navigate(`/view?src=${encodeXor((e.target as HTMLInputElement).value)}`)
                 }}
                 value={urlInput}
                 onChange={(e) => setUrlInput(e.target.value)}
@@ -93,7 +94,8 @@ function Proxy() {
                 <button
                   className="btn join-item"
                   onClick={() => {
-                    var contentWindow = frameRef.current.contentWindow
+                    if (!frameRef.current) return
+                    var contentWindow = frameRef.current.contentWindow as ProxyWindow
                     if (!contentWindow) return
                     if (contentWindow.eruda?._isInit) {
                       contentWindow.eruda.destroy()
@@ -117,7 +119,8 @@ function Proxy() {
                 <button
                   className="btn join-item"
                   onClick={() => {
-                    window.open(`/~/${proxy}/${btoa(frameRef.current.contentWindow[`__${proxy}$location`].href)}`)
+                    // @ts-ignore
+                    window.open(`/~/${proxy}/${encodeXor(frameRef.current.contentWindow[`__${proxy}$location`].href)}`)
                   }}
                 >
                   <FontAwesomeIcon icon={fas.faArrowUpRightFromSquare} />

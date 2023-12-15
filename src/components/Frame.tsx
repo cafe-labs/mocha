@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react'
-import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import store from 'store2'
+import { encodeXor } from '../utils'
 
-function Frame({ src, handleLoad, frameRef }) {
-  const [bareLoaded, setBareLoaded] = useState(false)
+function Frame({ src, handleLoad, frameRef }: { src: string, handleLoad: () => void, frameRef: React.RefObject<HTMLIFrameElement>}) {
+  // const [bareLoaded, setBareLoaded] = useState(false)
 
-  var proxiedSrc = src ? `/~/${store('proxy') || 'uv'}/` + btoa(src) : null
+  var proxiedSrc = src ? `/~/${store('proxy') || 'uv'}/` + encodeXor(src) : undefined
   const [loading, setLoading] = useState(true)
 
   function load() {

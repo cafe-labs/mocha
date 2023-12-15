@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { encodeXor } from "../utils"
 
 
 function Home() {
@@ -7,7 +8,7 @@ function Home() {
     const [input, setInput] = useState('')
 
     function handleSearch() {
-        const encodedSrc = btoa(input)
+        const encodedSrc = encodeXor(input)
         navigate(`view?src=${encodedSrc}`)
     }
     
