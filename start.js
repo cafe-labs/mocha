@@ -1,5 +1,6 @@
 import http from 'node:http';
 import { createBareServer } from '@tomphttp/bare-server-node';
+import path from "path";
 import express from 'express';
 
 const httpServer = http.createServer();
@@ -8,7 +9,9 @@ const app = express();
 const PORT = process.env.PORT || 3003
 
 app.use(express.static('dist'))
-
+app.get("*", (_req, res) => {
+	res.sendFile(path.resolve("dist", "index.html"));
+  });
 const bareServer = createBareServer('/bare/');
 
 httpServer.on('request', (req, res) => {
