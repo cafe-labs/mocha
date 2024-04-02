@@ -6,7 +6,7 @@ export default function Game({ game }: { game: GameData }) {
   function play() {
     const url = `https://assets.3kh0.net/${game.id}/${game.file}`
 
-    navigate(`/route/${btoa(url)}?hidecontrolbar`)
+    navigate(`/route/${btoa(url)}?hidecontrolbar=true`)
   }
 
   return (
