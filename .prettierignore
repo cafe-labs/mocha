@@ -1,3 +1,5 @@
 node_modules/
 .git/
 .dist/
+pnpm-lock.yaml
+public/coffee
