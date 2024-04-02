@@ -16,7 +16,7 @@ export default function Navbar() {
         </A>
       </div>
 
-      <div class="navbar-end gap-2 sm:hidden md:flex">
+      <div class="navbar-end gap-2">
         <button class="btn btn-ghost min-h-10 h-10">
           <Joystick class="h-5 w-5" /> Games
         </button>
