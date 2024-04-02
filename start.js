@@ -22,9 +22,13 @@ app.use('/cdn', (req, res) => {
     target: 'https://assets.3kh0.net',
     changeOrigin: true,
     pathRewrite: {
-      '^/cdn': '', // Rewrite the path removing '/cdn' prefix
+      '^/cdn': '',
     },
   });
+});
+
+app.get("*", (_req, res) => {
+  res.sendFile(path.resolve("dist", "index.html"));
 });
 
 httpServer.on('request', (req, res) => {
