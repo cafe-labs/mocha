@@ -4,6 +4,7 @@ import express from 'express'
 import http from 'node:http'
 import pico from 'picocolors'
 import { build } from 'vite'
+import path from 'node:path'
 
 const httpServer = http.createServer()
 const proxy = httpProxy.createProxyServer();
