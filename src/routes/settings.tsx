@@ -1,8 +1,10 @@
 import { createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
+import config from '../config'
 import { handleTabCloak } from '../lib/settings/cloak'
-import { PanicData, TabData, aboutblankData } from '../lib/types'
+import { handleTheme } from '../lib/settings/theme'
+import { PanicData, TabData, ThemeData, aboutblankData } from '../lib/types'
 
 export default function Settings() {
   const [tabName, setTabName] = createSignal('')
@@ -12,6 +14,8 @@ export default function Settings() {
   const [panicUrl, setPanicUrl] = createSignal('https://classroom.google.com/h')
 
   const [aboutBlank, setAboutBlank] = createSignal('disabled')
+
+  const [theme, setTheme] = createSignal('forest')
 
   onMount(() => {
     const tabData = store('tab') as TabData
@@ -28,6 +32,9 @@ export default function Settings() {
     } else {
       setAboutBlank('disabled')
     }
+
+    const themeData = store('theme') as ThemeData
+    if (themeData.theme) setTheme(themeData.theme)
   })
 
   function save() {
@@ -45,7 +52,12 @@ export default function Settings() {
       enabled: aboutBlank() == 'enabled'
     })
 
+    store('theme', {
+      theme: theme()
+    })
+
     handleTabCloak()
+    handleTheme()
 
     toast.custom(() => {
       return (
@@ -67,18 +79,29 @@ export default function Settings() {
           <input type="text" class="input input-bordered w-full" value={tabName()} onInput={(e) => setTabName(e.target.value)} placeholder="Tab name" />
           <input type="text" class="input input-bordered w-full" value={tabIcon()} onInput={(e) => setTabIcon(e.target.value)} placeholder="Tab icon" />
         </div>
+
         <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Panic Key</h1>
           <p class="text-center text-xs">Set a key to redirect to a URL (works inside proxy)</p>
           <input type="text" class="input input-bordered w-full" value={panicKey()} onInput={(e) => setPanicKey(e.target.value)} placeholder="Panic key" />
           <input type="text" class="input input-bordered w-full" value={panicUrl()} onInput={(e) => setPanicUrl(e.target.value)} placeholder="Panic URL" />
         </div>
+
         <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">about:blank</h1>
           <p class="text-center text-xs">Automatically open Mocha in an about:blank tab</p>
           <select class="select select-bordered w-full max-w-xs" value={aboutBlank()} onChange={(e) => setAboutBlank(e.target.value)}>
             <option value="enabled">Enabled</option>
             <option value="disabled">Disabled</option>
+          </select>
+        </div>
+        <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+          <h1 class="text-2xl font-semibold">Theme</h1>
+          <p class="text-center text-xs">Change how Mocha looks</p>
+          <select class="select select-bordered w-full max-w-xs" value={theme()} onChange={(e) => setTheme(e.target.value)}>
+            {config.themes.map((item, index) => {
+              return <option value={item}>{index == 0 ? 'Default' : item.charAt(0).toUpperCase() + item.slice(1)}</option>
+            })}
           </select>
         </div>
       </div>
@@ -94,6 +117,7 @@ export default function Settings() {
             setPanicKey('')
             setPanicUrl('https://classroom.google.com/h')
             setAboutBlank('disabled')
+            setTheme('forest')
             save()
           }}
         >

@@ -4,6 +4,7 @@ import Navbar from './components/navbar'
 import { handleAboutBlank } from './lib/settings/aboutblank'
 import { handleTabCloak } from './lib/settings/cloak'
 import { handlePanicKey } from './lib/settings/panic'
+import { handleTheme } from './lib/settings/theme'
 
 export default function Layout(props: ParentProps) {
   onMount(() => {
@@ -14,6 +15,7 @@ export default function Layout(props: ParentProps) {
     }
 
     handleTabCloak()
+    handleTheme()
     handleAboutBlank()
     document.addEventListener('keydown', handlePanicKey)
   })

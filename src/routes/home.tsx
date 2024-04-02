@@ -6,6 +6,7 @@ export default function Home() {
   const [query, setQuery] = createSignal('')
   const navigate = useNavigate()
   function processInput() {
+    if (!query()) return;
     navigate(`/route/${btoa(query())}`)
   }
   return (
@@ -27,9 +28,9 @@ export default function Home() {
             onInput={(e) => setQuery(e.target.value)}
             placeholder="Enter a search query or URL"
             type="text"
-            class="rounded-m input join-item w-full bg-base-300 focus:outline-none"
+            class="input join-item w-full bg-base-300"
           />
-          <button class="rounded-m btn join-item bg-base-300" onClick={processInput}>
+          <button class="btn btn-square join-item bg-base-300" onClick={processInput}>
             <Search class="h-5 w-5" />
           </button>
         </div>

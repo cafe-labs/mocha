@@ -34,6 +34,14 @@ store.set(
   false
 )
 
+store.set(
+  'theme',
+  {
+    theme: null
+  },
+  false
+)
+
 const root = document.getElementById('root')
 
 render(
