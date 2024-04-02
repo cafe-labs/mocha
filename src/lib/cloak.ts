@@ -5,6 +5,8 @@ export function handleTabCloak() {
 
   if (tabData.name) {
     document.title = tabData.name
+  } else {
+    document.title = "Mocha"
   }
 
   if (tabData.icon) {
