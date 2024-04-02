@@ -6,7 +6,7 @@ export default function Home() {
   const [query, setQuery] = createSignal('')
   const navigate = useNavigate()
   function processInput() {
-    if (!query()) return;
+    if (!query()) return
     navigate(`/route/${btoa(query())}`)
   }
   return (
