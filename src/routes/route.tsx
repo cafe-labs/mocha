@@ -1,5 +1,5 @@
-import { A, useParams } from '@solidjs/router'
-import { ChevronLeft, ChevronRight, FileCode, Home, RotateCw, SquareArrowOutUpRight } from 'lucide-solid'
+import { useParams } from '@solidjs/router'
+import { ChevronLeft, ChevronRight, FileCode, RotateCw, SquareArrowOutUpRight } from 'lucide-solid'
 import { createSignal, onMount } from 'solid-js'
 import { openAbWindow } from '../lib/settings/aboutblank'
 import { handlePanicKey } from '../lib/settings/panic'
@@ -55,11 +55,6 @@ export default function Route() {
         >
           <RotateCw class="h-5 w-5" />
         </button>
-        <A href="/">
-          <button class="btn btn-square join-item bg-base-200">
-            <Home class="h-5 w-5" />
-          </button>
-        </A>
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {
