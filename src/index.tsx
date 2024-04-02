@@ -26,6 +26,14 @@ store.set(
   false
 )
 
+store.set(
+  'aboutblank',
+  {
+    enabled: false
+  },
+  false
+)
+
 const root = document.getElementById('root')
 
 render(

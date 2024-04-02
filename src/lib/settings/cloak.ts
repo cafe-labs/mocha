@@ -1,5 +1,5 @@
 import store from 'store2'
-import { TabData } from './types'
+import { TabData } from '../types'
 export function handleTabCloak() {
   const tabData = store('tab') as TabData
 
@@ -12,4 +12,6 @@ export function handleTabCloak() {
   if (tabData.icon) {
     ;(document.querySelector('link[rel~=icon]') as HTMLLinkElement).href = tabData.icon
   }
+
+  console.log(window.top?.document.title)
 }

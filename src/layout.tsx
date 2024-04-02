@@ -1,8 +1,9 @@
 import { ParentProps, onCleanup, onMount } from 'solid-js'
 import { Toaster } from 'solid-toast'
 import Navbar from './components/navbar'
-import { handleTabCloak } from './lib/cloak'
-import { handlePanicKey } from './lib/panic'
+import { handleTabCloak } from './lib/settings/cloak'
+import { handlePanicKey } from './lib/settings/panic'
+import { handleAboutBlank } from './lib/settings/aboutblank'
 
 export default function Layout(props: ParentProps) {
   onMount(() => {
@@ -13,6 +14,7 @@ export default function Layout(props: ParentProps) {
     }
 
     handleTabCloak()
+    handleAboutBlank()
     document.addEventListener('keydown', handlePanicKey)
   })
 

@@ -2,7 +2,7 @@ import { A, useParams } from '@solidjs/router'
 import { createSignal, onMount } from 'solid-js'
 import { encodeXor, formatSearch } from '../lib/utils'
 import { ChevronLeft, ChevronRight, FileCode, RotateCw, SquareArrowOutUpRight, Home } from 'lucide-solid'
-import { handlePanicKey } from '../lib/panic'
+import { handlePanicKey } from '../lib/settings/panic'
 
 interface ContentWindow extends Window {
   __uv$location: Location
