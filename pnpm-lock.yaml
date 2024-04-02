@@ -35,6 +35,12 @@ dependencies:
   solid-js:
     specifier: ^1.8.15
     version: 1.8.15
+  solid-toast:
+    specifier: ^0.5.0
+    version: 0.5.0(solid-js@1.8.15)
+  store2:
+    specifier: ^2.14.3
+    version: 2.14.3
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
@@ -1957,6 +1963,14 @@ packages:
       solid-js: 1.8.15
     dev: true
 
+  /solid-toast@0.5.0(solid-js@1.8.15):
+    resolution: {integrity: sha512-t770JakjyS2P9b8Qa1zMLOD51KYKWXbTAyJePVUoYex5c5FH5S/HtUBUbZAWFcqRCKmAE8KhyIiCvDZA8bOnxQ==}
+    peerDependencies:
+      solid-js: ^1.5.4
+    dependencies:
+      solid-js: 1.8.15
+    dev: false
+
   /source-map-js@1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -1976,6 +1990,10 @@ packages:
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /store2@2.14.3:
+    resolution: {integrity: sha512-4QcZ+yx7nzEFiV4BMLnr/pRa5HYzNITX2ri0Zh6sT9EyQHbBHacC6YigllUPU9X3D0f/22QCgfokpKs52YRrUg==}
     dev: false
 
   /string-width@4.2.3:

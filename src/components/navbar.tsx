@@ -23,9 +23,11 @@ export default function Navbar() {
         <button class="btn btn-ghost min-h-10 h-10">
           <Layers class="h-5 w-5" /> Shortcuts
         </button>
-        <button class="btn btn-ghost min-h-10 h-10">
-          <Settings class="h-5 w-5" /> Settings
-        </button>
+        <A href="/settings">
+          <button class="btn btn-ghost min-h-10 h-10">
+            <Settings class="h-5 w-5" /> Settings
+          </button>
+        </A>
       </div>
     </div>
   )

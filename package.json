@@ -19,6 +19,8 @@
     "picocolors": "^1.0.0",
     "postcss": "^8.4.35",
     "solid-js": "^1.8.15",
+    "solid-toast": "^0.5.0",
+    "store2": "^2.14.3",
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
