@@ -2,8 +2,6 @@ import { createSignal, onMount } from 'solid-js'
 import Game from '../components/game'
 import { GameData } from '../lib/types'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
-
 export default function Games() {
   const [data, setData] = createSignal<GameData[]>([])
 
