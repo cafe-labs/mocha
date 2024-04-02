@@ -71,7 +71,18 @@ export default function Route() {
         >
           <ChevronRight class="h-5 w-5" />
         </button>
-        <input value={url()} type="text" class="input join-item w-80 bg-base-200 focus:outline-none " />
+        <input
+          value={url()}
+          type="text"
+          class="input join-item w-80 bg-base-200 focus:outline-none "
+          onKeyDown={(e) => {
+            if (e.key !== 'Enter') return
+            if (!ref || !ref.contentWindow) return
+
+            ref.src = '/~/' + encodeXor(formatSearch(e.currentTarget.value))
+            e.currentTarget.blur()
+          }}
+        />
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {
