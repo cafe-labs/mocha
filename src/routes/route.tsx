@@ -1,10 +1,10 @@
 import { A, useParams } from '@solidjs/router'
+import { ChevronLeft, ChevronRight, FileCode, Home, RotateCw, SquareArrowOutUpRight } from 'lucide-solid'
 import { createSignal, onMount } from 'solid-js'
-import { encodeXor, formatSearch } from '../lib/utils'
-import { ChevronLeft, ChevronRight, FileCode, RotateCw, SquareArrowOutUpRight, Home } from 'lucide-solid'
-import { handlePanicKey } from '../lib/settings/panic'
 import { openAbWindow } from '../lib/settings/aboutblank'
+import { handlePanicKey } from '../lib/settings/panic'
 import { ContentWindow } from '../lib/types'
+import { encodeXor, formatSearch } from '../lib/utils'
 
 export default function Route() {
   var ref: HTMLIFrameElement
@@ -30,9 +30,9 @@ export default function Route() {
   }
   return (
     <div>
-      <iframe class="w-screen h-[calc(100vh-4rem)]" ref={ref!} onLoad={handleLoad} />
+      <iframe class="h-[calc(100vh-4rem)] w-screen" ref={ref!} onLoad={handleLoad} />
 
-      <div class="absolute bottom-2 z-40 join left-1/2 bg-base-200 -translate-x-1/2 rounded-m px-2">
+      <div class="rounded-m join absolute bottom-2 left-1/2 z-40 -translate-x-1/2 bg-base-200 px-2">
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {

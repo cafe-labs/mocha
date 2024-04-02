@@ -1,5 +1,5 @@
+import { Route, Router } from '@solidjs/router'
 import { render } from 'solid-js/web'
-import { Router, Route } from '@solidjs/router'
 import store from 'store2'
 
 import Layout from './layout'
