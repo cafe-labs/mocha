@@ -1,11 +1,30 @@
 import { render } from 'solid-js/web'
 import { Router, Route } from '@solidjs/router'
-import './style.css'
+import store from 'store2'
 
 import Layout from './layout'
 import Home from './routes/home'
 import Proxy from './routes/route'
 import Settings from './routes/settings'
+import './style.css'
+
+store.set(
+  'tab',
+  {
+    name: null,
+    icon: null
+  },
+  false
+)
+
+store.set(
+  'panic',
+  {
+    key: null,
+    url: null
+  },
+  false
+)
 
 const root = document.getElementById('root')
 
