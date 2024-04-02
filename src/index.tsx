@@ -3,6 +3,7 @@ import { render } from 'solid-js/web'
 import store from 'store2'
 
 import Layout from './layout'
+import Games from './routes/games'
 import Home from './routes/home'
 import Proxy from './routes/route'
 import Settings from './routes/settings'
@@ -49,6 +50,7 @@ render(
     <Router root={Layout}>
       <Route path="/" component={Home} />
       <Route path="/route/:route" component={Proxy} />
+      <Route path="/games" component={Games} />
       <Route path="/settings" component={Settings} />
     </Router>
   ),

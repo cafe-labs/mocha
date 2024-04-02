@@ -15,9 +15,11 @@ export default function Navbar() {
       </div>
 
       <div class="navbar-end gap-2">
-        <button class="btn btn-ghost h-10 min-h-10">
-          <Joystick class="h-5 w-5" /> Games
-        </button>
+        <A href="/games">
+          <button class="btn btn-ghost h-10 min-h-10">
+            <Joystick class="h-5 w-5" /> Games
+          </button>
+        </A>
         <button class="btn btn-ghost h-10 min-h-10">
           <Layers class="h-5 w-5" /> Shortcuts
         </button>
