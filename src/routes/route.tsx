@@ -3,6 +3,7 @@ import { createSignal, onMount } from 'solid-js'
 import { encodeXor, formatSearch } from '../lib/utils'
 import { ChevronLeft, ChevronRight, FileCode, RotateCw, SquareArrowOutUpRight, Home } from 'lucide-solid'
 import { handlePanicKey } from '../lib/settings/panic'
+import { openAbWindow } from '../lib/settings/aboutblank'
 
 interface ContentWindow extends Window {
   __uv$location: Location
@@ -22,14 +23,13 @@ export default function Route() {
 
   function handleLoad() {
     if (!ref || !ref.contentWindow) return
-
     const contentWindow = ref.contentWindow as ContentWindow
 
     if ('__uv$location' in contentWindow) {
       setUrl(contentWindow.__uv$location.href)
     }
 
-    contentWindow.addEventListener("keydown", handlePanicKey)
+    contentWindow.addEventListener('keydown', handlePanicKey)
   }
   return (
     <div>
@@ -37,10 +37,26 @@ export default function Route() {
 
       <div class="absolute bottom-2 z-40 join left-1/2 bg-base-200 -translate-x-1/2 rounded-m px-2">
         <button class="btn btn-square join-item bg-base-200">
-          <ChevronLeft class="h-5 w-5" />
+          <ChevronLeft
+            class="h-5 w-5"
+            onClick={() => {
+              if (!ref || !ref.contentWindow) return
+              const contentWindow = ref.contentWindow as ContentWindow
+
+              contentWindow.history.back()
+            }}
+          />
         </button>
         <button class="btn btn-square join-item bg-base-200">
-          <RotateCw class="h-5 w-5" />
+          <RotateCw
+            class="h-5 w-5"
+            onClick={() => {
+              if (!ref || !ref.contentWindow) return
+              const contentWindow = ref.contentWindow as ContentWindow
+
+              contentWindow.location.reload()
+            }}
+          />
         </button>
         <A href="/">
           <button class="btn btn-square join-item bg-base-200">
@@ -48,14 +64,30 @@ export default function Route() {
           </button>
         </A>
         <button class="btn btn-square join-item bg-base-200">
-          <ChevronRight class="h-5 w-5" />
+          <ChevronRight
+            class="h-5 w-5"
+            onClick={() => {
+              if (!ref || !ref.contentWindow) return
+              const contentWindow = ref.contentWindow as ContentWindow
+
+              contentWindow.history.forward()
+            }}
+          />
         </button>
         <input value={url()} type="text" class="input join-item w-80 bg-base-200 focus:outline-none " />
         <button class="btn btn-square join-item bg-base-200">
-          <FileCode class="h-5 w-5" />
+          <FileCode class="h-5 w-5" /> {/* to do */}
         </button>
         <button class="btn btn-square join-item bg-base-200">
-          <SquareArrowOutUpRight class="h-5 w-5" />
+          <SquareArrowOutUpRight
+            class="h-5 w-5"
+            onClick={() => {
+              if (!ref || !ref.contentWindow) return
+              const contentWindow = ref.contentWindow as ContentWindow
+
+              openAbWindow(contentWindow.location.href)
+            }}
+          />
         </button>
       </div>
     </div>
