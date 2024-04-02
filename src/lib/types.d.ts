@@ -11,3 +11,8 @@ export interface PanicData {
 export interface aboutblankData {
   enabled: boolean
 }
+
+export interface ContentWindow extends Window {
+  __uv$location: Location
+  eruda: any
+}

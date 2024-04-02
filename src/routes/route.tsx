@@ -4,10 +4,7 @@ import { encodeXor, formatSearch } from '../lib/utils'
 import { ChevronLeft, ChevronRight, FileCode, RotateCw, SquareArrowOutUpRight, Home } from 'lucide-solid'
 import { handlePanicKey } from '../lib/settings/panic'
 import { openAbWindow } from '../lib/settings/aboutblank'
-
-interface ContentWindow extends Window {
-  __uv$location: Location
-}
+import { ContentWindow } from '../lib/types'
 
 export default function Route() {
   var ref: HTMLIFrameElement
@@ -76,7 +73,26 @@ export default function Route() {
         </button>
         <input value={url()} type="text" class="input join-item w-80 bg-base-200 focus:outline-none " />
         <button class="btn btn-square join-item bg-base-200">
-          <FileCode class="h-5 w-5" /> {/* to do */}
+          <FileCode
+            class="h-5 w-5"
+            onClick={() => {
+              if (!ref || !ref.contentWindow) return
+              const contentWindow = ref.contentWindow as ContentWindow
+
+              if (contentWindow.eruda?._isInit) {
+                contentWindow.eruda.destroy()
+              } else {
+                var erudaScript = contentWindow.document.createElement('script')
+                erudaScript.src = 'https://cdn.jsdelivr.net/npm/eruda'
+                erudaScript.onload = () => {
+                  if (!contentWindow) return
+                  contentWindow.eruda.init()
+                  contentWindow.eruda.show()
+                }
+                contentWindow.document.body.appendChild(erudaScript)
+              }
+            }}
+          />
         </button>
         <button class="btn btn-square join-item bg-base-200">
           <SquareArrowOutUpRight
