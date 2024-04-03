@@ -39,10 +39,48 @@ export default function Home() {
       <div class="absolute bottom-0 flex w-screen items-center justify-between p-4 px-6 text-sm">
         &copy; 2024 proudparrot2
         <div class="flex gap-4">
-          <a class="link-hover link">GitHub</a>
-          <a class="link-hover link">Discord</a>
+          <a class="link-hover link" href="https://github.com/cafe-labs/mocha" target="_blank">
+            GitHub
+          </a>
+          <a
+            class="link-hover link"
+            onClick={() => {
+              const modal = document.querySelector('#discordmodal') as HTMLDialogElement
+              modal.showModal()
+            }}
+          >
+            Discord
+          </a>
         </div>
       </div>
+
+      <dialog id="discordmodal" class="modal">
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Opening a link</h3>
+          <p class="py-4">Would you like to open our Discord server in a normal tab, or inside the proxy?</p>
+          <div class="modal-action">
+            <a
+              class="btn btn-primary"
+              href="https://discord.gg/yWKdcvcEmE"
+              target="_blank"
+              onClick={() => {
+                const modal = document.querySelector('#discordmodal') as HTMLDialogElement
+                modal.close()
+              }}
+            >
+              Normal Window
+            </a>
+            <button
+              class="btn btn-primary"
+              onClick={() => {
+                navigate(`/route/${btoa('https://discord.gg/yWKdcvcEmE')}`)
+              }}
+            >
+              Inside Proxy
+            </button>
+          </div>
+        </div>
+      </dialog>
     </div>
   )
 }
