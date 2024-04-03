@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node start.js"
   },
   "dependencies": {
     "@solidjs/router": "^0.13.1",
