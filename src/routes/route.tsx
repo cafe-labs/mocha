@@ -1,4 +1,4 @@
-import { useParams } from '@solidjs/router'
+import { useParams, useSearchParams } from '@solidjs/router'
 import { ChevronLeft, ChevronRight, FileCode, RotateCw, SquareArrowOutUpRight } from 'lucide-solid'
 import { createSignal, onMount } from 'solid-js'
 import { openAbWindow } from '../lib/settings/aboutblank'
@@ -11,7 +11,7 @@ export default function Route() {
   const [url, setUrl] = createSignal('')
 
   const params = useParams()
-  const searchParams = new URLSearchParams(window.location.search)
+  const [searchParams] = useSearchParams()
   onMount(() => {
     if (!ref || !ref.contentWindow) return
     const query = atob(params.route)
@@ -33,7 +33,7 @@ export default function Route() {
     <div>
       <iframe class="h-[calc(100vh-4rem)] w-screen" ref={ref!} onLoad={handleLoad} />
 
-      {searchParams.get('hidecontrolbar') == 'true' ? null : (
+      {searchParams.hidecontrolbar == 'true' ? null : (
         <div class="rounded-m join absolute bottom-2 left-1/2 z-40 -translate-x-1/2 bg-base-200 px-2">
           <button
             class="btn btn-square join-item bg-base-200"
