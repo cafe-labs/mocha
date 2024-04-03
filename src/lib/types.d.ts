@@ -29,7 +29,17 @@ export interface ShortcutData {
   image: string
 }
 
+export interface DebugData {
+  enabled: boolean
+}
+
 export interface ContentWindow extends Window {
   __uv$location: Location
   eruda: any
+}
+
+declare global {
+  interface Window {
+    eruda?: any
+  }
 }

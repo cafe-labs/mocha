@@ -1,6 +1,7 @@
 import { Route, Router } from '@solidjs/router'
 import { render } from 'solid-js/web'
 import store from 'store2'
+import { handleDebug } from './lib/settings/debug'
 
 import Layout from './layout'
 import Games from './routes/games'
@@ -43,6 +44,17 @@ store.set(
   },
   false
 )
+
+store.set(
+  'debug',
+  {
+    enabled: false
+  },
+  false
+)
+
+// Debug has to be here to capture all errors
+handleDebug()
 
 const root = document.getElementById('root')
 

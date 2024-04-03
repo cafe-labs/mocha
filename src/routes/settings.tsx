@@ -3,8 +3,9 @@ import toast from 'solid-toast'
 import store from 'store2'
 import config from '../config'
 import { handleTabCloak } from '../lib/settings/cloak'
+import { handleDebug } from '../lib/settings/debug'
 import { handleTheme } from '../lib/settings/theme'
-import { PanicData, TabData, ThemeData, aboutblankData } from '../lib/types'
+import { DebugData, PanicData, TabData, ThemeData, aboutblankData } from '../lib/types'
 
 export default function Settings() {
   const [tabName, setTabName] = createSignal('')
@@ -16,6 +17,8 @@ export default function Settings() {
   const [aboutBlank, setAboutBlank] = createSignal('disabled')
 
   const [theme, setTheme] = createSignal('forest')
+
+  const [debug, setDebug] = createSignal('disabled')
 
   onMount(() => {
     const tabData = store('tab') as TabData
@@ -35,6 +38,9 @@ export default function Settings() {
 
     const themeData = store('theme') as ThemeData
     if (themeData.theme) setTheme(themeData.theme)
+
+    const debugData = store('debug') as DebugData
+    if (debugData.enabled) setDebug('enabled')
   })
 
   function save() {
@@ -56,7 +62,12 @@ export default function Settings() {
       theme: theme()
     })
 
+    store('debug', {
+      enabled: debug() == 'enabled'
+    })
+
     handleTabCloak()
+    handleDebug()
     handleTheme()
 
     toast.custom(() => {
@@ -95,6 +106,7 @@ export default function Settings() {
             <option value="disabled">Disabled</option>
           </select>
         </div>
+
         <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Theme</h1>
           <p class="text-center text-xs">Change how Mocha looks</p>
@@ -102,6 +114,15 @@ export default function Settings() {
             {config.themes.map((item, index) => {
               return <option value={item}>{index == 0 ? 'Default' : item.charAt(0).toUpperCase() + item.slice(1)}</option>
             })}
+          </select>
+        </div>
+
+        <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+          <h1 class="text-2xl font-semibold">Debug</h1>
+          <p class="text-center text-xs">Enable Eruda devtools to help debug issues </p>
+          <select class="select select-bordered w-full max-w-xs" value={debug()} onChange={(e) => setDebug(e.target.value)}>
+            <option value="enabled">Enabled</option>
+            <option value="disabled">Disabled</option>
           </select>
         </div>
       </div>

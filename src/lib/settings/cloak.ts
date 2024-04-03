@@ -12,6 +12,4 @@ export function handleTabCloak() {
   if (tabData.icon) {
     ;(document.querySelector('link[rel~=icon]') as HTMLLinkElement).href = tabData.icon
   }
-
-  console.log(window.top?.document.title)
 }
