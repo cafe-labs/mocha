@@ -23,6 +23,12 @@ export interface GameData {
   image: string
 }
 
+export interface ShortcutData {
+  name: string
+  url: string
+  image: string
+}
+
 export interface ContentWindow extends Window {
   __uv$location: Location
   eruda: any

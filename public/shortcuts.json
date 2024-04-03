@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Discord",
+    "url": "https://discord.com/app",
+    "image": "https://d12jofbmgge65s.cloudfront.net/wp-content/uploads/2021/12/wp-app-review-cards_discord.png"
+  },
+  {
+    "name": "TikTok",
+    "url": "https://tiktok.com",
+    "image": "https://d12jofbmgge65s.cloudfront.net/wp-content/uploads/2021/12/wp-app-review-cards-05.png"
+  },
+  {
+    "name": "YouTube",
+    "url": "https://youtube.com",
+    "image": "https://cdn.vox-cdn.com/thumbor/SDe7wQcz6Y7SvBoaBsZyfcb5hno=/0x0:2040x1360/1400x1400/filters:focal(1020x680:1021x681)/cdn.vox-cdn.com/uploads/chorus_asset/file/23986638/acastro_STK092_02.jpg"
+  },
+  {
+    "name": "Google",
+    "url": "https://google.com",
+    "image": "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=w3840-h2160-rw"
+  },
+  {
+    "name": "Twitch",
+    "url": "https://twitch.tv",
+    "image": "https://variety.com/wp-content/uploads/2019/09/twitch_logo.jpg"
+  },
+  {
+    "name": "Cool Math Games",
+    "url": "https://coolmathgames.com",
+    "image": "https://upload.wikimedia.org/wikipedia/en/3/39/Cool_Math_Games_screenshot.png"
+  },
+  {
+    "name": "Chess.com",
+    "url": "https://chess.com",
+    "image": "https://upload.wikimedia.org/wikipedia/en/4/4c/Chess.com_Homepage_%28as_of_December_2017%29.PNG"
+  },
+  {
+    "name": "GeForce NOW",
+    "url": "https://play.geforcenow.com",
+    "image": "https://blogs.nvidia.com/wp-content/uploads/2021/02/GFN.png"
+  }
+]

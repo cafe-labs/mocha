@@ -7,6 +7,7 @@ import Games from './routes/games'
 import Home from './routes/home'
 import Proxy from './routes/route'
 import Settings from './routes/settings'
+import Shortcuts from './routes/shortcuts'
 import './style.css'
 
 store.set(
@@ -51,6 +52,7 @@ render(
       <Route path="/" component={Home} />
       <Route path="/route/:route" component={Proxy} />
       <Route path="/games" component={Games} />
+      <Route path="/shortcuts" component={Shortcuts} />
       <Route path="/settings" component={Settings} />
     </Router>
   ),

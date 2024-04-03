@@ -20,9 +20,11 @@ export default function Navbar() {
             <Joystick class="h-5 w-5" /> Games
           </button>
         </A>
-        <button class="btn btn-ghost h-10 min-h-10">
-          <Layers class="h-5 w-5" /> Shortcuts
-        </button>
+        <A href="/shortcuts">
+          <button class="btn btn-ghost h-10 min-h-10">
+            <Layers class="h-5 w-5" /> Shortcuts
+          </button>
+        </A>
         <A href="/settings">
           <button class="btn btn-ghost h-10 min-h-10">
             <Settings class="h-5 w-5" /> Settings
