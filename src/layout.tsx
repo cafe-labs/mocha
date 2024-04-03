@@ -9,8 +9,14 @@ import { handleTheme } from './lib/settings/theme'
 export default function Layout(props: ParentProps) {
   onMount(() => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js', {
-        scope: '/~/'
+      navigator.serviceWorker.getRegistrations().then(async function (registrations) {
+        for await (let registration of registrations) {
+          await registration.unregister()
+        }
+
+        navigator.serviceWorker.register('/sw.js', {
+          scope: '/~/'
+        })
       })
     }
 
