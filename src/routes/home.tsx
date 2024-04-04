@@ -80,6 +80,10 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        <form method="dialog" class="modal-backdrop">
+          <button class="cursor-default" />
+        </form>
       </dialog>
     </div>
   )
