@@ -1,14 +1,16 @@
-import { createBareServer } from '@tomphttp/bare-server-node'
-import httpProxy from 'http-proxy'
-import express from 'express'
 import http from 'node:http'
-import pico from 'picocolors'
-import { build } from 'vite'
+import express from 'express'
+import { createBareServer } from '@tomphttp/bare-server-node'
+import wisp from 'wisp-server-node'
+import { epoxyPath } from "@mercuryworkshop/epoxy-transport"
+import httpProxy from 'http-proxy'
 import path from 'node:path'
+import { build } from 'vite'
+import pico from 'picocolors'
 
 const httpServer = http.createServer()
 const proxy = httpProxy.createProxyServer();
-const bareServer = createBareServer('/-/')
+const bareServer = createBareServer('/hobhobobobobu/')
 
 const app = express()
 const PORT = process.env.PORT || 3003
@@ -17,6 +19,7 @@ console.log(pico.cyan(pico.bold('Building frontend...')))
 await build()
 
 app.use(express.static('dist'))
+app.use("/epoxy/", express.static(epoxyPath));
 
 app.use('/cdn', (req, res) => {
   proxy.web(req, res, {
@@ -41,8 +44,8 @@ httpServer.on('request', (req, res) => {
 })
 
 httpServer.on('upgrade', (req, socket, head) => {
-  if (bareServer.shouldRoute(req)) {
-    bareServer.routeUpgrade(req, socket, head)
+  if (req.url.startsWith("/-/")) {
+    wisp.routeRequest(req, socket, head)
   } else {
     socket.end()
   }

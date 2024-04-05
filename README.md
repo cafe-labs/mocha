@@ -1,28 +1,31 @@
-## Usage
+<div align="center">
+  <img src="public/icon.png" height=75 width=75 />
+  <h1>Mocha</h1>
+</div>
+A simple web proxy that has many essential features for easy browsing.
 
-```bash
-$ npm install # or pnpm install or yarn install
+## Features
+
+- [x] Tab cloaking
+- [x] about:blank
+- [x] Customizable panic key
+- [x] Theme switching
+- [x] Proxy control bar
+- [x] Shortcuts to popular websites
+- [x] Games
+- [x] End-to-end encryption with Epoxy and Wisp
+- [ ] Site compatability suggestions
+- [ ] Rammerhead support
+
+## Run locally
+
+You need [NodeJS](https://nodejs.org) and [Git](https://git-scm.com/download) installed on your system.
+
+```sh
+# Clone repository and install packages
+git clone https://github.com/cafe-labs/mocha.git
+npm install
+
+# Build and start the server
+npm run start
 ```
-
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run dev`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-Learn more about deploying your application with the [documentations](https://vitejs.dev/guide/static-deploy.html)
