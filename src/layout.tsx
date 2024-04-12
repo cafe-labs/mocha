@@ -6,8 +6,8 @@ import { handleTabCloak } from './lib/settings/cloak'
 import { handlePanicKey } from './lib/settings/panic'
 import { handleTheme } from './lib/settings/theme'
 
-// @ts-ignore
-import { SetTransport } from '@mercuryworkshop/bare-mux'
+// @ts-expect-error
+import { SetTransport, registerRemoteListener } from '@mercuryworkshop/bare-mux'
 
 export default function Layout(props: ParentProps) {
   onMount(() => {
@@ -17,13 +17,11 @@ export default function Layout(props: ParentProps) {
           await registration.unregister()
         }
 
-        navigator.serviceWorker
-          .register('/sw.js', {
-            scope: '/~/'
-          })
-          .then(() => {
-            SetTransport('EpxMod.EpoxyClient', { wisp: `${window.location.protocol == "https:" ? 'wss' : 'ws'}://${window.location.host}/-/` })
-          })
+        navigator.serviceWorker.register('/sw.js')
+
+        navigator.serviceWorker.ready.then(async (sw) => {
+          SetTransport('EpxMod.EpoxyClient', { wisp: `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/-/` })
+        })
       })
     }
 

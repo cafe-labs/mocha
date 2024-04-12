@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@mercuryworkshop/bare-mux':
-    specifier: ^1.0.5
-    version: 1.0.5
+    specifier: ^1.0.7
+    version: 1.0.7
   '@mercuryworkshop/epoxy-transport':
     specifier: ^1.1.0
     version: 1.1.0(typescript@5.4.2)
@@ -555,8 +555,8 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@mercuryworkshop/bare-mux@1.0.5:
-    resolution: {integrity: sha512-5czcsWISUCrN49diTuF/8WXZUCyoWHn90Ea+gLhVWKGUTyJzPAG5gTVZ77rMcQYewSuSDA1WVPaF0n79ciL5Gg==}
+  /@mercuryworkshop/bare-mux@1.0.7:
+    resolution: {integrity: sha512-VUJvfLxlzpyCuKoGfaI+sUpHEK4tvmvpYvkalU2z604+O9UahfZoc53arO9pm9F3Fnv7ZNloSWMnvSlPAznkoA==}
     dependencies:
       '@types/uuid': 9.0.8
       uuid: 9.0.1
