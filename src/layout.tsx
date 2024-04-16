@@ -20,6 +20,7 @@ export default function Layout(props: ParentProps) {
         navigator.serviceWorker.register('/sw.js')
 
         navigator.serviceWorker.ready.then(async (sw) => {
+          console.log("Service worker ready!")
           SetTransport('EpxMod.EpoxyClient', { wisp: `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/-/` })
         })
       })
