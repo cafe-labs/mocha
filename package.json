@@ -19,6 +19,7 @@
     "clsx": "^2.1.0",
     "daisyui": "^4.7.3",
     "express": "^4.19.2",
+    "fuse.js": "^7.0.0",
     "http-proxy": "^1.18.1",
     "lucide-solid": "^0.358.0",
     "picocolors": "^1.0.0",
