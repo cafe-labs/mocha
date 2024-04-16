@@ -5,7 +5,11 @@ import config from '../config'
 import { handleTabCloak } from '../lib/settings/cloak'
 import { handleDebug } from '../lib/settings/debug'
 import { handleTheme } from '../lib/settings/theme'
-import { DebugData, PanicData, TabData, ThemeData, aboutblankData } from '../lib/types'
+import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData } from '../lib/types'
+
+// @ts-expect-error
+import { SetTransport } from '@mercuryworkshop/bare-mux'
+import { handleTransport } from '../lib/settings/transport'
 
 export default function Settings() {
   const [tabName, setTabName] = createSignal('')
@@ -19,6 +23,8 @@ export default function Settings() {
   const [theme, setTheme] = createSignal('forest')
 
   const [debug, setDebug] = createSignal('disabled')
+
+  const [transport, setTransport] = createSignal('epoxy')
 
   onMount(() => {
     const tabData = store('tab') as TabData
@@ -41,6 +47,9 @@ export default function Settings() {
 
     const debugData = store('debug') as DebugData
     if (debugData.enabled) setDebug('enabled')
+
+    const transportData = store('transport') as TransportData
+    if (transportData.transport) setTransport(transportData.transport)
   })
 
   function save() {
@@ -66,9 +75,14 @@ export default function Settings() {
       enabled: debug() == 'enabled'
     })
 
+    store('transport', {
+      transport: transport()
+    })
+
     handleTabCloak()
     handleDebug()
     handleTheme()
+    handleTransport()
 
     toast.custom(() => {
       return (
@@ -123,6 +137,15 @@ export default function Settings() {
           <select class="select select-bordered w-full max-w-xs" value={debug()} onChange={(e) => setDebug(e.target.value)}>
             <option value="enabled">Enabled</option>
             <option value="disabled">Disabled</option>
+          </select>
+        </div>
+
+        <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+          <h1 class="text-2xl font-semibold">Transport</h1>
+          <p class="text-center text-xs">Change how Mocha transports requests</p>
+          <select class="select select-bordered w-full max-w-xs" value={transport()} onChange={(e) => setTransport(e.target.value)}>
+            <option value="epoxy">Epoxy</option>
+            <option value="libcurl">Libcurl</option>
           </select>
         </div>
       </div>

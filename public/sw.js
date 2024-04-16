@@ -1,4 +1,5 @@
 importScripts("/epoxy/index.js");
+importScripts("/libcurl/index.js");
 importScripts('/coffee/bundle.js')
 importScripts('/coffee/config.js')
 importScripts(__uv$config.sw || '/coffee/sw.js')

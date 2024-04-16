@@ -1,13 +1,12 @@
 import { ParentProps, onCleanup, onMount } from 'solid-js'
 import { Toaster } from 'solid-toast'
 import Navbar from './components/navbar'
+
 import { handleAboutBlank } from './lib/settings/aboutblank'
 import { handleTabCloak } from './lib/settings/cloak'
 import { handlePanicKey } from './lib/settings/panic'
 import { handleTheme } from './lib/settings/theme'
-
-// @ts-expect-error
-import { SetTransport, registerRemoteListener } from '@mercuryworkshop/bare-mux'
+import { handleTransport } from './lib/settings/transport'
 
 export default function Layout(props: ParentProps) {
   onMount(() => {
@@ -17,11 +16,15 @@ export default function Layout(props: ParentProps) {
           await registration.unregister()
         }
 
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+          registration.update().then(() => {
+            console.log('Service worker registered')
+          })
+        })
 
         navigator.serviceWorker.ready.then(async (sw) => {
-          console.log("Service worker ready!")
-          SetTransport('EpxMod.EpoxyClient', { wisp: `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/-/` })
+          console.log('Service worker ready')
+          handleTransport()
         })
       })
     }

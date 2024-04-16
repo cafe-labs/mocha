@@ -53,6 +53,14 @@ store.set(
   false
 )
 
+store.set(
+  'transport',
+  {
+    transport: "epoxy"
+  },
+  false
+)
+
 // Debug is here to capture all logs
 handleDebug()
 

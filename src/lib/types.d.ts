@@ -1,3 +1,4 @@
+import { transports } from './settings/transport'
 export interface TabData {
   name: string | null
   icon: string | null
@@ -10,6 +11,10 @@ export interface PanicData {
 
 export interface aboutblankData {
   enabled: boolean
+}
+
+export interface TransportData {
+  transport: keyof typeof transports
 }
 
 export interface ThemeData {

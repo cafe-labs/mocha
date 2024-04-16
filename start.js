@@ -3,6 +3,7 @@ import express from 'express'
 import { createBareServer } from '@tomphttp/bare-server-node'
 import wisp from 'wisp-server-node'
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport"
+import { libcurlPath } from "@mercuryworkshop/libcurl-transport"
 import httpProxy from 'http-proxy'
 import path from 'node:path'
 import { build } from 'vite'
@@ -20,6 +21,7 @@ await build()
 
 app.use(express.static('dist'))
 app.use("/epoxy/", express.static(epoxyPath));
+app.use("/libcurl/", express.static(libcurlPath));
 
 app.use('/cdn', (req, res) => {
   proxy.web(req, res, {
