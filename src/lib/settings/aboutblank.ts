@@ -8,7 +8,7 @@ export function handleAboutBlank() {
   }
 }
 
-export function openAbWindow(src: string) {
+export function openAbWindow(src: string, redirect = true) {
   const tab = window.open('about:blank', '_blank')
   if (!tab) return
   const iframe = tab.document.createElement('iframe')
@@ -21,5 +21,5 @@ export function openAbWindow(src: string) {
   iframe.src = src
   tab.document.body.appendChild(iframe)
 
-  window.location.replace('https://classroom.google.com/h')
+  if (redirect) window.location.replace('https://classroom.google.com/h')
 }

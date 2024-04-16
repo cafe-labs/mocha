@@ -108,7 +108,7 @@ export default function Route() {
               if (!ref || !ref.contentWindow) return
               const contentWindow = ref.contentWindow as ContentWindow
 
-              openAbWindow(contentWindow.location.href)
+              openAbWindow(contentWindow.location.href, false)
             }}
           >
             <SquareArrowOutUpRight class="h-5 w-5" />
