@@ -53,7 +53,7 @@ store.set(
   false
 )
 
-// Debug has to be here to capture all errors
+// Debug is here to capture all logs
 handleDebug()
 
 const root = document.getElementById('root')
