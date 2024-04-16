@@ -1,6 +1,5 @@
 import http from 'node:http'
 import express from 'express'
-import { createBareServer } from '@tomphttp/bare-server-node'
 import wisp from 'wisp-server-node'
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport"
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport"
@@ -11,7 +10,6 @@ import pico from 'picocolors'
 
 const httpServer = http.createServer()
 const proxy = httpProxy.createProxyServer();
-const bareServer = createBareServer('/hobhobobobobu/')
 
 const app = express()
 const PORT = process.env.PORT || 3003
@@ -38,11 +36,7 @@ app.get("*", (_req, res) => {
 });
 
 httpServer.on('request', (req, res) => {
-  if (bareServer.shouldRoute(req)) {
-    bareServer.routeRequest(req, res)
-  } else {
-    app(req, res)
-  }
+  app(req, res)
 })
 
 httpServer.on('upgrade', (req, socket, head) => {
