@@ -16,7 +16,8 @@ export default function SwWarning() {
       <div class="modal-box">
         <h3 class="text-lg font-bold">Warning</h3>
         <p class="py-4">
-          The Ultraviolet service worker failed to register. Pressing <kbd class="kbd kbd-sm">ctrl</kbd>+<kbd class="kbd kbd-sm">shift</kbd>+<kbd class="kbd kbd-sm">r</kbd> to force-reload the page may help.
+          The Ultraviolet service worker failed to register. <br />
+          Pressing <kbd class="kbd kbd-sm">ctrl</kbd>+<kbd class="kbd kbd-sm">shift</kbd>+<kbd class="kbd kbd-sm">r</kbd> to force-reload the page may help.
         </p>
         <div class="modal-action">
           {/* <button

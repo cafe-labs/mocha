@@ -1,5 +1,6 @@
 import { useParams, useSearchParams } from '@solidjs/router'
-import { ChevronLeft, ChevronRight, FileCode, RotateCw, SquareArrowOutUpRight } from 'lucide-solid'
+import clsx from 'clsx'
+import { ChevronLeft, ChevronRight, FileCode, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight } from 'lucide-solid'
 import { createSignal, onMount } from 'solid-js'
 import { openAbWindow } from '../lib/settings/aboutblank'
 import { handlePanicKey } from '../lib/settings/panic'
@@ -9,6 +10,7 @@ import { encodeXor, formatSearch } from '../lib/utils'
 export default function Route() {
   var ref: HTMLIFrameElement
   const [url, setUrl] = createSignal('')
+  const [showControls, setShowControls] = createSignal(true)
 
   const params = useParams()
   const [searchParams] = useSearchParams()
@@ -34,7 +36,7 @@ export default function Route() {
       <iframe class="h-[calc(100vh-4rem)] w-screen" ref={ref!} onLoad={handleLoad} />
 
       {searchParams.hidecontrolbar == 'true' ? null : (
-        <div class="rounded-m join absolute bottom-2 left-1/2 z-40 -translate-x-1/2 bg-base-200 px-2">
+        <div class={clsx('rounded-m join fixed bottom-2 left-1/2 z-40 -translate-x-1/2 bg-base-200 px-2 transition-[bottom] duration-300', showControls() ? 'bottom-2' : '-bottom-16')}>
           <button
             class="btn btn-square join-item bg-base-200"
             onClick={() => {
@@ -113,8 +115,22 @@ export default function Route() {
           >
             <SquareArrowOutUpRight class="h-5 w-5" />
           </button>
+          <button
+            class="btn btn-square join-item bg-base-200"
+            onClick={() => {
+              setShowControls(false)
+            }}
+          >
+            <PanelBottomClose class="h-5 w-5" />
+          </button>
         </div>
       )}
+
+      <div class={clsx('fixed bottom-2 right-2 transition-opacity duration-300', showControls() ? 'opacity-0' : 'opacity-50')}>
+        <button class="btn btn-square btn-ghost" onClick={() => setShowControls(true)}>
+          <PanelBottomOpen />
+        </button>
+      </div>
     </div>
   )
 }
