@@ -14,6 +14,7 @@ A simple web proxy that has many essential features for easy browsing.
 - [x] Shortcuts to popular websites
 - [x] Games
 - [x] End-to-end encryption with Epoxy and Wisp
+- [x] Transport switching for better site compatibility
 - [ ] Site compatability suggestions
 - [ ] Rammerhead support
 
