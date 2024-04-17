@@ -2,6 +2,8 @@ import { ParentProps, onCleanup, onMount } from 'solid-js'
 import { Toaster } from 'solid-toast'
 import Navbar from './components/navbar'
 
+import store from 'store2'
+import Warning from './components/warning'
 import { handleAboutBlank } from './lib/settings/aboutblank'
 import { handleTabCloak } from './lib/settings/cloak'
 import { handlePanicKey } from './lib/settings/panic'
@@ -22,8 +24,9 @@ export default function Layout(props: ParentProps) {
           })
         })
 
-        navigator.serviceWorker.ready.then(async (sw) => {
+        navigator.serviceWorker.ready.then(async () => {
           console.log('Service worker ready')
+          store('swReady', true)
           handleTransport()
         })
       })
@@ -42,6 +45,7 @@ export default function Layout(props: ParentProps) {
     <div>
       <Navbar />
       <Toaster position="top-center" />
+      <Warning />
       {props.children}
     </div>
   )

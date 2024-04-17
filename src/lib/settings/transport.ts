@@ -3,6 +3,7 @@ import { TransportData } from '../types'
 
 // @ts-expect-error
 import { SetTransport } from '@mercuryworkshop/bare-mux'
+import { setShowWarning } from '../../components/warning'
 
 export const transports = {
   epoxy: 'EpxMod.EpoxyClient',
@@ -15,3 +16,11 @@ export function handleTransport() {
   const transportData = store('transport') as TransportData
   SetTransport(transports[transportData.transport], { wisp: wispUrl })
 }
+
+setTimeout(() => {
+  const swReady = store('swReady')
+  console.log(swReady)
+  if (!swReady) {
+    setShowWarning(true)
+  }
+}, 5000)

@@ -56,10 +56,12 @@ store.set(
 store.set(
   'transport',
   {
-    transport: "epoxy"
+    transport: 'epoxy'
   },
   false
 )
+
+store('swReady', false)
 
 // Debug is here to capture all logs
 handleDebug()
