@@ -11,16 +11,18 @@ export const transports = {
 }
 
 export const wispUrl = `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/-/`
+var transportSet = false;
 
 export function handleTransport() {
   const transportData = store('transport') as TransportData
   SetTransport(transports[transportData.transport], { wisp: wispUrl })
+  transportSet = true
 }
 
 setTimeout(() => {
   const swReady = store('swReady')
   console.log(swReady)
-  if (!swReady) {
+  if (!swReady && !transportSet) {
     setShowWarning(true)
   }
 }, 5000)
