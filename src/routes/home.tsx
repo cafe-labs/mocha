@@ -58,6 +58,9 @@ export default function Home() {
           >
             Discord
           </a>
+          <A href="/faq" class="link-hover link">
+            FAQ
+          </A>
         </div>
       </div>
 

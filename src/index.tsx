@@ -4,6 +4,7 @@ import store from 'store2'
 import { handleDebug } from './lib/settings/debug'
 
 import Layout from './layout'
+import FAQ from './routes/faq'
 import Games from './routes/games'
 import Home from './routes/home'
 import Proxy from './routes/route'
@@ -75,6 +76,7 @@ render(
       <Route path="/route/:route" component={Proxy} />
       <Route path="/games" component={Games} />
       <Route path="/shortcuts" component={Shortcuts} />
+      <Route path="/faq" component={FAQ} />
       <Route path="/settings" component={Settings} />
     </Router>
   ),
