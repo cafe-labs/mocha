@@ -38,5 +38,10 @@
     "name": "GeForce NOW",
     "url": "https://play.geforcenow.com",
     "image": "https://blogs.nvidia.com/wp-content/uploads/2021/02/GFN.png"
+  },
+  {
+    "name": "movie-web",
+    "url": "https://movie-web.us",
+    "image": "https://avatars.githubusercontent.com/u/121455091?s=280&v=4"
   }
 ]

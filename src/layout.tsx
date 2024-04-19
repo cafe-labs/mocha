@@ -27,6 +27,7 @@ export default function Layout(props: ParentProps) {
         navigator.serviceWorker.ready.then(async () => {
           console.log('Service worker ready')
           store('swReady', true)
+          handleTransport()
         })
       })
     }
