@@ -10,6 +10,9 @@ export default function Shortcuts() {
     fetch('/shortcuts.json')
       .then((res) => res.json())
       .then((res: ShortcutData[]) => {
+        res = res.sort((a, b) => {
+          return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        })
         setData(res)
       })
   })
