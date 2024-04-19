@@ -5,7 +5,7 @@ export default function FAQ() {
     <div class="flex flex-col gap-4 p-8">
       <h1 class="-mt-2 pb-2 text-4xl font-bold">FAQ</h1>
       <div class="collapse collapse-arrow bg-base-200">
-        <input type="checkbox" name="faq" checked={true} />
+        <input type="checkbox" name="faq" />
         <div class="collapse-title text-xl font-medium">What is Mocha?</div>
         <div class="collapse-content">
           <p>Mocha is a web proxy used to unblock websites at work or school. Your traffic is encrypted so no one can read it, not even us. </p>
@@ -40,7 +40,7 @@ export default function FAQ() {
 
       <div class="collapse collapse-arrow bg-base-200">
         <input type="checkbox" name="faq" />
-        <div class="collapse-title text-xl font-medium">Why is the proxy saying "there are no bare clients"?</div>
+        <div class="collapse-title text-xl font-medium">Why is there an error saying "there are no bare clients"?</div>
         <div class="collapse-content">
           <p>This is due to how Mocha registers service workers for Ultraviolet, the internal proxy we use. Sometimes the service worker does not register properly, and cause other components of Mocha to fail. Reloading once or twice should fix the issue. We are actively working to fix this.</p>
         </div>
