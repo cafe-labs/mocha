@@ -10,6 +10,7 @@ import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData
 // @ts-expect-error
 import { SetTransport } from '@mercuryworkshop/bare-mux'
 import { handleTransport } from '../lib/settings/transport'
+import { CircleCheck } from 'lucide-solid'
 
 export default function Settings() {
   const [tabName, setTabName] = createSignal('')
@@ -88,6 +89,7 @@ export default function Settings() {
       return (
         <div class="toast toast-center toast-top">
           <div class="alert alert-success w-80">
+            <CircleCheck />
             <span>Settings saved.</span>
           </div>
         </div>
