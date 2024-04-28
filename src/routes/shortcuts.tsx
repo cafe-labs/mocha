@@ -1,4 +1,4 @@
-import { createSignal, onMount } from 'solid-js'
+import { Show, createSignal, onMount } from 'solid-js'
 import { ShortcutData } from '../lib/types'
 
 import Shortcut from '../components/shortcut'
@@ -19,6 +19,9 @@ export default function Shortcuts() {
 
   return (
     <div class="flex flex-wrap justify-center gap-4 px-4 py-8">
+      <Show when={!data()[0]}>
+        <span class="loading loading-dots loading-lg"></span>
+      </Show>
       {data().map((shortcut) => {
         return <Shortcut shortcut={shortcut} />
       })}

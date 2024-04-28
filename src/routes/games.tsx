@@ -1,5 +1,5 @@
 import Fuse, { FuseResult } from 'fuse.js'
-import { createSignal, onMount } from 'solid-js'
+import { Show, createSignal, onMount } from 'solid-js'
 import Game from '../components/game'
 import { GameData } from '../lib/types'
 
@@ -25,13 +25,21 @@ export default function Games() {
 
   return (
     <div class="flex flex-col items-center gap-2 py-4">
-      <input type="text" class="input input-bordered w-1/3" onInput={(e) => handleSearch(e.target.value)} placeholder={`Search ${data().length} games`} />
+      <Show when={data()[0]}>
+        <input type="text" class="input input-bordered w-1/3" onInput={(e) => handleSearch(e.target.value)} placeholder={`Search ${data().length} games`} />
+      </Show>
+
       <div class="flex flex-wrap justify-center gap-4 px-4 py-8">
-        {results().length > 0 ? results().map((result) => {
-          return <Game game={result.item} />
-        }) : data().map((game) => {
-          return <Game game={game} />
-        })}
+        <Show when={!data()[0]}>
+          <span class="loading loading-dots loading-lg"></span>
+        </Show>
+        {results().length > 0
+          ? results().map((result) => {
+              return <Game game={result.item} />
+            })
+          : data().map((game) => {
+              return <Game game={game} />
+            })}
       </div>
     </div>
   )
