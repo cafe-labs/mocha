@@ -43,5 +43,20 @@
     "name": "movie-web",
     "url": "https://movie-web.us",
     "image": "https://avatars.githubusercontent.com/u/121455091?s=280&v=4"
+  },
+  {
+    "name": "Twitter",
+    "url": "https://twitter.com",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC_wqW8HNICg2nSDYlkb-S010wjZrD9yZLeUzKDBF5Ew&s"
+  },
+  {
+    "name": "GitHub",
+    "url": "https://github.com",
+    "image": "https://github.blog/wp-content/uploads/2023/01/1200x640.png?fit=1200%2C640"
+  },
+  {
+    "name": "neal.fun",
+    "url": "https://neal.fun",
+    "image": "https://i.ytimg.com/vi/HHeBwZCJqhM/maxresdefault.jpg"
   }
 ]
