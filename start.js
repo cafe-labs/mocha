@@ -7,6 +7,7 @@ import httpProxy from 'http-proxy'
 import path from 'node:path'
 import { build } from 'vite'
 import pico from 'picocolors'
+import { consola } from "consola";
 
 const httpServer = http.createServer()
 const proxy = httpProxy.createProxyServer();
@@ -14,7 +15,7 @@ const proxy = httpProxy.createProxyServer();
 const app = express()
 const PORT = process.env.PORT || 3003
 
-console.log(pico.cyan(pico.bold('Building frontend...')))
+consola.start(pico.gray('Building frontend...'))
 await build()
 
 app.use(express.static('dist'))
@@ -48,8 +49,8 @@ httpServer.on('upgrade', (req, socket, head) => {
 })
 
 httpServer.on('listening', () => {
-  console.log(pico.green(pico.bold(`Mocha server online!`)))
-  console.log(pico.gray(`- http://localhost:${PORT}`))
+  consola.success(pico.green(pico.bold(`Mocha server ready!`)))
+  consola.info(pico.gray(`http://localhost:${PORT}`))
 })
 
 httpServer.listen({
