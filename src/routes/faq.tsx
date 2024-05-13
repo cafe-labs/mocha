@@ -37,14 +37,6 @@ export default function FAQ() {
           <p>The proxy is hosted on a shared server that serves all users. If there is a significant amount of users at one time, it can cause network congestion and slow down requests. </p>
         </div>
       </div>
-
-      <div class="collapse collapse-arrow bg-base-200">
-        <input type="checkbox" name="faq" />
-        <div class="collapse-title text-xl font-medium">Why is there an error saying "there are no bare clients"?</div>
-        <div class="collapse-content">
-          <p>This is due to how Mocha registers service workers for Ultraviolet, the internal proxy we use. Sometimes the service worker does not register properly, and cause other components of Mocha to fail. Reloading once or twice should fix the issue. We are actively working to fix this.</p>
-        </div>
-      </div>
     </div>
   )
 }
