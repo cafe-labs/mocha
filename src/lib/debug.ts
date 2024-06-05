@@ -1,5 +1,5 @@
 import store from 'store2'
-import { DebugData } from '../types'
+import { DebugData } from './types'
 export function handleDebug() {
   const debugData = store('debug') as DebugData
   if (!debugData.enabled) {

@@ -1,5 +1,5 @@
 import store from 'store2'
-import { aboutblankData } from '../types'
+import { aboutblankData } from './types'
 export function handleAboutBlank() {
   const aboutblankData = store('aboutblank') as aboutblankData
 

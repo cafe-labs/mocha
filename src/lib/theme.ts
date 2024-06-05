@@ -1,5 +1,5 @@
 import store from 'store2'
-import { ThemeData } from '../types'
+import { ThemeData } from './types'
 export function handleTheme() {
   const themeData = store('theme') as ThemeData
 
