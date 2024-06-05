@@ -2,14 +2,14 @@ import { createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
 import config from '../config'
-import { handleTabCloak } from '../lib/settings/cloak'
-import { handleDebug } from '../lib/settings/debug'
-import { handleTheme } from '../lib/settings/theme'
+import { handleTabCloak } from '../lib/cloak'
+import { handleDebug } from '../lib/debug'
+import { handleTheme } from '../lib/theme'
 import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData } from '../lib/types'
 
 // @ts-expect-error
 import { SetTransport } from '@mercuryworkshop/bare-mux'
-import { handleTransport } from '../lib/settings/transport'
+import { handleTransport } from '../lib/transport'
 import { CircleCheck } from 'lucide-solid'
 
 export default function Settings() {

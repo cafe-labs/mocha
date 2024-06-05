@@ -1,4 +1,4 @@
-import { transports } from './settings/transport'
+import { transports } from './transport'
 export interface TabData {
   name: string | null
   icon: string | null

@@ -1,7 +1,7 @@
 import { Route, Router } from '@solidjs/router'
 import { render } from 'solid-js/web'
 import store from 'store2'
-import { handleDebug } from './lib/settings/debug'
+import { handleDebug } from './lib/debug'
 
 import Layout from './layout'
 import FAQ from './routes/faq'

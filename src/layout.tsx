@@ -4,11 +4,11 @@ import Navbar from './components/navbar'
 
 import store from 'store2'
 import Warning from './components/warning'
-import { handleAboutBlank } from './lib/settings/aboutblank'
-import { handleTabCloak } from './lib/settings/cloak'
-import { handlePanicKey } from './lib/settings/panic'
-import { handleTheme } from './lib/settings/theme'
-import { handleTransport } from './lib/settings/transport'
+import { handleAboutBlank } from './lib/aboutblank'
+import { handleTabCloak } from './lib/cloak'
+import { handlePanicKey } from './lib/panic'
+import { handleTheme } from './lib/theme'
+import { handleTransport } from './lib/transport'
 
 export default function Layout(props: ParentProps) {
   onMount(() => {

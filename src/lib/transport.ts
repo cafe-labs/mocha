@@ -1,9 +1,9 @@
 import store from 'store2'
-import { TransportData } from '../types'
+import { TransportData } from './types'
 
 // @ts-expect-error
 import { SetTransport } from '@mercuryworkshop/bare-mux'
-import { setShowWarning } from '../../components/warning'
+import { setShowWarning } from '../components/warning'
 
 export const transports = {
   epoxy: 'EpxMod.EpoxyClient',
