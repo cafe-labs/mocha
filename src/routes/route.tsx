@@ -1,10 +1,14 @@
 import { useParams, useSearchParams } from '@solidjs/router'
 import clsx from 'clsx'
-import { ChevronLeft, ChevronRight, FileCode, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight } from 'lucide-solid'
+import { ChevronLeft, ChevronRight, CircleAlert, FileCode, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
 import { createSignal, onMount } from 'solid-js'
+import toast from 'solid-toast'
+import store from 'store2'
 import { openAbWindow } from '../lib/aboutblank'
 import { handlePanicKey } from '../lib/panic'
-import { ContentWindow } from '../lib/types'
+import { patches } from '../lib/patch'
+import { handleTransport } from '../lib/transport'
+import { ContentWindow, TransportData } from '../lib/types'
 import { encodeXor, formatSearch } from '../lib/utils'
 
 export default function Route() {
@@ -14,7 +18,7 @@ export default function Route() {
 
   const params = useParams()
   const [searchParams] = useSearchParams()
-  
+
   onMount(() => {
     if (searchParams.hidecontrolbar == 'true') {
       setShowControls(false)
@@ -35,6 +39,54 @@ export default function Route() {
     }
 
     contentWindow.addEventListener('keydown', handlePanicKey)
+
+    const hostname = contentWindow.__uv$location.hostname
+    console.log(hostname)
+
+    const patch = patches.find((x) => hostname.includes(x.hostname))
+    if (!patch) return
+
+    if (patch.suggestedTransport && patch.suggestedTransport !== (store('transport') as TransportData).transport) {
+      toast.custom((x) => {
+        return (
+          <div class="toast toast-center toast-top">
+            <div class="alert alert-warning">
+              <TriangleAlert />
+              <span>
+                This website might run better with the <span class="font-semibold">{patch.suggestedTransport}</span> transport enabled. <br />{' '}
+                <span
+                  class="cursor-pointer underline underline-offset-4"
+                  onClick={() => {
+                    handleTransport(patch.suggestedTransport)
+                    toast.dismiss(x.id)
+                    contentWindow.location.reload()
+                  }}
+                >
+                  Set Transport
+                </span>
+              </span>
+            </div>
+          </div>
+        )
+      })
+    }
+
+    if (!patch.works) {
+      toast.custom((x) => {
+        return (
+          <div class="toast toast-center toast-top">
+            <div class="alert alert-error">
+              <CircleAlert />
+              <span>This website is known not to work correctly.</span>
+            </div>
+          </div>
+        )
+      })
+    }
+
+    if (patch.execute) {
+      patch.execute(contentWindow)
+    }
   }
   return (
     <div>

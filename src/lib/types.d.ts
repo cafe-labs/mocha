@@ -1,4 +1,5 @@
 import { transports } from './transport'
+
 export interface TabData {
   name: string | null
   icon: string | null
@@ -41,6 +42,13 @@ export interface DebugData {
 export interface ContentWindow extends Window {
   __uv$location: Location
   eruda: any
+}
+
+export interface Patch {
+  hostname: string,
+  works?: boolean,
+  execute?: (contentWindow: ContentWindow) => void,
+  suggestedTransport?: keyof typeof transports
 }
 
 declare global {

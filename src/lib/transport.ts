@@ -3,7 +3,6 @@ import { TransportData } from './types'
 
 // @ts-expect-error
 import { SetTransport } from '@mercuryworkshop/bare-mux'
-import { setShowWarning } from '../components/warning'
 
 export const transports = {
   epoxy: 'EpxMod.EpoxyClient',
@@ -11,18 +10,14 @@ export const transports = {
 }
 
 export const wispUrl = `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/wisp/`
-var transportSet = false;
 
-export function handleTransport() {
+export function handleTransport(transport?: keyof typeof transports) {
   const transportData = store('transport') as TransportData
-  SetTransport(transports[transportData.transport], { wisp: wispUrl })
-  transportSet = true
-}
+  SetTransport(transports[transport || transportData.transport], { wisp: wispUrl })
 
-setTimeout(() => {
-  const swReady = store('swReady')
-  console.log(swReady)
-  if (!swReady && !transportSet) {
-    setShowWarning(true)
+  if (transport) {
+    store('transport', {
+      transport
+    } satisfies TransportData)
   }
-}, 5000)
+}
