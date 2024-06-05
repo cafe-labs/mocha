@@ -1,8 +1,6 @@
 import http from 'node:http'
 import express from 'express'
 import wisp from 'wisp-server-node'
-import { epoxyPath } from "@mercuryworkshop/epoxy-transport"
-import { libcurlPath } from "@mercuryworkshop/libcurl-transport"
 import httpProxy from 'http-proxy'
 import path from 'node:path'
 import { build } from 'vite'
@@ -19,8 +17,6 @@ consola.start(pico.gray('Building frontend...'))
 await build()
 
 app.use(express.static('dist'))
-app.use("/epoxy/", express.static(epoxyPath));
-app.use("/libcurl/", express.static(libcurlPath));
 
 app.use('/cdn', (req, res) => {
   proxy.web(req, res, {
@@ -41,7 +37,7 @@ httpServer.on('request', (req, res) => {
 })
 
 httpServer.on('upgrade', (req, socket, head) => {
-  if (req.url.startsWith("/-/")) {
+  if (req.url.startsWith("/wisp/")) {
     wisp.routeRequest(req, socket, head)
   } else {
     socket.end()
@@ -49,7 +45,7 @@ httpServer.on('upgrade', (req, socket, head) => {
 })
 
 httpServer.on('listening', () => {
-  consola.success(pico.green(pico.bold(`Mocha server ready!`)))
+  consola.success(pico.green(`Mocha server ready!`))
   consola.info(pico.gray(`http://localhost:${PORT}`))
 })
 

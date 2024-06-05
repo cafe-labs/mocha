@@ -1,15 +1,37 @@
-import { defineConfig } from 'vite'
 import { execSync } from 'child_process'
+import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
-  plugins: [solid()],
+  plugins: [
+    solid(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: './node_modules/@mercuryworkshop/epoxy-transport/dist/index.js',
+          dest: 'epoxy'
+        },
+        {
+          src: './node_modules/@mercuryworkshop/libcurl-transport/dist/index.js',
+          dest: 'libcurl'
+        }
+      ]
+    })
+  ],
   server: {
     proxy: {
+      // For development purposes
       '/cdn': {
         target: 'https://assets.3kh0.net',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/cdn/, '')
+      },
+      '/wisp/': {
+        target: "https://wisp.mercurywork.shop/",
+        changeOrigin: true,
+        ws: true,
+        rewrite: (path) => path.replace(/^\/wisp\//, "")
       }
     }
   },

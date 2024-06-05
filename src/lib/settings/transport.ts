@@ -10,7 +10,7 @@ export const transports = {
   libcurl: 'CurlMod.LibcurlClient'
 }
 
-export const wispUrl = `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/-/`
+export const wispUrl = `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/wisp/`
 var transportSet = false;
 
 export function handleTransport() {
