@@ -28,10 +28,10 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/cdn/, '')
       },
       '/wisp/': {
-        target: "https://wisp.mercurywork.shop/",
+        target: 'https://wisp.mercurywork.shop/',
         changeOrigin: true,
         ws: true,
-        rewrite: (path) => path.replace(/^\/wisp\//, "")
+        rewrite: (path) => path.replace(/^\/wisp\//, '')
       }
     }
   },

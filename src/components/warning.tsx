@@ -15,9 +15,7 @@ export default function SwWarning() {
     <dialog id="discordmodal" class="modal" ref={warningModal!}>
       <div class="modal-box">
         <h3 class="text-lg font-bold">Warning</h3>
-        <p class="py-4">
-          The Ultraviolet service worker failed to register. Reloading once or twice may fix the issue.
-        </p>
+        <p class="py-4">The Ultraviolet service worker failed to register. Reloading once or twice may fix the issue.</p>
         <div class="modal-action">
           <button
             class="btn btn-primary"

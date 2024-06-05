@@ -8,9 +8,8 @@ import { handleTheme } from '../lib/theme'
 import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData } from '../lib/types'
 
 // @ts-expect-error
-import { SetTransport } from '@mercuryworkshop/bare-mux'
-import { handleTransport } from '../lib/transport'
 import { CircleCheck } from 'lucide-solid'
+import { handleTransport } from '../lib/transport'
 
 export default function Settings() {
   const [tabName, setTabName] = createSignal('')
@@ -134,12 +133,10 @@ export default function Settings() {
         </div>
 
         <div class="collapse collapse-arrow">
-          <input type="checkbox" /> 
-          <div class="collapse-title text-xl font-medium w-1/3 -translate-x-1/2 left-1/2">
-            Advanced
-          </div>
-          <div class="collapse-content mt-6"> 
-            <div class="flex flex-wrap gap-6 justify-center">
+          <input type="checkbox" />
+          <div class="collapse-title left-1/2 w-1/3 -translate-x-1/2 text-xl font-medium">Advanced</div>
+          <div class="collapse-content mt-6">
+            <div class="flex flex-wrap justify-center gap-6">
               <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
                 <h1 class="text-2xl font-semibold">Debug</h1>
                 <p class="text-center text-xs">Enable Eruda devtools to help debug issues </p>
@@ -159,7 +156,6 @@ export default function Settings() {
             </div>
           </div>
         </div>
-
       </div>
       <div class="flex items-center gap-4 py-4">
         <button class="btn btn-primary px-16" onClick={save}>

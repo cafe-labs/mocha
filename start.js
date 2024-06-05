@@ -1,14 +1,14 @@
-import http from 'node:http'
+import { consola } from 'consola'
 import express from 'express'
-import wisp from 'wisp-server-node'
 import httpProxy from 'http-proxy'
+import http from 'node:http'
 import path from 'node:path'
-import { build } from 'vite'
 import pico from 'picocolors'
-import { consola } from "consola";
+import { build } from 'vite'
+import wisp from 'wisp-server-node'
 
 const httpServer = http.createServer()
-const proxy = httpProxy.createProxyServer();
+const proxy = httpProxy.createProxyServer()
 
 const app = express()
 const PORT = process.env.PORT || 3003
@@ -23,21 +23,21 @@ app.use('/cdn', (req, res) => {
     target: 'https://assets.3kh0.net',
     changeOrigin: true,
     pathRewrite: {
-      '^/cdn': '',
-    },
-  });
-});
+      '^/cdn': ''
+    }
+  })
+})
 
-app.get("*", (_req, res) => {
-  res.sendFile(path.resolve("dist", "index.html"));
-});
+app.get('*', (_req, res) => {
+  res.sendFile(path.resolve('dist', 'index.html'))
+})
 
 httpServer.on('request', (req, res) => {
   app(req, res)
 })
 
 httpServer.on('upgrade', (req, socket, head) => {
-  if (req.url.startsWith("/wisp/")) {
+  if (req.url.startsWith('/wisp/')) {
     wisp.routeRequest(req, socket, head)
   } else {
     socket.end()

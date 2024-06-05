@@ -45,9 +45,9 @@ export interface ContentWindow extends Window {
 }
 
 export interface Patch {
-  hostname: string,
-  works?: boolean,
-  execute?: (contentWindow: ContentWindow) => void,
+  hostname: string
+  works?: boolean
+  execute?: (contentWindow: ContentWindow) => void
   suggestedTransport?: keyof typeof transports
 }
 
