@@ -1,19 +1,18 @@
 import { consola } from 'consola'
 import express from 'express'
 import httpProxy from 'http-proxy'
+import wisp from 'wisp-server-node'
 import http from 'node:http'
 import path from 'node:path'
-import pico from 'picocolors'
 import { build } from 'vite'
-import wisp from 'wisp-server-node'
 
 const httpServer = http.createServer()
 const proxy = httpProxy.createProxyServer()
 
 const app = express()
-const PORT = process.env.PORT || 3003
+const port = process.env.PORT || 3003
 
-consola.start(pico.gray('Building frontend...'))
+consola.start("Building frontend")
 await build()
 
 app.use(express.static('dist'))
@@ -45,10 +44,9 @@ httpServer.on('upgrade', (req, socket, head) => {
 })
 
 httpServer.on('listening', () => {
-  consola.success(pico.green(`Mocha server ready!`))
-  consola.info(pico.gray(`http://localhost:${PORT}`))
+  consola.info(`Listening on http://localhost:${port}`)
 })
 
 httpServer.listen({
-  port: PORT
+  port
 })
