@@ -71,8 +71,8 @@ export default function Route() {
       })
     }
 
-    if (!patch.works) {
-      toast.custom((x) => {
+    if (patch.works == false) {
+      toast.custom(() => {
         return (
           <div class="toast toast-center toast-top">
             <div class="alert alert-error">
