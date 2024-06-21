@@ -29,6 +29,16 @@ export interface GameData {
   image: string
 }
 
+export interface BrowsingData {
+  localStorage?: {
+    key: string
+    value: string
+  }[]
+  cookies?: {
+    [key: string]: unknown
+  }[]
+}
+
 export interface ShortcutData {
   name: string
   url: string
@@ -47,7 +57,7 @@ export interface ContentWindow extends Window {
 export interface Patch {
   hostname: string
   works?: boolean
-  execute?: (contentWindow: ContentWindow) => void
+  execute?: (contentWindow: ContentWindow) => void // for injecting scripts into websites (not sure what it could be used for yet)
   suggestedTransport?: keyof typeof transports
 }
 

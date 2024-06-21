@@ -7,8 +7,8 @@ import { handleDebug } from '../lib/debug'
 import { handleTheme } from '../lib/theme'
 import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData } from '../lib/types'
 
-// @ts-expect-error
 import { CircleCheck } from 'lucide-solid'
+import { exportData } from '../lib/browsingdata'
 import { handleTransport } from '../lib/transport'
 
 export default function Settings() {
@@ -145,6 +145,7 @@ export default function Settings() {
                   <option value="disabled">Disabled</option>
                 </select>
               </div>
+
               <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
                 <h1 class="text-2xl font-semibold">Transport</h1>
                 <p class="text-center text-xs">Change how Mocha transports requests</p>
@@ -152,6 +153,18 @@ export default function Settings() {
                   <option value="epoxy">Epoxy</option>
                   <option value="libcurl">Libcurl</option>
                 </select>
+              </div>
+
+              <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+                <h1 class="text-2xl font-semibold">Browsing Data</h1>
+                <p class="text-center text-xs">Export, import, or delete your proxy browsing data</p>
+                <div class="flex w-full gap-2">
+                  <button class="btn btn-outline flex-1" onClick={exportData}>
+                    Export
+                  </button>
+                  <button class="btn btn-outline flex-1">Import</button>
+                </div>
+                <button class="btn btn-error w-full">Delete</button>
               </div>
             </div>
           </div>
