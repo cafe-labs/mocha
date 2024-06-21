@@ -8,7 +8,7 @@ import { handleTheme } from '../lib/theme'
 import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData } from '../lib/types'
 
 import { CircleCheck } from 'lucide-solid'
-import { exportData } from '../lib/browsingdata'
+import { exportData, importData, resetData } from '../lib/browsingdata'
 import { handleTransport } from '../lib/transport'
 
 export default function Settings() {
@@ -25,6 +25,11 @@ export default function Settings() {
   const [debug, setDebug] = createSignal('disabled')
 
   const [transport, setTransport] = createSignal('epoxy')
+
+  var fileImport: HTMLInputElement
+  var exportWarning: HTMLDialogElement
+  var importWarning: HTMLDialogElement
+  var deleteWarning: HTMLDialogElement
 
   onMount(() => {
     const tabData = store('tab') as TabData
@@ -159,12 +164,18 @@ export default function Settings() {
                 <h1 class="text-2xl font-semibold">Browsing Data</h1>
                 <p class="text-center text-xs">Export, import, or delete your proxy browsing data</p>
                 <div class="flex w-full gap-2">
-                  <button class="btn btn-outline flex-1" onClick={exportData}>
+                  <button class="btn btn-outline flex-1" onClick={() => exportWarning.showModal()}>
                     Export
                   </button>
-                  <button class="btn btn-outline flex-1">Import</button>
+                  <button class="btn btn-outline flex-1" onClick={() => importWarning.showModal()}>
+                    Import
+                  </button>
                 </div>
-                <button class="btn btn-error w-full">Delete</button>
+                <button class="btn btn-error w-full" onClick={() => deleteWarning.showModal()}>
+                  Delete
+                </button>
+
+                <input type="file" class="hidden" ref={fileImport!} />
               </div>
             </div>
           </div>
@@ -189,6 +200,51 @@ export default function Settings() {
           Reset
         </button>
       </div>
+
+      <dialog class="modal" ref={exportWarning!}>
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Continue with export?</h3>
+          <p class="py-4">Warning! This file contains all the data that would normally be stored in your browser if you were to visit websites un-proxied on your computer. This includes any logins you used while inside the proxy. <span class="font-bold underline">Don't give this file to other people.</span></p>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+              <button class="btn btn-success" onClick={exportData}>
+                Proceed
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="modal" ref={importWarning!}>
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Current browsing data will be removed</h3>
+          <p class="py-4">Warning! By proceeding, your proxy browsing data will be replaced by the imported data. This is irreversible. Continue?</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+              <button class="btn btn-error" onClick={() => importData(fileImport)}>
+                Proceed
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="modal" ref={deleteWarning!}>
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">Current browsing data will be deleted</h3>
+          <p class="py-4">Warning! By proceeding, your proxy browsing data will be wiped completely. This is irreversible. Continue?</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <button class="btn">Close</button>
+              <button class="btn btn-error" onClick={resetData}>
+                Proceed
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </div>
   )
 }
