@@ -204,9 +204,11 @@ export default function Settings() {
       <dialog class="modal" ref={exportWarning!}>
         <div class="modal-box">
           <h3 class="text-lg font-bold">Continue with export?</h3>
-          <p class="py-4">Warning! This file contains all the data that would normally be stored in your browser if you were to visit websites un-proxied on your computer. This includes any logins you used while inside the proxy. <span class="font-bold underline">Don't give this file to other people.</span></p>
+          <p class="py-4">
+            Warning! This file contains all the data that would normally be stored in your browser if you were to visit websites un-proxied on your computer. This includes any logins you used while inside the proxy. <span class="font-bold underline">Don't give this file to other people.</span>
+          </p>
           <div class="modal-action">
-            <form method="dialog">
+            <form method="dialog" class="flex gap-2">
               <button class="btn">Close</button>
               <button class="btn btn-success" onClick={exportData}>
                 Proceed
@@ -221,7 +223,7 @@ export default function Settings() {
           <h3 class="text-lg font-bold">Current browsing data will be removed</h3>
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be replaced by the imported data. This is irreversible. Continue?</p>
           <div class="modal-action">
-            <form method="dialog">
+            <form method="dialog" class="flex gap-2">
               <button class="btn">Close</button>
               <button class="btn btn-error" onClick={() => importData(fileImport)}>
                 Proceed
@@ -236,7 +238,7 @@ export default function Settings() {
           <h3 class="text-lg font-bold">Current browsing data will be deleted</h3>
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be wiped completely. This is irreversible. Continue?</p>
           <div class="modal-action">
-            <form method="dialog">
+            <form method="dialog" class="flex gap-2">
               <button class="btn">Close</button>
               <button class="btn btn-error" onClick={resetData}>
                 Proceed
