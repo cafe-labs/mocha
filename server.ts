@@ -5,6 +5,7 @@ import wisp from 'wisp-server-node'
 import http from 'node:http'
 import path from 'node:path'
 import { build } from 'vite'
+import { Socket } from 'node:net'
 
 const httpServer = http.createServer()
 const proxy = httpProxy.createProxyServer()
@@ -21,7 +22,8 @@ app.use('/cdn', (req, res) => {
   proxy.web(req, res, {
     target: 'https://assets.3kh0.net',
     changeOrigin: true,
-    pathRewrite: {
+    // @ts-ignore
+    rewritePath: {
       '^/cdn': ''
     }
   })
@@ -36,8 +38,8 @@ httpServer.on('request', (req, res) => {
 })
 
 httpServer.on('upgrade', (req, socket, head) => {
-  if (req.url.startsWith('/wisp/')) {
-    wisp.routeRequest(req, socket, head)
+  if (req.url?.startsWith('/wisp/')) {
+    wisp.routeRequest(req, socket as Socket, head)
   } else {
     socket.end()
   }
