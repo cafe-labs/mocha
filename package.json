@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "node start.js"
+    "start": "tsx server.ts"
   },
   "dependencies": {
     "@mercuryworkshop/bare-mux": "^1.1.0",
