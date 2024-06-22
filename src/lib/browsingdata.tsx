@@ -3,16 +3,15 @@ import { CircleCheck } from 'lucide-solid'
 import toast from 'solid-toast'
 import { BrowsingData } from './types'
 
-const db = await openDB('__op', 1, {
-  upgrade(db) {
-    const store = db.createObjectStore('cookies', {
-      keyPath: 'id'
-    })
-    store.createIndex('path', 'path')
-  }
-})
-
 export async function exportData() {
+  const db = await openDB('__op', 1, {
+    upgrade(db) {
+      const store = db.createObjectStore('cookies', {
+        keyPath: 'id'
+      })
+      store.createIndex('path', 'path')
+    }
+  })
   const data: BrowsingData = {
     cookies: [],
     localStorage: []
@@ -54,7 +53,15 @@ export async function exportData() {
   })
 }
 
-export function importData(fileImport: HTMLInputElement) {
+export async function importData(fileImport: HTMLInputElement) {
+  const db = await openDB('__op', 1, {
+    upgrade(db) {
+      const store = db.createObjectStore('cookies', {
+        keyPath: 'id'
+      })
+      store.createIndex('path', 'path')
+    }
+  })
   fileImport.click()
 
   fileImport.addEventListener('change', (event) => {
@@ -93,6 +100,15 @@ export function importData(fileImport: HTMLInputElement) {
 }
 
 export async function resetData() {
+  const db = await openDB('__op', 1, {
+    upgrade(db) {
+      const store = db.createObjectStore('cookies', {
+        keyPath: 'id'
+      })
+      store.createIndex('path', 'path')
+    }
+  })
+
   for (var key in localStorage) {
     if (key.startsWith('__uv$')) localStorage.removeItem(key)
   }
