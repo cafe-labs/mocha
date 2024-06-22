@@ -1,24 +1,24 @@
 import { execSync } from 'child_process'
 import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+// import { viteStaticCopy } from 'vite-plugin-static-copy'
 import wisp from 'wisp-server-node'
 
 export default defineConfig({
   plugins: [
     solid(),
-    viteStaticCopy({
-      targets: [
-        {
-          src: './node_modules/@mercuryworkshop/epoxy-transport/dist/index.js',
-          dest: 'epoxy'
-        },
-        {
-          src: './node_modules/@mercuryworkshop/libcurl-transport/dist/index.js',
-          dest: 'libcurl'
-        }
-      ]
-    }),
+    // viteStaticCopy({
+    //   targets: [
+    //     {
+    //       src: './node_modules/@mercuryworkshop/epoxy-transport/dist/index.js',
+    //       dest: 'epoxy'
+    //     },
+    //     {
+    //       src: './node_modules/@mercuryworkshop/libcurl-transport/dist/index.js',
+    //       dest: 'libcurl'
+    //     }
+    //   ]
+    // }),
     {
       name: 'Wisp Server',
       configureServer(server) {

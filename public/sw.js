@@ -1,5 +1,5 @@
-importScripts('/epoxy/index.js')
-importScripts('/libcurl/index.js')
+importScripts('https://unpkg.com/@mercuryworkshop/epoxy-transport@1.1.0/dist/index.js')
+importScripts('https://unpkg.com/@mercuryworkshop/libcurl-transport@1.3.1/dist/index.js')
 importScripts('/coffee/bundle.js')
 importScripts('/coffee/config.js')
 importScripts(__uv$config.sw || '/coffee/sw.js')
