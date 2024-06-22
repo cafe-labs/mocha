@@ -2,6 +2,7 @@ import { execSync } from 'child_process'
 import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
+import wisp from 'wisp-server-node'
 
 export default defineConfig({
   plugins: [
@@ -17,7 +18,17 @@ export default defineConfig({
           dest: 'libcurl'
         }
       ]
-    })
+    }),
+    {
+      name: 'Wisp Server',
+      configureServer(server) {
+        server.httpServer?.on('upgrade', (req, socket, head) => {
+          if (req.url?.startsWith('/wisp/')) {
+            wisp.routeRequest(req, socket, head)
+          }
+        })
+      }
+    }
   ],
   server: {
     proxy: {
@@ -26,13 +37,13 @@ export default defineConfig({
         target: 'https://assets.3kh0.net',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/cdn/, '')
-      },
-      '/wisp/': {
-        target: 'https://wisp.mercurywork.shop/',
-        changeOrigin: true,
-        ws: true,
-        rewrite: (path) => path.replace(/^\/wisp\//, '')
       }
+      // '/wisp/': {
+      //   target: 'https://wisp.mercurywork.shop/',
+      //   changeOrigin: true,
+      //   ws: true,
+      //   rewrite: (path) => path.replace(/^\/wisp\//, '')
+      // }
     }
   },
   define: {
