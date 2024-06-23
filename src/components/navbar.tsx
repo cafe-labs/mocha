@@ -2,7 +2,7 @@ import { A } from '@solidjs/router'
 import { Joystick, Layers, Settings } from 'lucide-solid'
 export default function Navbar() {
   return (
-    <div class="navbar px-6">
+    <div class="navbar px-6 bg-base-300 m-3.5 w-[calc(100vw-1.75rem)] rounded-btn">
       <div class="navbar-start">
         <A href="/">
           <div class="btn btn-ghost -ml-2 flex h-11 min-h-11 gap-3">
