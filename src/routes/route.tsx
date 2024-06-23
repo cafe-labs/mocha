@@ -1,6 +1,6 @@
-import { useParams, useSearchParams } from '@solidjs/router'
+import { A, useParams, useSearchParams } from '@solidjs/router'
 import clsx from 'clsx'
-import { ChevronLeft, ChevronRight, CircleAlert, FileCode, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
+import { ChevronLeft, ChevronRight, CircleAlert, FileCode, Home, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
 import { createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
@@ -90,7 +90,7 @@ export default function Route() {
   }
   return (
     <div>
-      <iframe class="h-[calc(100vh-4rem)] w-screen" ref={ref!} onLoad={handleLoad} />
+      <iframe class="h-screen w-screen" ref={ref!} onLoad={handleLoad} />
 
       <div class={clsx('rounded-m join fixed left-1/2 z-40 -translate-x-1/2 bg-base-200 px-2 transition-[bottom] duration-300', showControls() ? 'bottom-2' : '-bottom-16')}>
         <button
@@ -104,6 +104,7 @@ export default function Route() {
         >
           <ChevronLeft class="h-5 w-5" />
         </button>
+
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {
@@ -115,6 +116,7 @@ export default function Route() {
         >
           <RotateCw class="h-5 w-5" />
         </button>
+
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {
@@ -126,10 +128,11 @@ export default function Route() {
         >
           <ChevronRight class="h-5 w-5" />
         </button>
+
         <input
           value={url()}
           type="text"
-          class="input join-item w-80 bg-base-200 focus:outline-none "
+          class="input join-item w-96 bg-base-200 focus:outline-none "
           onKeyDown={(e) => {
             if (e.key !== 'Enter') return
             if (!ref || !ref.contentWindow) return
@@ -138,6 +141,11 @@ export default function Route() {
             e.currentTarget.blur()
           }}
         />
+
+        <A class="btn btn-square join-item bg-base-200" href="/">
+          <Home class="h-5 w-5" />
+        </A>
+
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {
@@ -160,6 +168,7 @@ export default function Route() {
         >
           <FileCode class="h-5 w-5" />
         </button>
+
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {
@@ -171,6 +180,7 @@ export default function Route() {
         >
           <SquareArrowOutUpRight class="h-5 w-5" />
         </button>
+
         <button
           class="btn btn-square join-item bg-base-200"
           onClick={() => {
