@@ -30,7 +30,7 @@ export default function Home() {
             type="text"
             class="input join-item w-full bg-base-300"
           />
-          <button class="btn btn-square join-item bg-base-300" onClick={processInput}>
+          <button class="btn btn-square join-item bg-base-300 border-none" onClick={processInput}>
             <Search class="h-5 w-5" />
           </button>
         </div>
