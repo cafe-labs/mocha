@@ -1,10 +1,9 @@
 import { createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
-import config from '../config'
 import { handleTabCloak } from '../lib/cloak'
 import { handleDebug } from '../lib/debug'
-import { handleTheme } from '../lib/theme'
+import { handleTheme, themes } from '../lib/theme'
 import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData } from '../lib/types'
 
 import { CircleCheck } from 'lucide-solid'
@@ -131,7 +130,7 @@ export default function Settings() {
           <h1 class="text-2xl font-semibold">Theme</h1>
           <p class="text-center text-xs">Change how Mocha looks</p>
           <select class="select select-bordered w-full max-w-xs" value={theme()} onChange={(e) => setTheme(e.target.value)}>
-            {config.themes.map((item, index) => {
+            {themes.map((item, index) => {
               return <option value={item}>{index == 0 ? 'Default' : item.charAt(0).toUpperCase() + item.slice(1)}</option>
             })}
           </select>
