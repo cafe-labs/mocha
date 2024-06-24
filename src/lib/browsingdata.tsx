@@ -114,4 +114,15 @@ export async function resetData() {
   }
 
   await db.clear('cookies')
+
+  toast.custom(() => {
+    return (
+      <div class="toast toast-center toast-top">
+        <div class="alert alert-success">
+          <CircleCheck />
+          <span>Browsing data deleted.</span>
+        </div>
+      </div>
+    )
+  })
 }
