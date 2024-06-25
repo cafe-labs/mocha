@@ -41,7 +41,6 @@ export default function Route() {
     contentWindow.addEventListener('keydown', handlePanicKey)
 
     const hostname = contentWindow.__uv$location.hostname
-    console.log(hostname)
 
     const patch = patches.find((x) => hostname.includes(x.hostname))
     if (!patch) return
