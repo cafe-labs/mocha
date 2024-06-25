@@ -81,6 +81,9 @@ export async function importData(fileImport: HTMLInputElement) {
       })
 
       data.cookies?.forEach(async (item) => {
+        if (item.set) item.set = new Date(item.set as string)
+        if (item.expires) item.expires = new Date(item.expires as string)
+
         await db.add('cookies', item)
       })
 
@@ -115,14 +118,15 @@ export async function resetData(showNotification = true) {
 
   await db.clear('cookies')
 
-  if (showNotification) toast.custom(() => {
-    return (
-      <div class="toast toast-center toast-top">
-        <div class="alert alert-success">
-          <CircleCheck />
-          <span>Browsing data deleted.</span>
+  if (showNotification)
+    toast.custom(() => {
+      return (
+        <div class="toast toast-center toast-top">
+          <div class="alert alert-success">
+            <CircleCheck />
+            <span>Browsing data deleted.</span>
+          </div>
         </div>
-      </div>
-    )
-  })
+      )
+    })
 }
