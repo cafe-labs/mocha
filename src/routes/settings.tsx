@@ -239,7 +239,7 @@ export default function Settings() {
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
               <button class="btn w-28">Cancel</button>
-              <button class="btn btn-error w-28" onClick={resetData}>
+              <button class="btn btn-error w-28" onClick={() => resetData()}>
                 Proceed
               </button>
             </form>

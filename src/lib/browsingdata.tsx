@@ -74,7 +74,7 @@ export async function importData(fileImport: HTMLInputElement) {
 
       const data: BrowsingData = JSON.parse(content as string)
 
-      await resetData()
+      await resetData(false)
 
       data.localStorage?.forEach((item) => {
         localStorage.setItem(item.key, item.value)
@@ -99,7 +99,7 @@ export async function importData(fileImport: HTMLInputElement) {
   })
 }
 
-export async function resetData() {
+export async function resetData(showNotification = true) {
   const db = await openDB('__op', 1, {
     upgrade(db) {
       const store = db.createObjectStore('cookies', {
@@ -115,7 +115,7 @@ export async function resetData() {
 
   await db.clear('cookies')
 
-  toast.custom(() => {
+  if (showNotification) toast.custom(() => {
     return (
       <div class="toast toast-center toast-top">
         <div class="alert alert-success">
