@@ -105,21 +105,21 @@ export default function Settings() {
       <div class="box-border flex flex-wrap justify-center gap-6 pt-8">
         <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Cloaking</h1>
-          <p class="text-xs">Change how your tab appears in your browser</p>
+          <p class="text-xs">Change how Mocha appears in your browser</p>
           <input type="text" class="input input-bordered w-full" value={tabName()} onInput={(e) => setTabName(e.target.value)} placeholder="Tab name" />
           <input type="text" class="input input-bordered w-full" value={tabIcon()} onInput={(e) => setTabIcon(e.target.value)} placeholder="Tab icon" />
         </div>
 
         <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Panic Key</h1>
-          <p class="text-center text-xs">Set a key to redirect to a URL (works inside proxy)</p>
+          <p class="text-center text-xs">Press a key to redirect to a URL (works in proxy)</p>
           <input type="text" class="input input-bordered w-full" value={panicKey()} onInput={(e) => setPanicKey(e.target.value)} placeholder="Panic key" />
           <input type="text" class="input input-bordered w-full" value={panicUrl()} onInput={(e) => setPanicUrl(e.target.value)} placeholder="Panic URL" />
         </div>
 
         <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">about:blank</h1>
-          <p class="text-center text-xs">Automatically open Mocha in an about:blank tab</p>
+          <p class="text-center text-xs">Open Mocha in an about:blank tab automatically</p>
           <select class="select select-bordered w-full max-w-xs" value={aboutBlank()} onChange={(e) => setAboutBlank(e.target.value)}>
             <option value="enabled">Enabled</option>
             <option value="disabled">Disabled</option>
@@ -128,7 +128,7 @@ export default function Settings() {
 
         <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Theme</h1>
-          <p class="text-center text-xs">Change how Mocha looks</p>
+          <p class="text-center text-xs">Change the styling of Mocha's UI</p>
           <select class="select select-bordered w-full max-w-xs" value={theme()} onChange={(e) => setTheme(e.target.value)}>
             {themes.map((item, index) => {
               return <option value={item}>{index == 0 ? 'Default' : item.charAt(0).toUpperCase() + item.slice(1)}</option>
@@ -143,7 +143,7 @@ export default function Settings() {
             <div class="flex flex-wrap justify-center gap-6">
               <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
                 <h1 class="text-2xl font-semibold">Debug</h1>
-                <p class="text-center text-xs">Enable Eruda devtools to help debug issues </p>
+                <p class="text-center text-xs">Enable Eruda devtools (helps with debugging)</p>
                 <select class="select select-bordered w-full max-w-xs" value={debug()} onChange={(e) => setDebug(e.target.value)}>
                   <option value="enabled">Enabled</option>
                   <option value="disabled">Disabled</option>
@@ -152,7 +152,7 @@ export default function Settings() {
 
               <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
                 <h1 class="text-2xl font-semibold">Transport</h1>
-                <p class="text-center text-xs">Change how Mocha transports requests</p>
+                <p class="text-center text-xs">Change how Mocha's proxy handles requests</p>
                 <select class="select select-bordered w-full max-w-xs" value={transport()} onChange={(e) => setTransport(e.target.value)}>
                   <option value="epoxy">Epoxy</option>
                   <option value="libcurl">Libcurl</option>
@@ -208,8 +208,8 @@ export default function Settings() {
           </p>
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
-              <button class="btn">Close</button>
-              <button class="btn btn-success" onClick={exportData}>
+              <button class="btn w-28">Cancel</button>
+              <button class="btn btn-success w-28" onClick={exportData}>
                 Proceed
               </button>
             </form>
@@ -223,8 +223,8 @@ export default function Settings() {
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be replaced by the imported data. This is irreversible. Continue?</p>
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
-              <button class="btn">Close</button>
-              <button class="btn btn-error" onClick={() => importData(fileImport)}>
+              <button class="btn w-28">Cancel</button>
+              <button class="btn btn-error w-28" onClick={() => importData(fileImport)}>
                 Proceed
               </button>
             </form>
@@ -238,8 +238,8 @@ export default function Settings() {
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be wiped completely. This is irreversible. Continue?</p>
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
-              <button class="btn">Close</button>
-              <button class="btn btn-error" onClick={resetData}>
+              <button class="btn w-28">Cancel</button>
+              <button class="btn btn-error w-28" onClick={resetData}>
                 Proceed
               </button>
             </form>
