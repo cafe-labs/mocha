@@ -14,11 +14,20 @@ export const patches: Patch[] = [
     execute(contentWindow) {
       const currentUrl = new URL(contentWindow.__uv$location.href)
       const currentLanguage = currentUrl.searchParams.get('hl')
+      const currentGeoLocation = currentUrl.searchParams.get('gl')
+      var changed = false
 
       if (currentLanguage !== 'en') {
         currentUrl.searchParams.set('hl', 'en')
-        contentWindow.__uv$location.href = currentUrl.toString()
+        changed = true
       }
+
+      if (currentGeoLocation !== 'us') {
+        currentUrl.searchParams.set('gl', 'us')
+        changed = true
+      }
+
+      if (changed) contentWindow.__uv$location.href = currentUrl.toString()
     }
   }
 ]
