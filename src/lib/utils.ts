@@ -1,3 +1,5 @@
+import type { ContentWindow } from './types'
+
 export function encodeXor(str: string) {
   if (!str) return str
   return encodeURIComponent(
@@ -20,4 +22,19 @@ export function formatSearch(input: string): string {
   } catch (e) {}
 
   return new URL(`https://google.com/search?q=${input}`).toString()
+}
+
+export function getFavicon(contentWindow: ContentWindow): Promise<string> {
+  return new Promise((resolve) => {
+    const image = new Image()
+    image.src = `${(contentWindow).__uv$location.origin}/favicon.ico`
+
+    image.onload = () => {
+      resolve(`${(contentWindow).__uv$location.origin}/favicon.ico`)
+    }
+
+    image.onerror = () => {
+      resolve((contentWindow.document.querySelector("link[rel*='icon']") as HTMLLinkElement)?.href || '/globe.svg')
+    }
+  })
 }

@@ -45,6 +45,12 @@ export interface ShortcutData {
   image: string
 }
 
+export interface Bookmark {
+  image: string
+  title: string
+  url: string
+}
+
 export interface DebugData {
   enabled: boolean
 }

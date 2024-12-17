@@ -1,6 +1,6 @@
 import { A, useParams, useSearchParams } from '@solidjs/router'
 import clsx from 'clsx'
-import { ChevronLeft, ChevronRight, CircleAlert, FileCode, Home, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
+import { Bookmark, ChevronLeft, ChevronRight, CircleAlert, FileCode, Home, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
 import { createEffect, createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
@@ -9,7 +9,8 @@ import { handlePanicKey } from '../lib/panic'
 import { patches } from '../lib/patch'
 import { handleTransport } from '../lib/transport'
 import type { ContentWindow, TransportData } from '../lib/types'
-import { encodeXor, formatSearch } from '../lib/utils'
+import { encodeXor, formatSearch, getFavicon } from '../lib/utils'
+import { bookmarks, handleBookmark } from '../lib/bookmarks'
 
 export const [proxyReady, setProxyStatus] = createSignal(false)
 
@@ -17,6 +18,7 @@ export default function Route() {
   let ref: HTMLIFrameElement
   const [url, setUrl] = createSignal('')
   const [showControls, setShowControls] = createSignal(true)
+  const [bookmarked, setBookmarked] = createSignal(false)
 
   const params = useParams()
   const [searchParams] = useSearchParams()
@@ -32,7 +34,6 @@ export default function Route() {
     const query = atob(params.route)
 
     if (proxyReady()) {
-      console.log('setting src')
       ref.src = `/~/${encodeXor(formatSearch(query))}`
     }
   })
@@ -41,12 +42,17 @@ export default function Route() {
     if (!ref || !ref.contentWindow) return
     const contentWindow = ref.contentWindow as ContentWindow
 
-    if (!('__uv$location' in contentWindow)) {
-      return
-    }
-    setUrl(contentWindow.__uv$location.href)  
+    if (!('__uv$location' in contentWindow)) return
+
+    setUrl(contentWindow.__uv$location.href)
 
     contentWindow.addEventListener('keydown', handlePanicKey)
+
+    if (bookmarks().some((val) => val.url === contentWindow.__uv$location.href)) {
+      setBookmarked(true)
+    } else {
+      setBookmarked(false)
+    }
 
     const hostname = contentWindow.__uv$location.hostname
 
@@ -191,6 +197,27 @@ export default function Route() {
             }}
           >
             <FileCode class="h-5 w-5" />
+          </button>
+        </div>
+        <div class="tooltip" data-tip={!bookmarked() ? 'Bookmark' : 'Remove bookmark'}>
+          <button
+            class="btn btn-square join-item bg-base-200"
+            type="button"
+            onClick={async () => {
+              if (!ref || !ref.contentWindow) return
+              const contentWindow = ref.contentWindow as ContentWindow
+              if (!('__uv$location' in contentWindow)) return
+
+              const { status } = handleBookmark({
+                title: contentWindow.document.title,
+                url: contentWindow.__uv$location.href,
+                image: await getFavicon(contentWindow)
+              })
+
+              setBookmarked(status === 'added')
+            }}
+          >
+            <Bookmark class={clsx('h-5 w-5', bookmarked() ? 'fill-base-content' : 'fill-none')} />
           </button>
         </div>
         <div class="tooltip" data-tip="Pop out tab">

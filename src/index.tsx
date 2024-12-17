@@ -11,6 +11,7 @@ import ProxyViewer from './routes/route'
 import Settings from './routes/settings'
 import Shortcuts from './routes/shortcuts'
 import './style.css'
+import Bookmarks from './routes/bookmarks'
 
 store.set(
   'tab',
@@ -78,6 +79,7 @@ render(
       <Route path="/route/:route" component={ProxyViewer} />
       <Route path="/games" component={Games} />
       <Route path="/shortcuts" component={Shortcuts} />
+      <Route path="/bookmarks" component={Bookmarks} />
       <Route path="/faq" component={FAQ} />
       <Route path="/settings" component={Settings} />
     </Router>
