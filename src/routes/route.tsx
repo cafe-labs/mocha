@@ -193,7 +193,7 @@ export default function Route() {
             <FileCode class="h-5 w-5" />
           </button>
         </div>
-        <div class="tooltip" data-tip="Pop-out tab in about:blank">
+        <div class="tooltip" data-tip="Pop out tab">
           <button
             class="btn btn-square join-item bg-base-200"
             type="button"
