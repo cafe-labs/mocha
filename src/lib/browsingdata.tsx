@@ -2,8 +2,10 @@ import { openDB } from 'idb'
 import { CircleCheck } from 'lucide-solid'
 import toast from 'solid-toast'
 import type { BrowsingData } from './types'
+import { setImportStatus, setExportStatus } from '../routes/settings'
 
 export async function exportData() {
+  setExportStatus(false)
   const db = await openDB('__op', 1, {
     upgrade(db) {
       const store = db.createObjectStore('cookies', {
@@ -52,9 +54,12 @@ export async function exportData() {
       </div>
     )
   })
+
+  setExportStatus(true)
 }
 
 export async function importData(fileImport: HTMLInputElement) {
+  setImportStatus(false)
   const db = await openDB('__op', 1, {
     upgrade(db) {
       const store = db.createObjectStore('cookies', {
@@ -104,6 +109,8 @@ export async function importData(fileImport: HTMLInputElement) {
           </div>
         )
       })
+
+      setImportStatus(true)
     }
 
     const item = file.item(0)

@@ -1,4 +1,4 @@
-import { createSignal, onMount } from 'solid-js'
+import { createEffect, createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
 import { handleTabCloak } from '../lib/cloak'
@@ -9,6 +9,9 @@ import type { DebugData, PanicData, TabData, ThemeData, TransportData, AboutBlan
 import { CircleCheck } from 'lucide-solid'
 import { exportData, importData, resetData } from '../lib/browsingdata'
 import { handleTransport } from '../lib/transport'
+
+export const [exportSuccessful, setExportStatus] = createSignal(false)
+export const [importSuccessful, setImportStatus] = createSignal(false)
 
 export default function Settings() {
   const [tabName, setTabName] = createSignal('')
@@ -99,6 +102,16 @@ export default function Settings() {
       )
     })
   }
+
+  createEffect(() => {
+    if (importSuccessful()) {
+      importWarning.close()
+    }
+
+    if (exportSuccessful()) {
+      exportWarning.close()
+    }
+  })
 
   return (
     <div class="flex flex-col items-center gap-4">
@@ -221,15 +234,13 @@ export default function Settings() {
           <p class="py-4">
             Warning! This file contains all the data that would normally be stored in your browser if you were to visit websites un-proxied on your computer. This includes any logins you used while inside the proxy. <span class="font-bold underline">Don't give this file to other people.</span>
           </p>
-          <div class="modal-action">
-            <form method="dialog" class="flex gap-2">
-              <button class="btn w-28" type="button">
-                Cancel
-              </button>
-              <button class="btn btn-success w-28" type="button" onClick={exportData}>
-                Proceed
-              </button>
-            </form>
+          <div class="modal-action flex gap-2">
+            <button class="btn w-28" type="button" onClick={() => exportWarning.close()}>
+              Cancel
+            </button>
+            <button class="btn btn-success w-28" type="button" onClick={exportData}>
+              Proceed
+            </button>
           </div>
         </div>
       </dialog>
@@ -244,15 +255,13 @@ export default function Settings() {
         <div class="modal-box">
           <h3 class="text-lg font-bold">Current browsing data will be removed</h3>
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be replaced by the imported data. This is irreversible. Continue?</p>
-          <div class="modal-action">
-            <form method="dialog" class="flex gap-2">
-              <button class="btn w-28" type="button">
-                Cancel
-              </button>
-              <button class="btn btn-error w-28" type="button" onClick={() => importData(fileImport)}>
-                Proceed
-              </button>
-            </form>
+          <div class="modal-action flex gap-2">
+            <button class="btn w-28" type="button" onClick={() => importWarning.close()}>
+              Cancel
+            </button>
+            <button class="btn btn-error w-28" type="button" onClick={() => importData(fileImport)}>
+              Proceed
+            </button>
           </div>
         </div>
       </dialog>
