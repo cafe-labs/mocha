@@ -54,7 +54,7 @@ export default function Home() {
             GitHub
           </a>
           <button
-            class="link-hover link"
+            class="link-hover link p-0 m-0 -mt-1"
             type="button"
             onClick={() => {
               const modal = document.querySelector('#discordmodal') as HTMLDialogElement
