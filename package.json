@@ -10,10 +10,11 @@
     "start": "tsx server.ts"
   },
   "dependencies": {
-    "@mercuryworkshop/bare-mux": "^1.1.4",
-    "@mercuryworkshop/epoxy-transport": "^1.1.0",
+    "@mercuryworkshop/bare-mux": "^2.1.7",
+    "@mercuryworkshop/epoxy-transport": "^2.1.27",
     "@mercuryworkshop/libcurl-transport": "^1.3.14",
     "@solidjs/router": "^0.13.6",
+    "@titaniumnetwork-dev/ultraviolet": "^3.2.10",
     "autoprefixer": "^10.4.19",
     "clsx": "^2.1.1",
     "consola": "^3.2.3",

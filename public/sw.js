@@ -1,8 +1,10 @@
-importScripts('https://unpkg.com/@mercuryworkshop/epoxy-transport@1.1.0/dist/index.js')
-importScripts('https://unpkg.com/@mercuryworkshop/libcurl-transport@1.3.1/dist/index.js')
-importScripts('/coffee/bundle.js')
-importScripts('/coffee/config.js')
-importScripts(__uv$config.sw || '/coffee/sw.js')
+importScripts('/coffee/uv.bundle.js')
+importScripts('/coffee/uv.config.js')
+importScripts(__uv$config.sw || '/coffee/uv.sw.js')
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(self.skipWaiting())
+})
 
 const sw = new UVServiceWorker()
 

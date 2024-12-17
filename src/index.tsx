@@ -62,8 +62,6 @@ store.set(
   false
 )
 
-store('swReady', false)
-
 // Debug is here to capture all logs
 handleDebug()
 

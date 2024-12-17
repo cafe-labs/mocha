@@ -5,7 +5,7 @@ import wisp from 'wisp-server-node'
 import http from 'node:http'
 import path from 'node:path'
 import { build } from 'vite'
-import { Socket } from 'node:net'
+import type { Socket } from 'node:net'
 
 const httpServer = http.createServer()
 const proxy = httpProxy.createProxyServer()

@@ -1,7 +1,15 @@
-import { execSync } from 'child_process'
-import { defineConfig } from 'vite'
+import { execSync } from 'node:child_process'
+import { defineConfig, normalizePath } from 'vite'
 import solid from 'vite-plugin-solid'
 import wisp from 'wisp-server-node'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
+
+import { uvPath } from '@titaniumnetwork-dev/ultraviolet'
+import { baremuxPath } from '@mercuryworkshop/bare-mux/node'
+// @ts-expect-error
+import { epoxyPath } from '@mercuryworkshop/epoxy-transport'
+import { libcurlPath } from '@mercuryworkshop/libcurl-transport'
+import path from 'node:path'
 
 export default defineConfig({
   plugins: [
@@ -15,7 +23,27 @@ export default defineConfig({
           }
         })
       }
-    }
+    },
+    viteStaticCopy({
+      targets: [
+        {
+          src: [normalizePath(path.resolve(uvPath, 'uv.bundle.js')), normalizePath(path.resolve(uvPath, 'uv.handler.js')), normalizePath(path.resolve(uvPath, 'uv.client.js')), normalizePath(path.resolve(uvPath, 'uv.sw.js'))],
+          dest: 'coffee'
+        },
+        {
+          src: normalizePath(path.resolve(baremuxPath, 'worker.js')),
+          dest: 'bare-mux'
+        },
+        {
+          src: normalizePath(path.resolve(epoxyPath, 'index.mjs')),
+          dest: 'epoxy'
+        },
+        {
+          src: normalizePath(path.resolve(libcurlPath, 'index.mjs')),
+          dest: 'libcurl'
+        }
+      ]
+    })
   ],
   server: {
     proxy: {

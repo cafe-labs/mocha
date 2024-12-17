@@ -1,7 +1,7 @@
 import { A, useParams, useSearchParams } from '@solidjs/router'
 import clsx from 'clsx'
 import { ChevronLeft, ChevronRight, CircleAlert, FileCode, Home, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
-import { createSignal, onMount } from 'solid-js'
+import { createEffect, createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
 import { openAbWindow } from '../lib/aboutblank'
@@ -10,6 +10,8 @@ import { patches } from '../lib/patch'
 import { handleTransport } from '../lib/transport'
 import type { ContentWindow, TransportData } from '../lib/types'
 import { encodeXor, formatSearch } from '../lib/utils'
+
+export const [proxyReady, setProxyStatus] = createSignal(false)
 
 export default function Route() {
   let ref: HTMLIFrameElement
@@ -23,20 +25,26 @@ export default function Route() {
     if (searchParams.hidecontrolbar === 'true') {
       setShowControls(false)
     }
+  })
 
+  createEffect(() => {
     if (!ref || !ref.contentWindow) return
     const query = atob(params.route)
 
-    ref.src = `/~/${encodeXor(formatSearch(query))}`
+    if (proxyReady()) {
+      console.log('setting src')
+      ref.src = `/~/${encodeXor(formatSearch(query))}`
+    }
   })
 
   function handleLoad() {
     if (!ref || !ref.contentWindow) return
     const contentWindow = ref.contentWindow as ContentWindow
 
-    if ('__uv$location' in contentWindow) {
-      setUrl(contentWindow.__uv$location.href)
+    if (!('__uv$location' in contentWindow)) {
+      return
     }
+    setUrl(contentWindow.__uv$location.href)  
 
     contentWindow.addEventListener('keydown', handlePanicKey)
 
