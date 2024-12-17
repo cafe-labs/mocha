@@ -1,4 +1,4 @@
-import { ParentProps, onCleanup, onMount } from 'solid-js'
+import { type ParentProps, onCleanup, onMount } from 'solid-js'
 import { Toaster } from 'solid-toast'
 import Navbar from './components/navbar'
 
@@ -10,10 +10,10 @@ import { handleTheme } from './lib/theme'
 import { handleTransport } from './lib/transport'
 
 export default function Layout(props: ParentProps) {
-  onMount(() => {
+  onMount(async () => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(async (registrations) => {
-        for await (let registration of registrations) {
+        for await (const registration of registrations) {
           await registration.unregister()
         }
 
@@ -26,7 +26,7 @@ export default function Layout(props: ParentProps) {
         navigator.serviceWorker.ready.then(async () => {
           console.log('Service worker ready')
           store('swReady', true)
-          handleTransport()
+          await handleTransport()
         })
       })
     }
@@ -34,7 +34,7 @@ export default function Layout(props: ParentProps) {
     handleTabCloak()
     handleTheme()
     handleAboutBlank()
-    handleTransport()
+    await handleTransport()
     document.addEventListener('keydown', handlePanicKey)
   })
 

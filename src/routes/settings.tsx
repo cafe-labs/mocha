@@ -4,7 +4,7 @@ import store from 'store2'
 import { handleTabCloak } from '../lib/cloak'
 import { handleDebug } from '../lib/debug'
 import { handleTheme, themes } from '../lib/theme'
-import { DebugData, PanicData, TabData, ThemeData, TransportData, aboutblankData } from '../lib/types'
+import type { DebugData, PanicData, TabData, ThemeData, TransportData, AboutBlankData } from '../lib/types'
 
 import { CircleCheck } from 'lucide-solid'
 import { exportData, importData, resetData } from '../lib/browsingdata'
@@ -25,10 +25,10 @@ export default function Settings() {
 
   const [transport, setTransport] = createSignal('epoxy')
 
-  var fileImport: HTMLInputElement
-  var exportWarning: HTMLDialogElement
-  var importWarning: HTMLDialogElement
-  var deleteWarning: HTMLDialogElement
+  let fileImport: HTMLInputElement
+  let exportWarning: HTMLDialogElement
+  let importWarning: HTMLDialogElement
+  let deleteWarning: HTMLDialogElement
 
   onMount(() => {
     const tabData = store('tab') as TabData
@@ -39,7 +39,7 @@ export default function Settings() {
     if (panicData.key) setPanicKey(panicData.key)
     if (panicData.url) setPanicUrl(panicData.url)
 
-    const aboutblankData = store('aboutblank') as aboutblankData
+    const aboutblankData = store('aboutblank') as AboutBlankData
     if (aboutblankData.enabled) {
       setAboutBlank('enabled')
     } else {
@@ -68,7 +68,7 @@ export default function Settings() {
     })
 
     store('aboutblank', {
-      enabled: aboutBlank() == 'enabled'
+      enabled: aboutBlank() === 'enabled'
     })
 
     store('theme', {
@@ -76,7 +76,7 @@ export default function Settings() {
     })
 
     store('debug', {
-      enabled: debug() == 'enabled'
+      enabled: debug() === 'enabled'
     })
 
     store('transport', {
@@ -131,7 +131,8 @@ export default function Settings() {
           <p class="text-center text-xs">Change the styling of Mocha's UI</p>
           <select class="select select-bordered w-full max-w-xs" value={theme()} onChange={(e) => setTheme(e.target.value)}>
             {themes.map((item, index) => {
-              return <option value={item}>{index == 0 ? 'Default' : item.charAt(0).toUpperCase() + item.slice(1)}</option>
+              // biome-ignore lint: it doesn't accept a key for some reason
+              return <option value={item}>{index === 0 ? 'Default' : item.charAt(0).toUpperCase() + item.slice(1)}</option>
             })}
           </select>
         </div>
@@ -163,29 +164,37 @@ export default function Settings() {
                 <h1 class="text-2xl font-semibold">Browsing Data</h1>
                 <p class="text-center text-xs">Export, import, or delete your proxy browsing data</p>
                 <div class="flex w-full gap-2">
-                  <button class="btn btn-outline flex-1" onClick={() => exportWarning.showModal()}>
+                  <button class="btn btn-outline flex-1" type="button" onClick={() => exportWarning.showModal()}>
                     Export
                   </button>
-                  <button class="btn btn-outline flex-1" onClick={() => importWarning.showModal()}>
+                  <button class="btn btn-outline flex-1" type="button" onClick={() => importWarning.showModal()}>
                     Import
                   </button>
                 </div>
-                <button class="btn btn-error w-full" onClick={() => deleteWarning.showModal()}>
+                <button class="btn btn-error w-full" type="button" onClick={() => deleteWarning.showModal()}>
                   Delete
                 </button>
 
-                <input type="file" class="hidden" ref={fileImport!} />
+                <input
+                  type="file"
+                  class="hidden"
+                  ref={
+                    // biome-ignore lint: needs to be here for Solid refs
+                    fileImport!
+                  }
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="flex items-center gap-4 py-4">
-        <button class="btn btn-primary px-16" onClick={save}>
+        <button class="btn btn-primary px-16" type="button" onClick={save}>
           Save
         </button>
         <button
           class="btn btn-error px-16"
+          type="button"
           onClick={() => {
             setTabIcon('')
             setTabName('')
@@ -200,7 +209,13 @@ export default function Settings() {
         </button>
       </div>
 
-      <dialog class="modal" ref={exportWarning!}>
+      <dialog
+        class="modal"
+        ref={
+          // biome-ignore lint: needs to be here for Solid refs
+          exportWarning!
+        }
+      >
         <div class="modal-box">
           <h3 class="text-lg font-bold">Continue with export?</h3>
           <p class="py-4">
@@ -208,8 +223,10 @@ export default function Settings() {
           </p>
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
-              <button class="btn w-28">Cancel</button>
-              <button class="btn btn-success w-28" onClick={exportData}>
+              <button class="btn w-28" type="button">
+                Cancel
+              </button>
+              <button class="btn btn-success w-28" type="button" onClick={exportData}>
                 Proceed
               </button>
             </form>
@@ -217,14 +234,22 @@ export default function Settings() {
         </div>
       </dialog>
 
-      <dialog class="modal" ref={importWarning!}>
+      <dialog
+        class="modal"
+        ref={
+          // biome-ignore lint: needs to be here for Solid refs
+          importWarning!
+        }
+      >
         <div class="modal-box">
           <h3 class="text-lg font-bold">Current browsing data will be removed</h3>
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be replaced by the imported data. This is irreversible. Continue?</p>
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
-              <button class="btn w-28">Cancel</button>
-              <button class="btn btn-error w-28" onClick={() => importData(fileImport)}>
+              <button class="btn w-28" type="button">
+                Cancel
+              </button>
+              <button class="btn btn-error w-28" type="button" onClick={() => importData(fileImport)}>
                 Proceed
               </button>
             </form>
@@ -232,14 +257,22 @@ export default function Settings() {
         </div>
       </dialog>
 
-      <dialog class="modal" ref={deleteWarning!}>
+      <dialog
+        class="modal"
+        ref={
+          // biome-ignore lint: needs to be here for Solid refs
+          deleteWarning!
+        }
+      >
         <div class="modal-box">
           <h3 class="text-lg font-bold">Current browsing data will be deleted</h3>
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be wiped completely. This is irreversible. Continue?</p>
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
-              <button class="btn w-28">Cancel</button>
-              <button class="btn btn-error w-28" onClick={() => resetData()}>
+              <button class="btn w-28" type="button">
+                Cancel
+              </button>
+              <button class="btn btn-error w-28" type="button" onClick={() => resetData()}>
                 Proceed
               </button>
             </form>

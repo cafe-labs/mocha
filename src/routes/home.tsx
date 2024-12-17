@@ -14,6 +14,7 @@ export default function Home() {
       <div class="absolute left-1/2 top-1/2 flex w-screen -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-4">
         <div class="flex items-center gap-3">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-12 w-12">
+            <title>Mocha icon</title>
             <path
               fill="currentColor"
               d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C120.5 112.3 128 119.9 128 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32V416c0 53 43 96 96 96H288c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H352 32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48H384V256zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1C232.5 112.3 240 119.9 240 136c0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"
@@ -33,7 +34,7 @@ export default function Home() {
             type="text"
             class="input join-item w-full bg-base-300"
           />
-          <button class="btn btn-square join-item bg-base-300 border-none" onClick={processInput}>
+          <button class="btn btn-square join-item bg-base-300 border-none" type="button" onClick={processInput}>
             <Search class="h-5 w-5" />
           </button>
         </div>
@@ -49,18 +50,19 @@ export default function Home() {
             </A>
           </div>
           <Dot class="-mx-3" />
-          <a class="link-hover link" href="https://github.com/cafe-labs/mocha" target="_blank">
+          <a class="link-hover link" href="https://github.com/cafe-labs/mocha" rel="noreferrer" target="_blank">
             GitHub
           </a>
-          <a
+          <button
             class="link-hover link"
+            type="button"
             onClick={() => {
               const modal = document.querySelector('#discordmodal') as HTMLDialogElement
               modal.showModal()
             }}
           >
             Discord
-          </a>
+          </button>
           <A href="/faq" class="link-hover link">
             FAQ
           </A>
@@ -76,6 +78,7 @@ export default function Home() {
               class="btn btn-primary"
               href="https://discord.gg/yWKdcvcEmE"
               target="_blank"
+              rel="noreferrer"
               onClick={() => {
                 const modal = document.querySelector('#discordmodal') as HTMLDialogElement
                 modal.close()
@@ -85,6 +88,7 @@ export default function Home() {
             </a>
             <button
               class="btn btn-primary"
+              type="button"
               onClick={() => {
                 navigate(`/route/${btoa('https://discord.gg/yWKdcvcEmE')}`)
               }}
@@ -95,7 +99,7 @@ export default function Home() {
         </div>
 
         <form method="dialog" class="modal-backdrop">
-          <button class="cursor-default" />
+          <button class="cursor-default" type="button" />
         </form>
       </dialog>
     </div>

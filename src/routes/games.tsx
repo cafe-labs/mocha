@@ -35,9 +35,11 @@ export default function Games() {
         </Show>
         {results().length > 0
           ? results().map((result) => {
-              return <Game game={result.item} key={result.item.id} />
+              // biome-ignore lint: shut up
+              return <Game game={result.item} />
             })
           : data().map((game) => {
+              // biome-ignore lint: shut up
               return <Game game={game} />
             })}
       </div>

@@ -18,7 +18,7 @@
     }
   },
   "linter": {
-    "ignore": [".next", "node_modules", "public/files/*"],
+    "ignore": ["dist", ".vite", "node_modules", "public/files/*"],
     "enabled": true,
     "rules": {
       "recommended": true

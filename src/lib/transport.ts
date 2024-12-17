@@ -1,8 +1,7 @@
 import store from 'store2'
 import type { TransportData } from './types'
 
-// @ts-expect-error
-import { SetTransport } from '@mercuryworkshop/bare-mux'
+import { BareMuxConnection } from '@mercuryworkshop/bare-mux'
 
 export const transports = {
   epoxy: 'EpxMod.EpoxyClient',
@@ -11,9 +10,10 @@ export const transports = {
 
 export const wispUrl = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/wisp/`
 
-export function handleTransport(transport?: keyof typeof transports) {
+export async function handleTransport(transport?: keyof typeof transports) {
   const transportData = store('transport') as TransportData
-  SetTransport(transports[transport || transportData.transport], { wisp: wispUrl })
+  const connection = new BareMuxConnection('/bare-mux/worker.js')
+  await connection.setTransport(transportData.transport, [{ wisp: wispUrl }])
 
   if (transport) {
     store('transport', {
