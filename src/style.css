@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    font-family: 'Quicksand';
+    font-family: 'Quicksand', sans-serif;
   }
 }

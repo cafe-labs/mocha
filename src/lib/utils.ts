@@ -4,7 +4,7 @@ export function encodeXor(str: string) {
     str
       .toString()
       .split('')
-      .map((char, ind) => (ind % 2 ? String.fromCharCode(char.charCodeAt(NaN) ^ 2) : char))
+      .map((char, ind) => (ind % 2 ? String.fromCharCode(char.charCodeAt(Number.NaN) ^ 2) : char))
       .join('')
   )
 }

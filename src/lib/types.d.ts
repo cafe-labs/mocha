@@ -1,4 +1,4 @@
-import { transports } from './transport'
+import type { transports } from './transport'
 
 export interface TabData {
   name: string | null
@@ -10,7 +10,7 @@ export interface PanicData {
   url: string | null
 }
 
-export interface aboutblankData {
+export interface AboutBlankData {
   enabled: boolean
 }
 
@@ -51,6 +51,7 @@ export interface DebugData {
 
 export interface ContentWindow extends Window {
   __uv$location: Location
+  // biome-ignore lint: we don't know dude
   eruda: any
 }
 
@@ -63,6 +64,7 @@ export interface Patch {
 
 declare global {
   interface Window {
+    // biome-ignore lint: we don't know dude
     eruda?: any
   }
 }

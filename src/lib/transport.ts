@@ -1,5 +1,5 @@
 import store from 'store2'
-import { TransportData } from './types'
+import type { TransportData } from './types'
 
 // @ts-expect-error
 import { SetTransport } from '@mercuryworkshop/bare-mux'
@@ -9,7 +9,7 @@ export const transports = {
   libcurl: 'CurlMod.LibcurlClient'
 }
 
-export const wispUrl = `${window.location.protocol == 'https:' ? 'wss' : 'ws'}://${window.location.host}/wisp/`
+export const wispUrl = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/wisp/`
 
 export function handleTransport(transport?: keyof typeof transports) {
   const transportData = store('transport') as TransportData

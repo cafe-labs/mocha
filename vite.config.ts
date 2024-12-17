@@ -25,12 +25,6 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/cdn/, '')
       }
-      // '/wisp/': {
-      //   target: 'https://wisp.mercurywork.shop/',
-      //   changeOrigin: true,
-      //   ws: true,
-      //   rewrite: (path) => path.replace(/^\/wisp\//, '')
-      // }
     }
   },
   define: {

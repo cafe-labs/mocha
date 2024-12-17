@@ -13,7 +13,7 @@ const proxy = httpProxy.createProxyServer()
 const app = express()
 const port = process.env.PORT || 3003
 
-consola.start("Building frontend")
+consola.start('Building frontend')
 await build()
 
 app.use(express.static('dist'))

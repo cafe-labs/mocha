@@ -7,7 +7,7 @@ import Layout from './layout'
 import FAQ from './routes/faq'
 import Games from './routes/games'
 import Home from './routes/home'
-import Proxy from './routes/route'
+import ProxyViewer from './routes/route'
 import Settings from './routes/settings'
 import Shortcuts from './routes/shortcuts'
 import './style.css'
@@ -69,16 +69,20 @@ handleDebug()
 
 const root = document.getElementById('root')
 
+if (!root) {
+  throw new Error('Root not initialized')
+}
+
 render(
   () => (
     <Router root={Layout}>
       <Route path="/" component={Home} />
-      <Route path="/route/:route" component={Proxy} />
+      <Route path="/route/:route" component={ProxyViewer} />
       <Route path="/games" component={Games} />
       <Route path="/shortcuts" component={Shortcuts} />
       <Route path="/faq" component={FAQ} />
       <Route path="/settings" component={Settings} />
     </Router>
   ),
-  root!
+  root
 )

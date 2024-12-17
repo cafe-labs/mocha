@@ -1,9 +1,10 @@
 import store from 'store2'
-import { aboutblankData } from './types'
-export function handleAboutBlank() {
-  const aboutblankData = store('aboutblank') as aboutblankData
+import type { AboutBlankData } from './types'
 
-  if (aboutblankData.enabled && window.self == window.top) {
+export function handleAboutBlank() {
+  const aboutblankData = store('aboutblank') as AboutBlankData
+
+  if (aboutblankData.enabled && window.self === window.top) {
     openAbWindow(window.location.origin)
   }
 }

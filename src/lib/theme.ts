@@ -1,5 +1,5 @@
 import store from 'store2'
-import { ThemeData } from './types'
+import type { ThemeData } from './types'
 
 // https://daisyui.com/docs/themes
 export const themes = ['forest', 'aqua', 'dim', 'night', 'bumblebee', 'lemonade', 'luxury', 'sunset']

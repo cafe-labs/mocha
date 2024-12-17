@@ -1,4 +1,4 @@
-import { Patch } from './types'
+import type { Patch } from './types'
 
 export const patches: Patch[] = [
   {
@@ -15,7 +15,7 @@ export const patches: Patch[] = [
       const currentUrl = new URL(contentWindow.__uv$location.href)
       const currentLanguage = currentUrl.searchParams.get('hl')
       const currentGeoLocation = currentUrl.searchParams.get('gl')
-      var changed = false
+      let changed = false
 
       if (currentLanguage !== 'en') {
         currentUrl.searchParams.set('hl', 'en')

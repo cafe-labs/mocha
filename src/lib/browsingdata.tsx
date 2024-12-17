@@ -1,7 +1,7 @@
 import { openDB } from 'idb'
 import { CircleCheck } from 'lucide-solid'
 import toast from 'solid-toast'
-import { BrowsingData } from './types'
+import type { BrowsingData } from './types'
 
 export async function exportData() {
   const db = await openDB('__op', 1, {
@@ -18,9 +18,10 @@ export async function exportData() {
   }
 
   // Local storage
-  for (var key in localStorage) {
+  for (const key in localStorage) {
     if (key.startsWith('__uv$')) {
-      const value = localStorage.getItem(key)!
+      const value = localStorage.getItem(key)
+      if (!value) continue
 
       data.localStorage?.push({
         key,
@@ -65,40 +66,50 @@ export async function importData(fileImport: HTMLInputElement) {
   fileImport.click()
 
   fileImport.addEventListener('change', (event) => {
-    const file = (event.target as HTMLInputElement).files![0]
+    if (!(event.target as HTMLInputElement).files) return
+
+    const file = (event.target as HTMLInputElement).files
     if (!file) return
 
     const reader = new FileReader()
-    reader.onload = async function (e) {
+    reader.onload = async (e) => {
       const content = e.target?.result
 
       const data: BrowsingData = JSON.parse(content as string)
 
       await resetData(false)
 
-      data.localStorage?.forEach((item) => {
-        localStorage.setItem(item.key, item.value)
-      })
+      if (data.localStorage) {
+        for (const item of data.localStorage) {
+          localStorage.setItem(item.key, item.value)
+        }
+      }
 
-      data.cookies?.forEach(async (item) => {
-        if (item.set) item.set = new Date(item.set as string)
-        if (item.expires) item.expires = new Date(item.expires as string)
+      if (data.cookies) {
+        for (const item of data.cookies) {
+          if (item.set) item.set = new Date(item.set as string)
+          if (item.expires) item.expires = new Date(item.expires as string)
 
-        await db.add('cookies', item)
-      })
+          await db.add('cookies', item)
+        }
+      }
 
       toast.custom(() => {
         return (
           <div class="toast toast-center toast-top">
             <div class="alert alert-success">
               <CircleCheck />
-              <span>Browsing data imported from {file.name}.</span>
+              <span>Browsing data imported from {file.item(0)?.name}</span>
             </div>
           </div>
         )
       })
     }
-    reader.readAsText(file)
+
+    const item = file.item(0)
+    if (!item) return
+
+    reader.readAsText(item)
   })
 }
 
@@ -112,7 +123,7 @@ export async function resetData(showNotification = true) {
     }
   })
 
-  for (var key in localStorage) {
+  for (const key in localStorage) {
     if (key.startsWith('__uv$')) localStorage.removeItem(key)
   }
 

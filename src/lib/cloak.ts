@@ -1,5 +1,6 @@
 import store from 'store2'
-import { TabData } from './types'
+import type { TabData } from './types'
+
 export function handleTabCloak() {
   const tabData = store('tab') as TabData
 

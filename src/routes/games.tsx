@@ -1,7 +1,7 @@
-import Fuse, { FuseResult } from 'fuse.js'
+import Fuse, { type FuseResult } from 'fuse.js'
 import { Show, createSignal, onMount } from 'solid-js'
 import Game from '../components/game'
-import { GameData } from '../lib/types'
+import type { GameData } from '../lib/types'
 
 export default function Games() {
   const [data, setData] = createSignal<GameData[]>([])
@@ -31,11 +31,11 @@ export default function Games() {
 
       <div class="flex flex-wrap justify-center gap-4 px-4 py-8">
         <Show when={!data()[0]}>
-          <span class="loading loading-dots loading-lg"></span>
+          <span class="loading loading-dots loading-lg" />
         </Show>
         {results().length > 0
           ? results().map((result) => {
-              return <Game game={result.item} />
+              return <Game game={result.item} key={result.item.id} />
             })
           : data().map((game) => {
               return <Game game={game} />

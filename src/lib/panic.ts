@@ -1,5 +1,5 @@
 import store from 'store2'
-import { PanicData } from './types'
+import type { PanicData } from './types'
 export function handlePanicKey(e: KeyboardEvent) {
   const panicData = store('panic') as PanicData
 

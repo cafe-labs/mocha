@@ -1,5 +1,5 @@
 import store from 'store2'
-import { DebugData } from './types'
+import type { DebugData } from './types'
 export function handleDebug() {
   const debugData = store('debug') as DebugData
   if (!debugData.enabled) {
@@ -9,7 +9,7 @@ export function handleDebug() {
 
   if (window.eruda?._isInit) return
 
-  var erudaScript = document.createElement('script')
+  const erudaScript = document.createElement('script')
   erudaScript.src = 'https://cdn.jsdelivr.net/npm/eruda'
   erudaScript.onload = () => {
     window.eruda.init()
