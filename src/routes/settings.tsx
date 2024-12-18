@@ -6,7 +6,7 @@ import { handleDebug } from '../lib/debug'
 import { handleTheme, themes } from '../lib/theme'
 import type { DebugData, PanicData, TabData, ThemeData, TransportData, AboutBlankData } from '../lib/types'
 
-import { CircleCheck } from 'lucide-solid'
+import { CircleCheck, CircleHelp } from 'lucide-solid'
 import { exportData, importData, resetData } from '../lib/browsingdata'
 import { handleTransport } from '../lib/transport'
 
@@ -28,10 +28,15 @@ export default function Settings() {
 
   const [transport, setTransport] = createSignal('epoxy')
 
+  const [moreInfoTitle, setMoreInfoTitle] = createSignal('')
+  const [moreInfoContent, setMoreInfoContent] = createSignal('')
+  const [moreInfoVisibility, setMoreInfoVisiblity] = createSignal(false)
+
   let fileImport: HTMLInputElement
   let exportWarning: HTMLDialogElement
   let importWarning: HTMLDialogElement
   let deleteWarning: HTMLDialogElement
+  let moreInfo: HTMLDialogElement
 
   onMount(() => {
     const tabData = store('tab') as TabData
@@ -113,33 +118,70 @@ export default function Settings() {
     }
   })
 
+  createEffect(() => {
+    if (moreInfoVisibility()) moreInfo.showModal()
+  })
+
   return (
     <div class="flex flex-col items-center gap-4">
       <div class="box-border flex flex-wrap justify-center gap-6 pt-8">
-        <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+        <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Cloaking</h1>
           <p class="text-xs">Change how Mocha appears in your browser</p>
           <input type="text" class="input input-bordered w-full" value={tabName()} onInput={(e) => setTabName(e.target.value)} placeholder="Tab name" />
           <input type="text" class="input input-bordered w-full" value={tabIcon()} onInput={(e) => setTabIcon(e.target.value)} placeholder="Tab icon" />
+
+          <span
+            class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+            onMouseDown={() => {
+              setMoreInfoTitle('Tab Cloaking')
+              setMoreInfoContent("Changing these settings change how the tab in your browser looks. You can make it look like Google Docs, Quizlet, or another learning site. The Tab Icon field requires an image URL - search one on Google and copy it's image address.")
+              setMoreInfoVisiblity(true)
+            }}
+          >
+            <CircleHelp class="h-5 w-5" />
+          </span>
         </div>
 
-        <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+        <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Panic Key</h1>
           <p class="text-center text-xs">Press a key to redirect to a URL (works in proxy)</p>
           <input type="text" class="input input-bordered w-full" value={panicKey()} onInput={(e) => setPanicKey(e.target.value)} placeholder="Panic key" />
           <input type="text" class="input input-bordered w-full" value={panicUrl()} onInput={(e) => setPanicUrl(e.target.value)} placeholder="Panic URL" />
+
+          <span
+            class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+            onMouseDown={() => {
+              setMoreInfoTitle('Panic Key')
+              setMoreInfoContent("Set the Panic Key field to automatically redirect to a website when you press that key. It's useful for when teachers are coming and you need to quickly close Mocha. The panic button also works when you're browsing inside the proxy!")
+              setMoreInfoVisiblity(true)
+            }}
+          >
+            <CircleHelp class="h-5 w-5" />
+          </span>
         </div>
 
-        <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+        <div class="flex relative group w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">about:blank</h1>
           <p class="text-center text-xs">Open Mocha in an about:blank tab automatically</p>
           <select class="select select-bordered w-full max-w-xs" value={aboutBlank()} onChange={(e) => setAboutBlank(e.target.value)}>
             <option value="enabled">Enabled</option>
             <option value="disabled">Disabled</option>
           </select>
+
+          <span
+            class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+            onMouseDown={() => {
+              setMoreInfoTitle('about:blank')
+              setMoreInfoContent("about:blank tabs don't show up in your history and appear as system pages or pages that are still loading. Enabling this setting enables Mocha to automatically launch inside one of these tabs, and Mocha won't show up in your history.")
+              setMoreInfoVisiblity(true)
+            }}
+          >
+            <CircleHelp class="h-5 w-5" />
+          </span>
         </div>
 
-        <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+        <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
           <h1 class="text-2xl font-semibold">Theme</h1>
           <p class="text-center text-xs">Change the styling of Mocha's UI</p>
           <select class="select select-bordered w-full max-w-xs" value={theme()} onChange={(e) => setTheme(e.target.value)}>
@@ -148,6 +190,17 @@ export default function Settings() {
               return <option value={item}>{index === 0 ? 'Default' : item.charAt(0).toUpperCase() + item.slice(1)}</option>
             })}
           </select>
+
+          <span
+            class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+            onMouseDown={() => {
+              setMoreInfoTitle('Themes')
+              setMoreInfoContent("It's simple - themes change the colors of Mocha's UI.")
+              setMoreInfoVisiblity(true)
+            }}
+          >
+            <CircleHelp class="h-5 w-5" />
+          </span>
         </div>
 
         <div class="collapse collapse-arrow">
@@ -155,25 +208,47 @@ export default function Settings() {
           <div class="collapse-title left-1/2 w-1/3 -translate-x-1/2 text-xl font-medium">Advanced</div>
           <div class="collapse-content mt-6">
             <div class="flex flex-wrap justify-center gap-6">
-              <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+              <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
                 <h1 class="text-2xl font-semibold">Debug</h1>
                 <p class="text-center text-xs">Enable Eruda devtools (helps with debugging)</p>
                 <select class="select select-bordered w-full max-w-xs" value={debug()} onChange={(e) => setDebug(e.target.value)}>
                   <option value="enabled">Enabled</option>
                   <option value="disabled">Disabled</option>
                 </select>
+
+                <span
+                  class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+                  onMouseDown={() => {
+                    setMoreInfoTitle('Debug Menu')
+                    setMoreInfoContent("Enabling this enables the Eruda devtools menu. This puts a little wrench icon in the bottom right of your screen and can be used in conjunction with Mocha's dev team to diagnose issues, even when you don't have normal Chrome devtools enabled on your device.")
+                    setMoreInfoVisiblity(true)
+                  }}
+                >
+                  <CircleHelp class="h-5 w-5" />
+                </span>
               </div>
 
-              <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+              <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
                 <h1 class="text-2xl font-semibold">Transport</h1>
                 <p class="text-center text-xs">Change how Mocha's proxy handles requests</p>
                 <select class="select select-bordered w-full max-w-xs" value={transport()} onChange={(e) => setTransport(e.target.value)}>
                   <option value="epoxy">Epoxy</option>
                   <option value="libcurl">Libcurl</option>
                 </select>
+
+                <span
+                  class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+                  onMouseDown={() => {
+                    setMoreInfoTitle('Transports')
+                    setMoreInfoContent('Changing the transport changes how Mocha fetches proxied requests. Each transport has its own method of doing this - changing it may improve compatibility with sites.')
+                    setMoreInfoVisiblity(true)
+                  }}
+                >
+                  <CircleHelp class="h-5 w-5" />
+                </span>
               </div>
 
-              <div class="flex w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+              <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
                 <h1 class="text-2xl font-semibold">Browsing Data</h1>
                 <p class="text-center text-xs">Export, import, or delete your proxy browsing data</p>
                 <div class="flex w-full gap-2">
@@ -196,6 +271,19 @@ export default function Settings() {
                     fileImport!
                   }
                 />
+
+                <span
+                  class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+                  onMouseDown={() => {
+                    setMoreInfoTitle('Browsing Data')
+                    setMoreInfoContent(
+                      "This section allows you to import or export Mocha's browsing data. This stores all of your logged in sites, history, and other data you would normally have in a typical browser into a single file. This means you can periodically download your browsing data and import it into a new Mocha link in case the one you're on now gets blocked. It's VERY IMPORTANT to know that you DO NOT SHARE this file with ANYONE."
+                    )
+                    setMoreInfoVisiblity(true)
+                  }}
+                >
+                  <CircleHelp class="h-5 w-5" />
+                </span>
               </div>
             </div>
           </div>
@@ -278,11 +366,39 @@ export default function Settings() {
           <p class="py-4">Warning! By proceeding, your proxy browsing data will be wiped completely. This is irreversible. Continue?</p>
           <div class="modal-action">
             <form method="dialog" class="flex gap-2">
-              <button class="btn w-28" type="button">
+              <button class="btn w-28" type="submit">
                 Cancel
               </button>
               <button class="btn btn-error w-28" type="button" onClick={() => resetData()}>
                 Proceed
+              </button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog
+        class="modal"
+        ref={
+          // biome-ignore lint: needs to be here for Solid refs
+          moreInfo!
+        }
+      >
+        <div class="modal-box">
+          <h3 class="text-lg font-bold">{moreInfoTitle()}</h3>
+          <p class="py-4">{moreInfoContent()}</p>
+          <div class="modal-action">
+            <form method="dialog" class="flex gap-2">
+              <button
+                class="btn w-28"
+                type="submit"
+                onClick={() => {
+                  setMoreInfoVisiblity(false)
+                  setMoreInfoTitle('')
+                  setMoreInfoContent('')
+                }}
+              >
+                Got it
               </button>
             </form>
           </div>
