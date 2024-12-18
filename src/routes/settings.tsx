@@ -58,7 +58,7 @@ export default function Settings() {
     if (themeData.theme) setTheme(themeData.theme)
 
     const debugData = store('debug') as DebugData
-    if (debugData.enabled) setDebug('enabled')
+    setDebug(debugData.enabled ? 'enabled' : 'disabled')
 
     const transportData = store('transport') as TransportData
     if (transportData.transport) setTransport(transportData.transport)
@@ -303,6 +303,7 @@ export default function Settings() {
             setPanicUrl('https://classroom.google.com/h')
             setAboutBlank('disabled')
             setTheme('forest')
+            setDebug('disabled')
             save()
           }}
         >
