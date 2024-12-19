@@ -63,6 +63,8 @@ store.set(
   false
 )
 
+store.set('bookmarks', [], false)
+
 // Debug is here to capture all logs
 handleDebug()
 
