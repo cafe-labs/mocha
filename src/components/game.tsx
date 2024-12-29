@@ -4,7 +4,7 @@ import type { GameData } from '../lib/types'
 export default function Game({ game }: { game: GameData }) {
   const navigate = useNavigate()
   function play() {
-    const url = `https://assets.3kh0.net/${game.id}/${game.file}`
+    const url = `/cdn/${game.id}/${game.file}`
 
     navigate(`/route/${btoa(url)}?hidecontrolbar=true`)
   }

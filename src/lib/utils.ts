@@ -12,6 +12,10 @@ export function encodeXor(str: string) {
 }
 
 export function formatSearch(input: string): string {
+  if (input.startsWith("/cdn")) {
+    return new URL(input, window.location.href).href
+  }
+  
   try {
     return new URL(input).toString()
   } catch (e) {}
