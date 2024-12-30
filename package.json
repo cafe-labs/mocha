@@ -25,6 +25,7 @@
     "idb": "^8.0.0",
     "lucide-solid": "^0.358.0",
     "picocolors": "^1.0.1",
+    "plausible-tracker": "^0.3.9",
     "postcss": "^8.4.38",
     "solid-js": "^1.8.17",
     "solid-toast": "^0.5.0",
@@ -40,6 +41,7 @@
     "@types/express": "^4.17.21",
     "@types/http-proxy": "^1.17.14",
     "@types/node": "^20.14.7",
+    "cross-env": "^7.0.3",
     "tsx": "^4.15.7",
     "typescript": "^5.5.2"
   },
