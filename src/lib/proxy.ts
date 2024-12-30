@@ -25,7 +25,7 @@ export async function setupProxy() {
     })
 
     const transportData = store('transport') as TransportData
-    console.log("Using", transports[transportData.transport])
+    console.log('Using', transports[transportData.transport])
     const connection = new BareMuxConnection('/bare-mux/worker.js')
     await connection.setTransport(transports[transportData.transport], [{ wisp: wispUrl }])
     setProxyStatus(true)

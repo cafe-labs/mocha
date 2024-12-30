@@ -14,6 +14,6 @@ export async function handleTransport(transport?: keyof typeof transports) {
       transport
     } satisfies TransportData)
   }
-  
+
   await setupProxy()
 }

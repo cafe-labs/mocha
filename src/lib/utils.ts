@@ -12,10 +12,10 @@ export function encodeXor(str: string) {
 }
 
 export function formatSearch(input: string): string {
-  if (input.startsWith("/cdn")) {
+  if (input.startsWith('/cdn')) {
     return new URL(input, window.location.href).href
   }
-  
+
   try {
     return new URL(input).toString()
   } catch (e) {}
@@ -31,10 +31,10 @@ export function formatSearch(input: string): string {
 export function getFavicon(contentWindow: ContentWindow): Promise<string> {
   return new Promise((resolve) => {
     const image = new Image()
-    image.src = `${(contentWindow).__uv$location.origin}/favicon.ico`
+    image.src = `${contentWindow.__uv$location.origin}/favicon.ico`
 
     image.onload = () => {
-      resolve(`${(contentWindow).__uv$location.origin}/favicon.ico`)
+      resolve(`${contentWindow.__uv$location.origin}/favicon.ico`)
     }
 
     image.onerror = () => {
