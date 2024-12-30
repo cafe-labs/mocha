@@ -7,15 +7,16 @@ The simplicity and power you expect from a web proxy.
 ## Features
 
 - [x] Sleek and simple UI
-- [x] Panic key (works inside the proxy)
+- [x] Browsing data import, export, and deletion 
+- [x] Bookmarks
 - [x] Proxy control bar
 - [x] Tab cloaking
 - [x] about:blank
 - [x] Site shortcuts and games
+- [x] Panic key (works inside the proxy)
 - [x] Devtools 
-- [x] End-to-end encryption with Epoxy and Libcurl 
+- [x] End-to-end encryption with Epoxy and Libcurl
 - [x] Site compatability alerts and suggestions
-- [x] Browsing data import, export, and deletion 
 - [ ] Script injections (Extensions)
 - [ ] Rammerhead
 
@@ -33,4 +34,4 @@ npm run start
 ```
 
 ## Support us
-If you like Mocha and would like to support the development, you can donate [here](https://buymeacoffee.com/proudparrot2). It helps with server costs, domains, and otherwise financially supports the project.
+If you like Mocha and would like to support the development, you can donate to me [here](https://buymeacoffee.com/proudparrot2). It helps with server costs, domains, and otherwise financially supports me.
