@@ -41,7 +41,7 @@ export default function Home() {
       </div>
 
       <div class="absolute bottom-0 flex w-screen items-center justify-between p-4 px-6 text-sm">
-        &copy; 2024 proudparrot2
+        &copy; 2025 proudparrot2
         <div class="flex gap-4">
           <div class="flex items-center gap-2">
             <GitCommitHorizontal />
