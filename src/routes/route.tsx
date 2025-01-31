@@ -173,8 +173,8 @@ export default function Route() {
             <Home class="h-5 w-5" />
           </A>
         </div>
-
-        <div class="tooltip" data-tip="Toggle devtools">
+        
+        {/* <div class="tooltip" data-tip="Toggle devtools">
           <button
             class="btn btn-square join-item bg-base-200"
             type="button"
@@ -198,7 +198,8 @@ export default function Route() {
           >
             <FileCode class="h-5 w-5" />
           </button>
-        </div>
+        </div> */}
+        
         <div class="tooltip" data-tip={!bookmarked() ? 'Bookmark' : 'Remove bookmark'}>
           <button
             class="btn btn-square join-item bg-base-200"
