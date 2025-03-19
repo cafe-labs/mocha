@@ -1,6 +1,6 @@
 import { A, useParams, useSearchParams } from '@solidjs/router'
 import clsx from 'clsx'
-import { Bookmark, ChevronLeft, ChevronRight, CircleAlert, Home, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
+import { Bookmark, ChevronLeft, ChevronRight, CircleAlert, FileCode, Home, PanelBottomClose, PanelBottomOpen, RotateCw, SquareArrowOutUpRight, TriangleAlert } from 'lucide-solid'
 import { createEffect, createSignal, onMount } from 'solid-js'
 import toast from 'solid-toast'
 import store from 'store2'
@@ -8,7 +8,7 @@ import { openAbWindow } from '../lib/aboutblank'
 import { handlePanicKey } from '../lib/panic'
 import { patches } from '../lib/patch'
 import { handleTransport } from '../lib/transport'
-import type { ContentWindow, TransportData } from '../lib/types'
+import type { ContentWindow, DevtoolsData, TransportData } from '../lib/types'
 import { encodeXor, formatSearch, getFavicon } from '../lib/utils'
 import { bookmarks, handleBookmark } from '../lib/bookmarks'
 
@@ -173,33 +173,35 @@ export default function Route() {
             <Home class="h-5 w-5" />
           </A>
         </div>
-        
-        {/* <div class="tooltip" data-tip="Toggle devtools">
-          <button
-            class="btn btn-square join-item bg-base-200"
-            type="button"
-            onClick={() => {
-              if (!ref || !ref.contentWindow) return
-              const contentWindow = ref.contentWindow as ContentWindow
 
-              if (contentWindow.eruda?._isInit) {
-                contentWindow.eruda.destroy()
-              } else {
-                const erudaScript = contentWindow.document.createElement('script')
-                erudaScript.src = 'https://cdn.jsdelivr.net/npm/eruda'
-                erudaScript.onload = () => {
-                  if (!contentWindow) return
-                  contentWindow.eruda.init()
-                  contentWindow.eruda.show()
+        {(store('devtools') as DevtoolsData).enabled ? (
+          <div class="tooltip" data-tip="Toggle devtools">
+            <button
+              class="btn btn-square join-item bg-base-200"
+              type="button"
+              onClick={() => {
+                if (!ref || !ref.contentWindow) return
+                const contentWindow = ref.contentWindow as ContentWindow
+
+                if (contentWindow.eruda?._isInit) {
+                  contentWindow.eruda.destroy()
+                } else {
+                  const erudaScript = contentWindow.document.createElement('script')
+                  erudaScript.src = 'https://cdn.jsdelivr.net/npm/eruda'
+                  erudaScript.onload = () => {
+                    if (!contentWindow) return
+                    contentWindow.eruda.init()
+                    contentWindow.eruda.show()
+                  }
+                  contentWindow.document.body.appendChild(erudaScript)
                 }
-                contentWindow.document.body.appendChild(erudaScript)
-              }
-            }}
-          >
-            <FileCode class="h-5 w-5" />
-          </button>
-        </div> */}
-        
+              }}
+            >
+              <FileCode class="h-5 w-5" />
+            </button>
+          </div>
+        ) : null}
+
         <div class="tooltip" data-tip={!bookmarked() ? 'Bookmark' : 'Remove bookmark'}>
           <button
             class="btn btn-square join-item bg-base-200"

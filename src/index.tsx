@@ -59,6 +59,14 @@ store.set(
 )
 
 store.set(
+  'devtools',
+  {
+    enabled: false
+  },
+  false
+)
+
+store.set(
   'transport',
   {
     transport: 'epoxy'

@@ -4,7 +4,7 @@ import store from 'store2'
 import { handleTabCloak } from '../lib/cloak'
 import { handleDebug } from '../lib/debug'
 import { handleTheme, themes } from '../lib/theme'
-import type { DebugData, PanicData, TabData, ThemeData, TransportData, AboutBlankData } from '../lib/types'
+import type { DebugData, PanicData, TabData, ThemeData, TransportData, AboutBlankData, DevtoolsData } from '../lib/types'
 
 import { CircleCheck, CircleHelp } from 'lucide-solid'
 import { exportData, importData, resetData } from '../lib/browsingdata'
@@ -25,6 +25,8 @@ export default function Settings() {
   const [theme, setTheme] = createSignal('forest')
 
   const [debug, setDebug] = createSignal('disabled')
+  
+  const [devtools, setDevtools] = createSignal('disabled')
 
   const [transport, setTransport] = createSignal('epoxy')
 
@@ -60,6 +62,9 @@ export default function Settings() {
     const debugData = store('debug') as DebugData
     setDebug(debugData.enabled ? 'enabled' : 'disabled')
 
+    const devtoolsData = store('devtools') as DevtoolsData
+    setDevtools(devtoolsData.enabled ? 'enabled' : 'disabled')
+
     const transportData = store('transport') as TransportData
     if (transportData.transport) setTransport(transportData.transport)
   })
@@ -85,6 +90,10 @@ export default function Settings() {
 
     store('debug', {
       enabled: debug() === 'enabled'
+    })
+
+    store('devtools', {
+      enabled: devtools() === 'enabled'
     })
 
     store('transport', {
@@ -221,6 +230,26 @@ export default function Settings() {
                   onMouseDown={() => {
                     setMoreInfoTitle('Debug Menu')
                     setMoreInfoContent("Enabling this enables the Eruda devtools menu. This puts a little wrench icon in the bottom right of your screen and can be used in conjunction with Mocha's dev team to diagnose issues, even when you don't have normal Chrome devtools enabled on your device.")
+                    setMoreInfoVisiblity(true)
+                  }}
+                >
+                  <CircleHelp class="h-5 w-5" />
+                </span>
+              </div>
+
+              <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+                <h1 class="text-2xl font-semibold">Proxy Devtools</h1>
+                <p class="text-center text-xs">Enable a devtools option inside the proxy</p>
+                <select class="select select-bordered w-full max-w-xs" value={devtools()} onChange={(e) => setDevtools(e.target.value)}>
+                  <option value="enabled">Enabled</option>
+                  <option value="disabled">Disabled</option>
+                </select>
+
+                <span
+                  class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+                  onMouseDown={() => {
+                    setMoreInfoTitle('Proxy Devtools')
+                    setMoreInfoContent('When enabled, a devtools button will appear on your browsing bar to open a devtools panel inside the proxy. This can be used to run JavaScript or inspect element on a proxied site.')
                     setMoreInfoVisiblity(true)
                   }}
                 >

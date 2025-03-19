@@ -55,6 +55,10 @@ export interface DebugData {
   enabled: boolean
 }
 
+export interface DevtoolsData {
+  enabled: boolean
+}
+
 export interface ContentWindow extends Window {
   __uv$location: Location
   // biome-ignore lint: we don't know dude
