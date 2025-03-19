@@ -25,7 +25,6 @@ export default function Games() {
 
   return (
     <div class="flex flex-col items-center gap-2 py-4">
-      <p class="italic my-1.5">Games may not work right now. We're working to move our games CDN to another server, please be patient.</p>
       <Show when={data()[0]}>
         <input type="text" class="input input-bordered w-1/3" onInput={(e) => handleSearch(e.target.value)} placeholder={`Search ${data().length} games`} />
       </Show>
