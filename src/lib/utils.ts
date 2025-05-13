@@ -1,4 +1,5 @@
-import type { ContentWindow } from './types'
+import store from 'store2'
+import type { ContentWindow, SearchEngineData } from './types'
 
 export function encodeXor(str: string) {
   if (!str) return str
@@ -25,7 +26,16 @@ export function formatSearch(input: string): string {
     if (url.hostname.includes('.')) return url.toString()
   } catch (e) {}
 
-  return new URL(`https://google.com/search?q=${input}`).toString()
+  const searchEngineData = store('searchEngine') as SearchEngineData
+
+  switch (searchEngineData.engine) {
+    case 'google':
+      return new URL(`https://google.com/search?q=${input}`).toString()
+    case 'ecosia':
+      return new URL(`https://www.ecosia.org/search?q=${input}`).toString()
+    default:
+      return new URL(`https://duckduckgo.com/?q=${input}`).toString()
+  }
 }
 
 export function getFavicon(contentWindow: ContentWindow): Promise<string> {

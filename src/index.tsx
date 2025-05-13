@@ -76,6 +76,14 @@ store.set(
 
 store.set('bookmarks', [], false)
 
+store.set(
+  'searchEngine',
+  {
+    engine: 'duckduckgo'
+  },
+  false
+)
+
 // Debug is here to capture all logs
 handleDebug()
 

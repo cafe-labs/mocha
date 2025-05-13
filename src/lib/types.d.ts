@@ -22,6 +22,10 @@ export interface ThemeData {
   theme: string | null
 }
 
+export interface SearchEngineData {
+  engine: 'google' | 'duckduckgo' | 'ecosia'
+}
+
 export interface GameData {
   name: string
   id: string

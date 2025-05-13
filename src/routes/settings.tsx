@@ -4,7 +4,7 @@ import store from 'store2'
 import { handleTabCloak } from '../lib/cloak'
 import { handleDebug } from '../lib/debug'
 import { handleTheme, themes } from '../lib/theme'
-import type { DebugData, PanicData, TabData, ThemeData, TransportData, AboutBlankData, DevtoolsData } from '../lib/types'
+import type { DebugData, PanicData, TabData, ThemeData, TransportData, AboutBlankData, DevtoolsData, SearchEngineData } from '../lib/types'
 
 import { CircleCheck, CircleHelp } from 'lucide-solid'
 import { exportData, importData, resetData } from '../lib/browsingdata'
@@ -29,6 +29,8 @@ export default function Settings() {
   const [devtools, setDevtools] = createSignal('disabled')
 
   const [transport, setTransport] = createSignal('epoxy')
+
+  const [searchEngine, setSearchEngine] = createSignal('duckduckgo')
 
   const [moreInfoTitle, setMoreInfoTitle] = createSignal('')
   const [moreInfoContent, setMoreInfoContent] = createSignal('')
@@ -67,6 +69,9 @@ export default function Settings() {
 
     const transportData = store('transport') as TransportData
     if (transportData.transport) setTransport(transportData.transport)
+
+    const searchEngineData = store('searchEngine') as SearchEngineData
+    if (searchEngineData.engine) setSearchEngine(searchEngineData.engine)
   })
 
   function save() {
@@ -98,6 +103,10 @@ export default function Settings() {
 
     store('transport', {
       transport: transport()
+    })
+
+    store('searchEngine', {
+      engine: searchEngine()
     })
 
     handleTabCloak()
@@ -205,6 +214,27 @@ export default function Settings() {
             onMouseDown={() => {
               setMoreInfoTitle('Themes')
               setMoreInfoContent("It's simple - themes change the colors of Mocha's UI.")
+              setMoreInfoVisiblity(true)
+            }}
+          >
+            <CircleHelp class="h-5 w-5" />
+          </span>
+        </div>
+
+        <div class="flex group relative w-80 flex-col items-center gap-4 rounded-box bg-base-200 p-4">
+          <h1 class="text-2xl font-semibold">Search Engine</h1>
+          <p class="text-center text-xs">Change the search engine</p>
+          <select class="select select-bordered w-full max-w-xs" value={searchEngine()} onChange={(e) => setSearchEngine(e.target.value)}>
+            <option value="google">Google</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+            <option value="ecosia">Ecosia</option>
+          </select>
+
+          <span
+            class="absolute top-2.5 right-2.5 text-base-content/50 opacity-0 group-hover:opacity-100 duration-150 cursor-pointer"
+            onMouseDown={() => {
+              setMoreInfoTitle('Search Engine')
+              setMoreInfoContent('Changes the search engine used when you type a search query into Mocha.')
               setMoreInfoVisiblity(true)
             }}
           >
@@ -333,6 +363,9 @@ export default function Settings() {
             setAboutBlank('disabled')
             setTheme('forest')
             setDebug('disabled')
+            setDevtools('disabled')
+            setTransport('epoxy')
+            setSearchEngine('duckduckgo')
             save()
           }}
         >
